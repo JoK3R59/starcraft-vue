@@ -1,0 +1,24 @@
+.footer {
+    
+    z-index: 1;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.liste {
+    list-style-type: none;
+}
+.logo {
+    max-width: 20px;
+}
+.middle {
+    padding-top: 1rem;
+}
+
+@media (min-width: 1024px) {
+    
+    .footer {
+        padding: 0.5rem 6rem;
+    }
+}

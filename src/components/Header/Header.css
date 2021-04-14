@@ -1,0 +1,95 @@
+@keyframes gifMenuAnimate {
+
+    0% {
+        background-image: url(../../assets/Images/Interfaces/Menu/gifLeft1.gif);
+    }
+    20% {
+        background-image: url(../../assets/Images/Interfaces/Menu/gifLeft2.gif);
+    }
+    30% {
+        background-image: url(../../assets/Images/Interfaces/Menu/gifLeft3.gif);
+    }
+    40% {
+        background-image: url(../../assets/Images/Interfaces/Menu/gifLeft4.gif);
+    }
+    50% {
+        background-image: url(../../assets/Images/Interfaces/Menu/gifLeft5.gif);
+    }
+    60% {
+        background-image: url(../../assets/Images/Interfaces/Menu/gifRight1.gif);
+    }
+    70% {
+        background-image: url(../../assets/Images/Interfaces/Menu/gifRight2.gif);
+    }
+    80% {
+        background-image: url(../../assets/Images/Interfaces/Menu/gifRight3.gif);
+    }
+    90% {
+        background-image: url(../../assets/Images/Interfaces/Menu/gifRight4.gif);
+    }
+    99% {
+        background-image: url(../../assets/Images/Interfaces/Menu/gifRight5.gif);
+    }
+    100% {
+        background-image: url(../../assets/Images/Interfaces/Menu/gifLeft1.gif);
+    }  
+}
+
+.header-undertitle {
+    margin: 10px 0 0 0;
+    padding-top: 10px;
+    color: white;
+    font-size: 1.5rem;
+    border: 8px solid transparent;
+    border-image: url(../../assets/Images/Interfaces/Menu/Border-Image81x81.png) 15 stretch;
+}
+.container-xl {
+    padding: 0;
+}
+.header {
+    /* border-bottom: 6px solid rgba(0, 0, 0, 0.8); */
+    border-style: solid;
+    border-width: 0 2px 6px 2px;
+    border-color: rgba(0, 0, 0, 0.8);
+    border-radius: 0 0 2rem 2rem;
+    box-shadow: 0px 10px 6px rgba(0, 173, 196, 0.2);
+}
+.header-title {
+    max-width: 500px;
+}
+.header-undertitle {
+    margin: 10px 0 2rem 75px;
+    padding-top: 10px;
+    color: white;
+    font-size: 1.5rem;
+    width: 20rem;
+    border: 8px solid transparent;
+    border-image: url(../../assets/Images/Interfaces/Menu/Border-Image81x81.png) 15 stretch;
+}
+
+@media (min-width: 1024px) {
+    .header-title-gif {
+        margin: 2rem 1rem 0 0;
+        min-height: 200px;
+        min-width: 400px;       
+        animation: gifMenuAnimate 80s infinite;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        border: 16px solid transparent;
+        border-image: url(../../assets/Images/Interfaces/Menu/Border-Image81x81.png) 30 stretch;
+    }
+}
+
+@media (min-width: 1600px) {
+    .header-title-gif {
+        min-height: 250px;
+        min-width: 500px;       
+        animation: gifMenuAnimate 80s infinite;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        border: 16px solid transparent;
+        border-image: url(../../assets/Images/Interfaces/Menu/Border-Image81x81.png) 30 stretch;
+    }
+}
+
+

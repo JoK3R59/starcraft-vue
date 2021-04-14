@@ -1,0 +1,179 @@
+.d-flex {
+    margin: 20rem 30rem 20rem 30rem;
+    padding: 2rem;
+    border-radius: 4rem;
+    color: black;
+    font-weight: bolder;
+    font-size: x-large;
+}
+.TIPS {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    text-shadow: 0.5px 0.5px 0.8em white, 0 0 0.5em rgb(0, 0, 160), 0 0 0.2em rgb(0, 0, 160);
+    text-decoration: underline;
+    padding: 1rem;
+}
+.Bleu {
+    background-color: rgba(0, 0, 255, 0.5);
+}
+.Rouge {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+.Jaune {
+    background-color: rgba(255, 255, 0, 0.5);
+}
+.Orange {
+    background-color: rgba(255, 125, 0, 0.5);
+}
+.Violet {
+    background-color: rgba(255, 0, 125, 0.5);
+}
+.Vert {
+    background-color: rgba(0, 255, 0, 0.5);
+}
+@media (min-width: 1024px) {
+    .imgTop {
+        width: 200px;
+        max-height: 250px;
+    }
+    .imgBot {
+        width: 80px;
+        max-height: 90px;
+    }
+    .faction-content.bottom .desc p{
+        font-size: 1.3rem;
+        padding: 2rem 0 0 0.5rem;
+    }
+}
+@media (min-width: 1800px) {
+    .imgTop {
+        width: 300px;
+        max-height: 350px;
+        margin-bottom: 2rem;
+    }
+    .imgBot {
+        width: 100px;
+        max-height: 110px;
+    }
+    .parag {
+        font-size: 1.2rem;
+    }
+    .faction-header h3{
+        min-width: 20rem;
+        margin-bottom: 2rem;
+    }
+    .faction-content {
+        margin: 1rem 0 1rem 0;
+    }
+    .faction-content .desc p{
+        font-size: 1.5rem;
+        padding: 2rem 1rem 0 1rem;
+    }
+    .faction-content.bottom .desc p{
+        font-size: 1.5rem;
+        padding: 2rem 1rem 0 1rem;
+    }
+    .faction-portrait.img.Zerg {
+        width: 450px;
+        top: 63.25rem;
+        left: 39.2%;
+    }
+    .faction-portrait.gif.Zerg {
+        width: 160px;
+        top: 73.3rem;
+        left: 45.6%;
+    }
+    .faction-portrait.img.Terran {
+        width: 450px;
+        top: 66.5rem;
+        left: 38.5%;
+    }
+    .faction-portrait.gif.Terran {
+        width: 180px;
+        top: 73.5rem;
+        left: 45.4%;
+    }
+    .faction-portrait.img.Protoss {
+        width: 450px;
+        top: 69.2rem;
+        left: 39.2%;
+    }
+    .faction-portrait.gif.Protoss {
+        width: 180px;
+        top: 75rem;
+        left: 45%;
+    }
+}
+.content {
+    display: flex;
+    justify-content: space-between;
+}
+.imgTop {
+    border-style: solid;
+    border-width: 6px;
+    border-color: rgba(30, 30, 30, 0.8);
+    border-radius: 2rem;
+}
+.imgBot {
+    border-style: solid;
+    border-width: 4px;
+    border-color: rgba(30, 30, 30, 0.8);
+    border-radius: 1rem;
+}
+.faction {
+    z-index: 50;
+    width: 40%;
+    padding: 2rem!important;
+    border-style: solid;
+    border-width: 6px 2px 6px 2px;
+    border-color: rgba(0, 0, 0);
+    border-radius: 0 2rem 2rem 0;
+    box-shadow: 
+        12px 0px 6px rgba(0, 173, 196, 0.2),
+        -12px 0px 6px rgba(0, 173, 196, 0.2);
+    background: rgba(44, 44, 44);
+}
+.faction.droite {
+    border-radius: 2rem 0 0 2rem;
+}
+.faction-lead {
+    padding: 1rem;
+    border-radius: 0.5em;
+}
+.faction-lead-desc {
+    text-align: center;
+}
+.faction-header-gauche {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+.faction-header-droite {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.faction-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.faction-content .desc{
+    display: flex;
+    flex-direction: row;
+}
+.faction-content .desc p{
+    text-align: center;
+}
+.faction-portrait.img {
+    z-index: 40;
+    position: absolute;
+    border-style: solid;
+    border-width: 0 0 6px 0;
+    border-color: rgba(30, 30, 30, 0.8);
+}
+.faction-portrait.gif {
+    z-index: 30;
+    position: absolute;
+}

@@ -1,0 +1,162 @@
+.container {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+.TIPS {
+    font-weight: bold;
+    color: black;
+    text-shadow: 0.5px 0.5px 0.8em white, 0 0 0.5em rgb(0, 0, 160), 0 0 0.2em rgb(0, 0, 160);
+    text-decoration: underline;
+}
+.races-container {
+    margin: 1rem 1rem;
+    border-style: solid;
+    border-width: 1px 3px 1px 3px;
+    border-color: rgba(0, 0, 0, 0.8);
+    border-radius: 2rem 2rem;
+}
+.races-container-header a {
+    color: white;
+    text-decoration: none;
+}
+.races-container-header:hover img {
+    border-width: 0;
+    border-radius: 2rem 2rem;
+    box-shadow:
+     8px 0px 0px rgba(0, 173, 196, 0.2),
+     -8px 0px 0px rgba(0, 173, 196, 0.2);
+}
+.races-container-title--Terran {
+    font-weight: bold;
+    text-shadow:
+     5px 5px 10px blue, 
+     5px 5px 1em #e90000, 
+     0 0 0.5em #e90000, 
+     1.5px 2px 10px blue;
+    animation: redToBlue 5s infinite;
+}
+.races-container-title--Zerg {
+    font-weight: bold;
+    text-shadow:
+     2px 2px 10px #d800d8,
+     1.5px 2px 1em #00ff00,
+     0 0 0.2em #00ff00,
+     1.5px 2px 10px #d800d8;
+    animation: purpleToGreen 5s infinite;
+}
+.races-container-title--Protoss {
+    font-weight: bold;
+    text-shadow:
+     2px 2px 10px #f5f500,
+     1.5px 2px 1em #fc7a00,
+     0 0 0.5em #fc7a00,
+     1.5px 2px 10px #f5f500;
+    animation: yellowToOrange 5s infinite;
+}
+
+@media (min-width: 1024px) {
+
+    .container {
+        border-style: solid;
+        border-width: 6px 2px 6px 2px;
+        border-color: rgba(0, 0, 0, 0.8);
+        border-radius: 2rem;
+        box-shadow: 
+            12px 0px 6px rgba(0, 173, 196, 0.2),
+            -12px 0px 6px rgba(0, 173, 196, 0.2);
+        background: rgba(44, 44, 44, 0.6);
+    }
+    .races-container-header {
+        margin-bottom: 2rem;
+    }
+    .races-container--Terran {
+        width: 300px;
+        margin: 6.7rem 0 2rem 0.3rem;
+    }
+    .races-container--Protoss {
+        width: 300px;
+        margin: 6.5rem 0 2rem 0.3rem;
+    }
+    .races-container--Zerg {
+        width: 300px;
+        margin: 1rem 0 1rem 0.3rem;
+    }
+    .races-capacity--desc {
+        padding: 1rem;
+    }
+};
+
+@keyframes redToBlue {
+
+    0% {
+        text-shadow:
+         0 0 0.2em blue, 
+         1.5px 2px 1em #e90000, 
+         0 0 0.2em #e90000, 
+         1.5px 2px 10px blue;
+    }
+    50% {
+        text-shadow:
+         0 0 0.2em #e90000, 
+         1.5px 2px 1em blue, 
+         0 0 0.2em blue, 
+         1.5px 2px 10px #e90000;
+    }
+    100% {
+        text-shadow:
+         0 0 0.2em blue, 
+         1.5px 2px 1em #e90000, 
+         0 0 0.2em #e90000, 
+         1.5px 2px 10px blue;
+    }
+};
+
+@keyframes purpleToGreen {
+
+    0% {
+        text-shadow:
+         0 0 0.2em #d800d8, 
+         1.5px 2px 1em #00ff00, 
+         0 0 0.2em #00ff00, 
+         1.5px 2px 10px #d800d8;
+    }
+    50% {
+        text-shadow:
+         0 0 0.2em #00ff00, 
+         1.5px 2px 1em  #d800d8, 
+         0 0 0.2em #d800d8,
+         1.5px 2px 10px#00ff00;
+    }
+    100% {
+        text-shadow:
+         0 0 0.2em #d800d8, 
+         1.5px 2px 1em #00ff00, 0
+         0 0.2em #00ff00, 
+         1.5px 2px 10px #d800d8;
+    }
+};
+
+@keyframes yellowToOrange {
+
+    0% {
+        text-shadow:
+         0 0 0.2em #f5f500,
+         1.5px 2px 1em #fc7a00,
+         0 0 0.2em #fc7a00, 
+         1.5px 2px 10px #f5f500;
+    }
+    50% {
+        text-shadow:
+         0 0 0.2em #fc7a00,
+         1.5px 2px 1em #f5f500,
+         0 0 0.2em #f5f500, 
+         1.5px 2px 10px #fc7a00;
+    }
+    100% {
+        text-shadow:
+         0 0 0.2em #f5f500,
+         1.5px 2px 1em #fc7a00,
+         0 0 0.2em #fc7a00, 
+         1.5px 2px 10px #f5f500;
+    }
+};
