@@ -7,7 +7,7 @@
     font-size: x-large;
 }
 .TIPS {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
     color: black;
     text-shadow: 0.5px 0.5px 0.8em white, 0 0 0.5em rgb(0, 0, 160), 0 0 0.2em rgb(0, 0, 160);
@@ -39,22 +39,61 @@
         max-height: 250px;
     }
     .imgBot {
-        width: 80px;
+        width: 73px;
         max-height: 90px;
+    }
+    .faction {
+        padding: 1rem!important;
+    }
+    .parag {
+        font-size: 1.2rem;
+        padding: 0 0.2rem 0 0.2rem;
+    }
+    .faction-lead {
+        padding: 1rem;
+        border-radius: 0.5em;
+        font-size: 1.5rem;
+    }
+    .faction-content.top {
+        margin-bottom: 1rem;
+    }
+    .faction-content.top .desc p{
+        font-size: 1.3rem;
+        padding: 2rem 0.5rem 0 0.2rem;
     }
     .faction-content.bottom .desc p{
         font-size: 1.3rem;
         padding: 2rem 0 0 0.5rem;
     }
     .faction-portrait.img.Protoss {
-        top: 60rem;
+        top: 58.4rem;
         left: 30rem;
         width: 350px;
     }
     .faction-portrait.gif.Protoss {
-        top: 64.5rem;
+        top: 62.8rem;
         left: 35rem;
         width: 145px;
+    }
+    .faction-portrait.img.Zerg {
+        top: 51.2rem;
+        left: 30rem;
+        width: 350px;
+    }
+    .faction-portrait.gif.Zerg {
+        top: 58.65rem;
+        left: 35.7rem;
+        width: 130px;
+    }
+    .faction-portrait.img.Terran {
+        top: 57rem;
+        left: 29.9rem;
+        width: 315px;
+    }
+    .faction-portrait.gif.Terran {
+        top: 61.7rem;
+        left: 35.5rem;
+        width: 130px;
     }
 }
 @media (min-width: 1800px) {
@@ -71,9 +110,16 @@
     .parag {
         font-size: 1.2rem;
     }
+    .faction {
+        padding: 2rem!important;
+    }
     .faction-header h3{
         min-width: 20rem;
         margin-bottom: 2rem;
+    }
+    .faction-lead {
+        padding: 1rem;
+        border-radius: 0.5em;
     }
     .faction-content {
         margin: 1rem 0 1rem 0;
@@ -136,7 +182,6 @@
 .faction {
     z-index: 50;
     width: 40%;
-    padding: 2rem!important;
     border-style: solid;
     border-width: 6px 2px 6px 2px;
     border-color: rgba(0, 0, 0);
@@ -148,10 +193,6 @@
 }
 .faction.droite {
     border-radius: 2rem 0 0 2rem;
-}
-.faction-lead {
-    padding: 1rem;
-    border-radius: 0.5em;
 }
 .faction-lead-desc {
     text-align: center;
@@ -190,14 +231,8 @@
     border-style: solid;
     border-width: 0 0 6px 0;
     border-color: rgba(30, 30, 30, 0.8);
-    top: 60rem;
-    left: 30rem;
-    width: 350px;
 }
 .faction-portrait.gif {
     z-index: 30;
     position: absolute;
-    top: 64.5rem;
-    left: 35rem;
-    width: 145px;
 }
