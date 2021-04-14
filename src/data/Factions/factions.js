@@ -4,9 +4,9 @@ const factions = [
         slug: 'terran',
         image: 'Terran/Terran',
         cap_first_name: 'Décollage',
-        cap_first_desc: 'lors de l\'éxecution d\'un ordre Mobilisation, si vous avez une base sur la planète active, vous pouvez la déplacer sur n\'importe quelle zone amie de la planète.',
+        cap_first_desc: 'Lors de l\'éxecution d\'un ordre Mobilisation, si vous avez une base sur la planète active, vous pouvez la déplacer sur n\'importe quelle zone amie de la planète.',
         cap_second_name: 'Adaptabilité',
-        cap_second_desc: 'limite de cartes en main 8 (au lieu de 6).',
+        cap_second_desc: 'Limite de cartes en main 8 (au lieu de 6).',
         history: "Condamnés sur Terre, un grand nombre de prisonniers terrans furent à la place mis en stase cryogénique et envoyés dans l'espace. On avait le secret espoir que ces prisonniers trouvent de nouvelles colonies pour s'y installer. A cause d'une défaillance de l'équipement, les terrans endormis s'écrasèrent dans une galaxie différente. Des siècles plus tard, leurs descendants se sont retrouvés entrainés dans un conflit entre deux races alien. L'humanité ne possède ni la technologie anvancée des protoss, ni les avantages biologiques des zerg. En dépit de nombreuses pertes, les terrans ont montré leur résistance et ils continuent à se battre pour leur survie.",
         commander: [
             {
@@ -110,7 +110,7 @@ const factions = [
         cap_first_name: 'Rampant',
         cap_first_desc: 'Votre limite de construction d\'unités est égale à deux fois le nombre de bâtiments différents sur votre feuille de faction.',
         cap_second_name: 'Soin',
-        cap_second_desc: 'piochez 1 carte Combat à la fin de chaque bataille à laquelle vous participez.',
+        cap_second_desc: 'Piochez 1 carte Combat à la fin de chaque bataille à laquelle vous participez.',
         history: "Les Zerg sont composés de plusieurs types de créatures qui ont été intégrées à la Nuée par l'Overmind. Ces créatures ont été choisies pour devenir des tueurs efficaces ou pour assister les zerg dans leur quête du pouvoir ultime. Les zerg n'utilisent pas de technologie, mais leur armement et blindage naturels sont comparables aux appareils employés par les autres espèces. Cette évolution biologique, combinée avec une sauvagerie inégalée et une dévotion absolue à l'Overmind, font des zerg un adversaire mortel.",
         commander: [
             {
@@ -204,7 +204,7 @@ const factions = [
         slug: 'protoss',
         image: 'Protoss/Protoss',
         cap_first_name: 'Boucliers',
-        cap_first_desc: 'piochez 2 cartes Combat supplémentaires lors de l\'étape Pioche de Cartes Combat de chaque bataille où vous êtes le défenseur.',
+        cap_first_desc: 'Piochez 2 cartes Combat supplémentaires lors de l\'étape Pioche de Cartes Combat de chaque bataille où vous êtes le défenseur.',
         history: "A l'opposé des terrans polyvalents et des féroces zerg se dressent les flegmatiques protoss. Avec leur technologie avancée et leurs capacités psioniques, les protoss se sont longtemps considérés comme l'espèce la plus puissante du monde connu. S'ils ne sont pas un peuple prolifique, ils ont appris à consolider leur armée avec des robots de guerre et à combiner leur capacité psionique inhérente avec la technologie, produisant ainsi les guerriers les plus redoutables jamais connus. Si les protoss ont une faiblesse, c'est leur refus à accepter le changement. Les doctrines du Khala sont rigides, et les protoss n'aiment pas s'en écarter de peur du désordre civil.",
         commander: [
             {

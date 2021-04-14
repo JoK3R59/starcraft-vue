@@ -32,7 +32,8 @@
 .Vert {
     background-color: rgba(0, 255, 0, 0.5);
 }
-@media (min-width: 1024px) {
+@media (min-width: 1260px) {
+    /* 1263px */
     .imgTop {
         width: 200px;
         max-height: 250px;
@@ -45,8 +46,19 @@
         font-size: 1.3rem;
         padding: 2rem 0 0 0.5rem;
     }
+    .faction-portrait.img.Protoss {
+        top: 60rem;
+        left: 30rem;
+        width: 350px;
+    }
+    .faction-portrait.gif.Protoss {
+        top: 64.5rem;
+        left: 35rem;
+        width: 145px;
+    }
 }
 @media (min-width: 1800px) {
+        /* 1880px */
     .imgTop {
         width: 300px;
         max-height: 350px;
@@ -154,6 +166,12 @@
     justify-content: space-between;
     flex-direction: row;
 }
+.faction-header-desc.droite h2{
+    text-align: right;
+}
+.faction-content-droite {
+    text-align: right;
+}
 .faction-content {
     display: flex;
     flex-direction: row;
@@ -172,8 +190,14 @@
     border-style: solid;
     border-width: 0 0 6px 0;
     border-color: rgba(30, 30, 30, 0.8);
+    top: 60rem;
+    left: 30rem;
+    width: 350px;
 }
 .faction-portrait.gif {
     z-index: 30;
     position: absolute;
+    top: 64.5rem;
+    left: 35rem;
+    width: 145px;
 }

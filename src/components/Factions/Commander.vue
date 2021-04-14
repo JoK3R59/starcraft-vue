@@ -29,14 +29,12 @@
                         :alt ="`${ commander.slug } commander image`"/>
                     </div>
 
-                    <div class = 'faction-header-desc'>
+                    <div :class ="`faction-header-desc ${ i === 0 ? 'gauche' : 'droite' }`">
 
-                        <div>
-                            <h2 class = 'TIPS'>Condition de Victoire</h2>
-                            <p class="parag">
-                                {{ commander.victory }}
-                            </p>
-                        </div>
+                        <h2 class = 'TIPS'>Condition de Victoire</h2>
+                        <p class="parag">
+                            {{ commander.victory }}
+                        </p>
                     </div>
                 </div>
 

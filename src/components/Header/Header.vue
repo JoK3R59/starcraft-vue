@@ -2,10 +2,9 @@
 
     <div class="container-xl">
 
-        <div class="header row d-flex justify-content-between">
+        <div class="header row d-flex justify-content-around">
             
             <div class="header-title">
-                <hr>
                 <img class="img-fluid"
                 src="../../assets/Images/Interfaces/Accueil/starcraft_title.png"
                 alt="Starcraft">
@@ -14,7 +13,7 @@
                 </h1>
             </div>
 
-            <div class="m-5">
+            <div class="mt-3">
                 <div class= "header-title-gif "/>
             </div>
 
