@@ -18,7 +18,6 @@
     font-size: 1.5rem;
 }
 .title {
-    text-transform: uppercase;
     text-align: center;
 }
 .Order {
@@ -54,10 +53,11 @@
 }
 .top h2 {
     background-color: rgb(114, 114, 114,0.8);
-    border-radius: 0.5rem 1.6rem 0.5rem 0.5rem;
-    padding-left: 2rem;
+    border-radius: 0.5rem 1.6rem 0 0.5rem;
+    text-align: center;
     text-transform: uppercase;
     margin: 0 0 0.5rem 0;
+    padding: 0.5rem 0 0.5rem 0;
 }
 .top p {
     padding: 0.5rem;
@@ -87,7 +87,7 @@
     max-height: 85px;
 }
 .list-0 .bot {
-    margin-top: 3.5rem;
+    margin-top: 5rem;
 }
 .list-1 .bot {
     margin-top: 0.55rem;

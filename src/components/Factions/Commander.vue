@@ -11,7 +11,7 @@
 
                 <div class ="faction-header">
 
-                    <div :class ="`faction-header-${ i === 0 ? 'gauche' : 'droite' }`">
+                    <div :class ="`faction-header-${ i === 0 ? 'gauche' : 'droite' } ${ commander.slug }`">
 
                         <div class="faction-lead-desc">
                             <h3 :class ="`faction-lead ${commander.color}`">
@@ -29,7 +29,7 @@
                         :alt ="`${ commander.slug } commander image`"/>
                     </div>
 
-                    <div :class ="`faction-header-desc ${ i === 0 ? 'gauche' : 'droite' }`">
+                    <div :class ="`faction-header-desc ${ i === 0 ? 'gauche' : 'droite' } ${ commander.slug }`">
 
                         <h2 class = 'TIPS'>Condition de Victoire</h2>
                         <p class="parag">
@@ -46,53 +46,84 @@
                     <div class = 'faction-content top'>
 
                         <div class="desc">
+                            
+                            <h2 class="desc-name">
+                                {{ commander.soldier.name }}
+                            </h2>
 
-                            <img class="imgBot"
-                             :src ="getGifUrl(commander.gifS)"/>
-                            <p>
-                                {{ commander.soldier }}
-                            </p>
+                            <div class="desc-content">
+                                <img class="imgBot"
+                                :src ="getGifUrl(commander.gifS)"/>
+                                <p>
+                                    {{ commander.soldier.numb }}
+                                </p>
+                            </div>
                         </div>
                         
                         <div class="desc"
                          v-if="commander.advance">
 
-                            <img class="imgBot"
-                             :src ="getGifUrl(commander.gifA)"/>
-                            <p>
-                                {{ commander.advance }}
-                            </p>
+                            <h2 class="desc-name">
+                                {{ commander.advance.name }}
+                            </h2>
+
+                            <div class="desc-content">
+                                <img class="imgBot"
+                                :src ="getGifUrl(commander.gifA)"/>
+                                <p>
+                                    {{ commander.advance.numb }}
+                                </p>
+                            </div>
                         </div>
 
                         <div class="desc"
                          v-if="commander.vehicule">
 
-                            <img class="imgBot"
-                             :src ="getGifUrl(commander.gifV)"/>
-                            <p>
-                                {{ commander.vehicule }}
-                            </p>
+                            <h2 class="desc-name">
+                                {{ commander.vehicule.name }}
+                            </h2>
+
+                            <div class="desc-content">
+                                <img class="imgBot"
+                                 :src ="getGifUrl(commander.gifV)"/>
+                                <p>
+                                    {{ commander.vehicule.numb }}
+                                </p>
+                            </div>
+                            
                         </div>
                     </div>
 
                     <div class = 'faction-content bottom'>
 
                         <div class="desc">
+                            
+                            <h2 class="desc-name">
+                                {{ commander.constructor.name }}
+                            </h2>
 
-                            <img class="imgBot"
-                             :src ="getGifUrl(commander.gifC)"/>
-                            <p>
-                                {{ commander.constructor }}
-                            </p>
+                            <div class="desc-content">
+                                <img class="imgBot"
+                                 :src ="getGifUrl(commander.gifC)"/>
+                                <p>
+                                    {{ commander.constructor.numb }}
+                                </p>
+                            </div>
                         </div>
 
                         <div class="desc">
+                            
+                            <h2 class="desc-name">
+                                {{ commander.ship.name }}
+                            </h2>
 
-                            <img class="imgBot"
-                             :src ="getGifUrl(commander.gifSh)"/>
-                            <p>
-                                {{ commander.ship }}
-                            </p>
+                            <div class="desc-content">
+                                <img class="imgBot"
+                                :src ="getGifUrl(commander.gifSh)"/>
+                                <p>
+                                    {{ commander.ship.numb }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

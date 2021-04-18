@@ -17,15 +17,30 @@ const factions = [
                 victory: 'Vous gagnez immédiatement la partie si vous contrôlez au moins 6 zones avec du minerai et/ou du gaz lors de la Phase de Regroupement à l\'époque III du jeu.',
                 world: 'Mar Sara',
                 imgW: '',
-                soldier: '2 Marines',
+                soldier: {
+                    name: "Marines",
+                    numb: "2",
+                },
                 gifS: 'Terran/Troupes/soldier',
-                advance: '1 Flammeur',
+                advance: {
+                    name: "Flammeur",
+                    numb: "1"
+                },
                 gifA: 'Terran/Troupes/advance',
-                vehicule: '1 Vautour',
+                vehicule: {
+                    name: "Vautour",
+                    numb: "1"
+                },
                 gifV: 'Terran/Troupes/vehicule-a',
-                ship: '1 Transport',
+                ship: {
+                    name: "Transport",
+                    numb: "1"
+                },
                 gifSh: 'Terran/Troupes/ship',
-                constructor: '8 Travailleurs',
+                constructor: {
+                    name: "Travailleurs",
+                    numb: "8"
+                },
                 gifC: 'Terran/Troupes/constructor',
             },
             {
@@ -35,15 +50,30 @@ const factions = [
                 color: 'Rouge',
                 victory: 'Vous gagnez immédiatement la partie si vous contrôlez toutes les zones sur deux planètes différentes lors de l\'époque III du jeu.',
                 world: 'Korhal IV',
-                soldier: '2 Marines',
+                soldier: {
+                    name: "Marines",
+                    numb: "2"
+                },
                 gifS: 'Terran/Troupes/soldier',
-                advance: '1 Flammeur',
+                advance: {
+                    name: "Flammeur",
+                    numb: "1"
+                },
                 gifA: 'Terran/Troupes/advance',
-                vehicule: '1 Fantôme',
+                vehicule: {
+                    name: "Fantôme",
+                    numb: "1"
+                },
                 gifV: 'Terran/Troupes/vehicule-b',
-                ship: '1 Transport',
+                ship: {
+                    name: "Transport",
+                    numb: "1"
+                },
                 gifSh: 'Terran/Troupes/ship',
-                constructor: '8 Travailleurs',
+                constructor: {
+                    name: "Travailleurs",
+                    numb: "8"
+                },
                 gifC: 'Terran/Troupes/constructor',
             }
         ],
@@ -120,15 +150,27 @@ const factions = [
                 color: 'Violet',
                 victory: 'Vous gagnez immédiatement la partie si vous contrôlez au moins 3 zones fournissant des points de conquête lors de la Phase Regroupement à l\'époque III du jeu.',
                 world: 'Braxis',
-                soldier: '3 Zerglings',
+                soldier: {
+                    name: "Zerglings",
+                    numb: "3"
+                },
                 gifS: 'Zerg/Troupes/soldier',
-                advance: '2 Hydralisks',
+                advance: {
+                    name: "Hydralisks",
+                    numb: "2"
+                },
                 gifA: 'Zerg/Troupes/advance',
                 vehicule: false,
                 gifV: '',
-                ship: '1 Transport',
+                ship: {
+                    name: "Transport",
+                    numb: "1"
+                },
                 gifSh: 'Zerg/Troupes/ship',
-                constructor: '7 Travailleurs',
+                constructor: {
+                    name: "Travailleurs",
+                    numb: "7"
+                },
                 gifC: 'Zerg/Troupes/constructor'
             },
             {
@@ -138,15 +180,27 @@ const factions = [
                 color: 'Vert',
                 victory: 'Vous gagnez immédiatement la partie si vous avez une base sur au moins 3 planètes différentes lors de la Phase Regroupement à l\'époque III du jeu.',
                 world: 'Char',
-                soldier: '4 Zerglings',
+                soldier: {
+                    name: "Zerglings",
+                    numb: "4"
+                },
                 gifS: 'Zerg/Troupes/soldier',
-                advance: '1 Hydralisks',
+                advance: {
+                    name: "Hydralisks",
+                    numb: "1"
+                },
                 gifA: 'Zerg/Troupes/advance',
                 vehicule: '',
                 gifV: '',
-                ship: '1 Transport',
+                ship: {
+                    name: "Transport",
+                    numb: "1"
+                },
                 gifSh: 'Zerg/Troupes/ship',
-                constructor: '8 Travailleurs',
+                constructor: {
+                    name: "Travailleurs",
+                    numb: "8"
+                },
                 gifC: 'Zerg/Troupes/constructor'
             }
         ],
@@ -214,15 +268,24 @@ const factions = [
                 color: 'Jaune',
                 victory: 'Vous gagnez Immédiatement la partie si vous contrôlez plus de zones que chaque autre adversaire lors de la Phase de Regroupement à l\'époque III du jeu.',
                 world: 'Shakuras',
-                soldier: '3 Disciples',
+                soldier: {
+                    name: "Disciples",
+                    numb: "3"
+                },
                 gifS: 'Protoss/Troupes/soldier',
                 advance: '',
                 gifA: '',
                 vehicule: '',
                 gifV: '',
-                ship: '1 Transport',
+                ship: {
+                    name: "Transport",
+                    numb: "1"
+                },
                 gifSh: 'Protoss/Troupes/ship',
-                constructor: '8 Travailleurs',
+                constructor: {
+                    name: "Travailleurs",
+                    numb: "8"
+                },
                 gifC: 'Protoss/Troupes/constructor'
             },
             {
@@ -232,15 +295,27 @@ const factions = [
                 color: 'Orange',
                 victory: 'Le nombre de points de conquête nécessaires pour une victoire normale de vos adversaires passe de 15 à 20. Quand au moins 2 cartes Evénement <<La Fin est Proche>> sont jouées, la faction Aldaris gagne immédiatement la partie.',
                 world: 'Aiur',
-                soldier: '2 Disciples',
+                soldier: {
+                    name: "Disciples",
+                    numb: "2"
+                },
                 gifS: 'Protoss/Troupes/soldier',
                 advance: '',
                 gifA: '',
-                vehicule: '1 Dragon',
+                vehicule: {
+                    name: "Dragon",
+                    numb: "1"
+                },
                 gifV: 'Protoss/Troupes/vehicule',
-                ship: '1 Transport',
+                ship: {
+                    name: "Transport",
+                    numb: "1"
+                },
                 gifSh: 'Protoss/Troupes/ship',
-                constructor: '7 Travailleurs',
+                constructor: {
+                    name: "Travailleurs",
+                    numb: "7"
+                },
                 gifC: 'Protoss/Troupes/constructor'
             }
         ],

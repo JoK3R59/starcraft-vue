@@ -22,11 +22,22 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: 'univers';
+  src:
+   url('./assets/fonts/Univers/UniversLTStd.otf')     
+     format('opentype'),
+   url('./assets/fonts/Univers/Univers-light-normal.ttf')
+     format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 .app {
   background-image: url(./assets/Images/Interfaces/Menu/fond-menu2.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: white;
+  color: #f6fafd;
+  font-family: 'univers', sans-serif;
 }
 </style>

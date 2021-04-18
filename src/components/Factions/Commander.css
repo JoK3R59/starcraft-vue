@@ -40,7 +40,7 @@
     }
     .imgBot {
         width: 73px;
-        max-height: 90px;
+        max-height: 73px;
     }
     .faction {
         padding: 1rem!important;
@@ -54,45 +54,61 @@
         border-radius: 0.5em;
         font-size: 1.5rem;
     }
+    .faction-header-gauche.tassadar {
+        margin-bottom: 2.5rem;
+    }
+    .faction-header-desc.tassadar {
+        margin-bottom: 2.5rem;
+    }
+    .faction-header-desc.overmind {
+        margin-bottom: 2rem;
+    }
+    .faction-header-desc.arcturus_mengsk {
+        margin-bottom: 2rem;
+    }
     .faction-content.top {
         margin-bottom: 1rem;
     }
-    .faction-content.top .desc p{
-        font-size: 1.3rem;
-        padding: 2rem 0.5rem 0 0.2rem;
+    .faction-content .desc-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
-    .faction-content.bottom .desc p{
+    .faction-content .desc-name {
         font-size: 1.3rem;
-        padding: 2rem 0 0 0.5rem;
+    }
+    .faction-content .desc p {
+        font-size: 1.3rem;
+        padding: 1rem 1.5rem 0 1.5rem;
     }
     .faction-portrait.img.Protoss {
-        top: 58.4rem;
+        top: 62.5rem;
         left: 30rem;
         width: 350px;
     }
     .faction-portrait.gif.Protoss {
-        top: 62.8rem;
+        top: 67rem;
         left: 35rem;
         width: 145px;
     }
     .faction-portrait.img.Zerg {
-        top: 51.2rem;
-        left: 30rem;
-        width: 350px;
+        top: 54.3rem;
+        left: 29rem;
+        width: 370px;
     }
     .faction-portrait.gif.Zerg {
-        top: 58.65rem;
-        left: 35.7rem;
+        top: 62.5rem;
+        left: 35.3rem;
         width: 130px;
     }
     .faction-portrait.img.Terran {
-        top: 57rem;
+        top: 59rem;
         left: 29.9rem;
-        width: 315px;
+        width: 320px;
     }
     .faction-portrait.gif.Terran {
-        top: 61.7rem;
-        left: 35.5rem;
+        top: 63.7rem;
+        left: 35.6rem;
         width: 130px;
     }
 }
@@ -105,7 +121,7 @@
     }
     .imgBot {
         width: 100px;
-        max-height: 110px;
+        max-height: 100px;
     }
     .parag {
         font-size: 1.2rem;
@@ -114,6 +130,7 @@
         padding: 2rem!important;
     }
     .faction-header h3{
+        font-size: 2.2rem;
         min-width: 20rem;
         margin-bottom: 2rem;
     }
@@ -124,43 +141,42 @@
     .faction-content {
         margin: 1rem 0 1rem 0;
     }
-    .faction-content .desc p{
+    .faction-content .desc-name {
         font-size: 1.5rem;
-        padding: 2rem 1rem 0 1rem;
     }
-    .faction-content.bottom .desc p{
+    .faction-content .desc .desc-content p {
         font-size: 1.5rem;
-        padding: 2rem 1rem 0 1rem;
+        padding: 2rem 2rem 0 2rem;
     }
     .faction-portrait.img.Zerg {
-        width: 450px;
-        top: 59.5rem;
-        left: 39.2%;
+        width: 550px;
+        top: 59rem;
+        left: 37%;
     }
     .faction-portrait.gif.Zerg {
-        width: 160px;
-        top: 69.5rem;
-        left: 45.6%;
+        width: 200px;
+        top: 71rem;
+        left: 44.7%;
     }
     .faction-portrait.img.Terran {
-        width: 450px;
-        top: 62rem;
-        left: 38.5%;
+        width: 500px;
+        top: 64.8rem;
+        left: 37.3%;
     }
     .faction-portrait.gif.Terran {
-        width: 180px;
-        top: 69rem;
-        left: 45.4%;
+        width: 200px;
+        top: 72.5rem;
+        left: 45%;
     }
     .faction-portrait.img.Protoss {
-        width: 450px;
-        top: 65.5rem;
-        left: 39.2%;
+        width: 500px;
+        top: 69.6rem;
+        left: 38.6%;
     }
     .faction-portrait.gif.Protoss {
-        width: 180px;
-        top: 72rem;
-        left: 45%;
+        width: 200px;
+        top: 76.5rem;
+        left: 44.7%;
     }
 }
 .content {
@@ -220,9 +236,24 @@
 }
 .faction-content .desc{
     display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-width: 1px 3px 1px 3px;
+    border-color: rgb(30, 30, 30);
+    border-radius: 2rem 2rem 2rem 1.2rem;
+}
+.faction-content .desc-name {
+    background-color: rgb(114, 114, 114,0.8);
+    border-radius: 2rem 2rem 0 0;
+    text-align: center;
+    padding: 0.5rem;
+    margin: 0;
+}
+.faction-content .desc .desc-content{
+    display: flex;
     flex-direction: row;
 }
-.faction-content .desc p{
+.faction-content .desc-content p{
     text-align: center;
 }
 .faction-portrait.img {
