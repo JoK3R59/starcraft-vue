@@ -12,7 +12,7 @@
              v-bind:key="i">
 
                 <h2>
-                    {{ item.title }}
+                   {{ item.numb }}. {{ item.title }}
                 </h2>
 
                 <p>

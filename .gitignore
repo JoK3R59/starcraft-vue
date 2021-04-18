@@ -6,8 +6,6 @@ vue.config.jstest
 
 # Dossier ignoré - non utilisé
 
-/src/data/Order
-/src/data/Phase
 
 # Fichier ignoré - non utilisé
 
@@ -15,6 +13,10 @@ vue.config.jstest
 /src/data/Factions/Protoss.js
 /src/data/Factions/Terran.js
 /src/data/Factions/Zerg.js
+/src/data/Order/move.js
+/src/data/Order/Spec.js
+/src/data/Phase/Program.js
+/src/data/Phase/Regroupement.js
 
 
 # local env files
