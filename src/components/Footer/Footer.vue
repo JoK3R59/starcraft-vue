@@ -3,7 +3,7 @@
     <div class= 'footer'>
 
         <div class="text-center">
-            <h5>Version: 0.2.9</h5>
+            <h5>Version: 0.3.0</h5>
             <p>
                 Rendu par <br/>
                 <img class="logo"

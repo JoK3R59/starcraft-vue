@@ -35,4 +35,5 @@ export default {
 }
 </script>
 
-<style src="./Header.css"></style>
+<style src="./Header.css">
+</style>

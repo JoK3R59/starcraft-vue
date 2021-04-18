@@ -47,6 +47,7 @@
 }
 .header {
     /* border-bottom: 6px solid rgba(0, 0, 0, 0.8); */
+    background: rgba(80, 80, 80, 0.4);
     border-style: solid;
     border-width: 0 2px 6px 2px;
     border-color: rgba(0, 0, 0, 0.8);
@@ -58,8 +59,9 @@
 }
 .header-undertitle {
     margin: 10px 0 2rem 75px;
-    padding-top: 10px;
+    padding: 1rem;
     color: white;
+    background: rgba(0, 0, 100, 0.6);
     font-size: 1.5rem;
     width: 20rem;
     border: 8px solid transparent;

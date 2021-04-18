@@ -20,6 +20,11 @@
                 </p>
                 
             </div>           
+            <div class="button d-flex flex-row-reverse">
+                <button class="btn btn-info">
+                    Plus d'informations...
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -31,9 +36,6 @@ export default {
     name: 'Phase',
     data() {
         return {
-            // Progr : phase[0],
-            // Execu : phase[1],
-            // Mobil : phase[2]
             phase
         }
     },
