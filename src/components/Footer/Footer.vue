@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="liste">
-                    <a href="https://github.com/JoK3R59/Starcraft_rules" target="_blank">
+                    <a href="https://github.com/JoK3R59/starcraft-vue" target="_blank">
                         -&gt; GitHub
                     </a>
                 </li>
