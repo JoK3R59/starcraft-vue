@@ -45,6 +45,10 @@
 .container-xl {
     padding: 0;
 }
+.img-fluid {
+    width: 500px;
+    margin: 2rem;
+}
 .header {
     /* border-bottom: 6px solid rgba(0, 0, 0, 0.8); */
     background: rgba(80, 80, 80, 0.4);
@@ -58,7 +62,7 @@
     max-width: 500px;
 }
 .header-undertitle {
-    margin: 10px 0 2rem 75px;
+    margin: 10px 0 2rem 8rem;
     padding: 1rem;
     color: white;
     background: rgba(0, 0, 100, 0.6);
@@ -69,7 +73,7 @@
 }
 @media (min-width: 1260px) {
     .header-title-gif {
-        margin-top: 2.5rem;
+        margin: 2.5rem 0;
         min-height: 200px;
         min-width: 400px;       
         animation: gifMenuAnimate 80s infinite;
@@ -81,7 +85,7 @@
 }
 @media (min-width: 1600px) {
     .header-title-gif {
-        margin-top: 1.2rem;
+        margin: 1.2rem 0;
         min-height: 250px;
         min-width: 500px;       
         animation: gifMenuAnimate 80s infinite;

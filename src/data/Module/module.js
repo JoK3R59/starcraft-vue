@@ -1,7 +1,7 @@
 export default [
     {
         name: "Le module d'Approvisionement",
-        desc: "Ces modules augmentent la limite de construction d'unités de leur possesseur. Pour chaque modules d'approvisionnement sur sa fiche de faction, le joueur voit sa limite de construction d'unités augmentée de 1.",
+        desc: "Ces modules augmentent la limite de construction d'unités de leur possesseur. Pour chaque modules d'approvisionnement sur sa fiche de faction, le joueur voit sa limite de construction d'unités augmentée de 1. La limite de construction d'unités du joueur Zerg est égale à deux fois le nombre de types de bâtiments sur sa fiche de faction (max. 6).",
         imgB: "Bleu/jeton/module_appro",
         imgO: "Orange/jeton/module_appro"
     },

@@ -6,7 +6,7 @@
         <phase></phase>
         <victoire></victoire>
         <module></module>
-
+        <exploit></exploit>
     </div>
 
 </template>
@@ -16,6 +16,7 @@ import Order from './Order/Order';
 import Phase from './Phase/Phase';
 import Victoire from './Victoire/Victoire';
 import Module from './Module/Module';
+import Exploit from './Exploit/Exploit';
 
 export default {
     name: 'Regles',
@@ -23,7 +24,8 @@ export default {
         'order' : Order,
         'phase' : Phase,
         'victoire' : Victoire,
-        'module' : Module
+        'module' : Module,
+        'exploit' : Exploit
     },
 }
 </script>

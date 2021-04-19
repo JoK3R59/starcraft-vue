@@ -13,7 +13,7 @@
                 </h1>
             </div>
 
-            <div class="mt-3">
+            <div class="m-3">
                 <div class= "header-title-gif "/>
             </div>
 

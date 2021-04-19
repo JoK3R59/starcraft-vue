@@ -9,7 +9,7 @@
             </h1> 
 
             <p>
-                Une Partie peut se terminer de quatre façons :
+                Une partie peut se terminer de quatre façons :
             </p>
 
             <div :class="`Victoire-list list-${ i }`"
