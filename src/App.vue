@@ -2,6 +2,13 @@
 
   <div class="app"
    id="app">
+
+   <div id="stellar">
+     <div id="const" ></div>
+     <div id="const1"></div>
+     <div id="terre"></div>
+   </div>
+
     <header-top></header-top>
     <router-view></router-view>
     <footer-bot></footer-bot>
@@ -14,9 +21,48 @@ import Footer from './components/Footer/Footer';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      y : -400
+    }
+  },
   components: {
     'header-top' : Header,
     'footer-bot' : Footer,
+  },
+  methods: {
+    topPosition() {
+      var scrollPosition = document.documentElement.scrollTop
+      // Terre calcule
+      var calcY = (scrollPosition * 0.095) + this.y
+      var mathY = Math.round(calcY)
+      var yPosition = mathY.toString() + "px"
+      // const calcule
+      var calcY0 = (scrollPosition * 0.05) + this.y
+      var mathY0 = Math.round(calcY0)
+      var yPosition0 = mathY0.toString() + "px"
+      // const1 calcule
+      var calcY1 = (scrollPosition * 0.02) + this.y
+      var mathY1 = Math.round(calcY1)
+      var yPosition1 = mathY1.toString() + "px"
+      // get ID element
+      var terreVar = document.getElementById("terre")
+      var constVar = document.getElementById("const")
+      var const1Var = document.getElementById("const1")
+      // condition
+      if (scrollPosition > 50 ) {
+        terreVar.style.top = yPosition;
+        constVar.style.top = yPosition0;
+        const1Var.style.top = yPosition1;
+      } else {
+        terreVar.style.top = "-400px";
+        constVar.style.top = "-400px";
+        const1Var.style.top = "-400px";
+      }
+    }
+  },
+  created() {
+    window.addEventListener('scroll', this.topPosition);
   }
 }
 </script>
@@ -33,11 +79,68 @@ export default {
   font-style: normal;
 }
 .app {
-  background-image: url(./assets/Images/Interfaces/Menu/fond-menu2.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* background-image: url(./assets/Images/Interfaces/Menu/terre1.png),
+    url(./assets/Images/Interfaces/Menu/constellations0.png),
+    url(./assets/Images/Interfaces/Menu/constellations.png),
+    url(./assets/Images/Interfaces/Menu/motif_etoiles.png); */
+    /* background-position: contain; */
+  /*
+  *
+  *TODO a terminer !! 
+  *
+  */
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-size:auto;
   color: #f6fafd;
   font-family: 'univers', sans-serif;
+}
+#stellar {
+  background: url(./assets/Images/Interfaces/Menu/motif_etoiles.png);
+  z-index: -500;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: all 0.5s ease;
+}
+#stellar div {
+  position: fixed;
+  top: -400px;
+  bottom: 0;
+  left: 135px;
+  right: 0;
+  transition: all 0.5s ease;
+  background-repeat: no-repeat;
+}
+#const {
+  background: url(./assets/Images/Interfaces/Menu/constellations0.png);
+    transition: all 1.5s ease;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#const1 {
+  background: url(./assets/Images/Interfaces/Menu/constellations.png);
+    transition: all 1s ease;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+#terre {
+  background: url(./assets/Images/Interfaces/Menu/terre1.png);
+  transition: all 0.3s ease;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 </style>

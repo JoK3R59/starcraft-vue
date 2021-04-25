@@ -22,7 +22,7 @@
                 Exploitation
             </button>
             <button class="btn btn-secondary"
-             v-on:click="scrollToElement('Exploit')">
+             v-on:click="scrollToElement('Capacity')">
                 Capacités
             </button>
         </div>
@@ -37,6 +37,7 @@
         <victoire></victoire>
         <module></module>
         <exploit></exploit>
+        <capacity></capacity>
     </div>
 </template>
 
@@ -46,6 +47,7 @@ import Phase from './Phase/Phase';
 import Victoire from './Victoire/Victoire';
 import Module from './Module/Module';
 import Exploit from './Exploit/Exploit';
+import Capacity from './Capacity/Capacity';
 
 export default {
     name: 'Regles',
@@ -54,7 +56,8 @@ export default {
         'phase' : Phase,
         'victoire' : Victoire,
         'module' : Module,
-        'exploit' : Exploit
+        'exploit' : Exploit,
+        'capacity' : Capacity
     },
     methods: {
         scrollToElement(pic) {

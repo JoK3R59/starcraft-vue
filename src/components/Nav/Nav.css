@@ -11,7 +11,7 @@ a {
     .navigation {
         color: white;
         margin: -0.38rem 1rem;
-        background: linear-gradient(to bottom,#0a0a0a,#3f3f3f86);
+        background: linear-gradient(to bottom,rgb(10, 10, 10),rgba(63, 63, 63, 0.9));
         /* border: 0px solid rgba(0, 0, 0, 0.2); */
         border-style: solid;
         border-width: 0 0 1px 0;
@@ -23,6 +23,6 @@ a {
         padding: 0.2rem 2rem 0.5rem 2rem;
     }
     .navigation:hover {
-        box-shadow: 0px 10px 6px rgba(0, 173, 196, 0.2);
+        box-shadow: 0px 10px 6px rgba(0, 173, 196, 0.8);
     }
 }
