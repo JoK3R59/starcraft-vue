@@ -92,3 +92,53 @@
 .list-1 .bot {
     margin-top: 0.55rem;
 }
+@media (max-width: 512px) {
+    .TIPS {
+        font-size: 2rem;
+        padding: 0;
+    }
+    .Order {
+        flex-direction: column;
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
+    .Order-list {
+        max-width: 100%;
+        margin: 0.5rem 0;
+    }
+    .top-img {
+        width: 100px;
+        max-height: 90px;
+    }
+    .top h2 {
+        font-size: 1.35rem;
+    }
+    .top p {
+        padding: 0.5rem .5rem;
+        margin-bottom: 0;
+    }
+    .bot-img {
+        width: 70px;
+        max-height: 65px;
+    }
+    .bot {
+        margin-top: 1rem!important;
+        padding: 0.2rem 0 0.2rem 0;
+        border-style: solid;
+        border-width: 2px 0 0 0;
+        border-color: rgba(0, 0, 0);
+        border-radius: 0 0 1.8rem 1.8rem;
+        background-color: rgba(255, 255, 0, 0.2);
+    }
+    .bot p {
+        padding: 0 .5rem;
+    }
+    .button {
+        display: none;
+    }
+    .button button {
+        max-height: 4rem;
+        color: black;
+        font-size: 1.5rem;
+    }
+}

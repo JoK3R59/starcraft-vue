@@ -82,32 +82,32 @@
         padding: 1rem 1.5rem 0 1.5rem;
     }
     .faction-portrait.img.Protoss {
-        top: 62.5rem;
+        top: 61.5rem;
         left: 30rem;
         width: 350px;
     }
     .faction-portrait.gif.Protoss {
-        top: 67rem;
+        top: 66rem;
         left: 35rem;
         width: 145px;
     }
     .faction-portrait.img.Zerg {
-        top: 54.3rem;
+        top: 53.3rem;
         left: 29rem;
         width: 370px;
     }
     .faction-portrait.gif.Zerg {
-        top: 62.5rem;
+        top: 61.5rem;
         left: 35.3rem;
         width: 130px;
     }
     .faction-portrait.img.Terran {
-        top: 59rem;
+        top: 58rem;
         left: 29.9rem;
         width: 320px;
     }
     .faction-portrait.gif.Terran {
-        top: 63.7rem;
+        top: 62.8rem;
         left: 35.6rem;
         width: 130px;
     }

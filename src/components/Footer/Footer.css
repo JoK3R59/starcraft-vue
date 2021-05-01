@@ -1,5 +1,4 @@
 .footer {
-    
     z-index: 1;
     background-color: black;
     display: flex;
@@ -15,9 +14,22 @@
 .middle {
     padding-top: 1rem;
 }
-
+@media (min-width: 320px) {
+    .footer {
+        padding: 0;
+        font-size: 1rem;
+    }
+    .footer div {
+        padding: .5rem;
+    }
+    .txt{
+        font-size: .75rem;
+    }
+    .right ul{
+        padding-left: 0rem;
+    }
+}
 @media (min-width: 1024px) {
-    
     .footer {
         padding: 0.5rem 6rem;
     }

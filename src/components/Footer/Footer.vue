@@ -3,30 +3,32 @@
     <div class= 'footer'>
 
         <div class="text-center">
-            <h5>Version: 0.3.0</h5>
-            <p>
+            <h5 class="txt">Version: 0.3.3</h5>
+            <p class="txt">
                 Rendu par <br/>
-                <img class="logo"
+                <img class="logo txt"
                  src="../../assets/logo.png"/>
                 Vue.js
             </p>
         </div>
 
         <div class="text-center middle">
-            <h5>StarCraft</h5>
-            <p>Le Jeu de Plateau FanMade</p>
+            <h5 class="txt">StarCraft</h5>
+            <p class="txt">Le Jeu de Plateau FanMade</p>
         </div>
 
-        <div>
-            <h5>Liens :</h5>
+        <div class="right">
+            <h5 class="txt">Liens :</h5>
             <ul>
                 <li class="liste">
-                    <a href="https://www.linkedin.com/in/guillaume-ersent-15419a17b/" target="_blank">
+                    <a class="txt"
+                     href="https://www.linkedin.com/in/guillaume-ersent-15419a17b/" target="_blank">
                         -&gt; Linkedin
                     </a>
                 </li>
                 <li class="liste">
-                    <a href="https://github.com/JoK3R59/starcraft-vue" target="_blank">
+                    <a class="txt"
+                     href="https://github.com/JoK3R59/starcraft-vue" target="_blank">
                         -&gt; GitHub
                     </a>
                 </li>

@@ -46,3 +46,26 @@ h2 {
 p {
     padding: 0.5rem 3rem 0.5rem 3rem;
 }
+@media (max-width: 512px) {
+    .TIPS {
+        font-size: 2rem;
+        padding: 0;
+    }
+    .button button {
+        display: none;
+    }
+    .Phase {
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
+    .Phase-list {
+        margin: 0.5rem 0;
+    }
+    h2 {
+        padding: 0.5rem .2rem;
+        font-size: 1.2rem;
+    }
+    p {
+        padding: 0.5rem 1rem;
+    }
+}

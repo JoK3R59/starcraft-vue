@@ -23,7 +23,7 @@ export default [
     { 
         title: 'La Phase d\'Exécution.',
         numb: "II",
-        recap: "Lors de la phase Exécution, les joueurs exécutent leurs ordres un par un(déplacement d'unités, construction de nouvelles unités ou d'améliorations de base, recherche de nouvelles technologies). Une fois que tout les ordres placés lors de la phase ont été exécutés, on passe à la phase de Regroupement.",
+        recap: "Lors de la phase Exécution, les joueurs exécutent leurs ordres un par un (déplacement d'unités, construction de nouvelles unités ou d'améliorations de base, recherche de nouvelles technologies). Une fois que tout les ordres placés lors de la phase ont été exécutés, on passe à la phase de Regroupement.",
         desc: 'Le premier joueur doit choisir un de ses ordres se trouvant au sommet d\'une pile (il doit être visible), le révéler, l\'exécuter, et le retirer du plateau (il retourne dans son aire de jeu). Puis le joueur a sa gauche fait de même,et ainsi de suite. Un joueur doit exécuter un ordre à son tour, si possible (les joueurs n\'ont pas le droit de << passer >>).',
         desc2: 'Quand un joueur a choisi un ordre et l\'a révélé, il peut choisir de piocher une carte Evénement au lieu d\'exécuter cet ordre. Si il décide de le faire, il retire son pion ordre du plateau (qui revient dans son aire de jeu) sans l\'exécuter et il pioche une carte du paquet Evénement, qu\'il la place face cachée devant lui sans en prendre connaissance. (Nous recommandons de glisser la carte partiellement sous sa fiche de faction pour ne pas oublier de ne pas regarder avant le début de la phase de regroupement)',
         conseil: {

@@ -1,0 +1,76 @@
+@font-face {
+    font-family: 'univers';
+    src:
+        url('./assets/fonts/Univers/UniversLTStd.otf')     
+        format('opentype'),
+        url('./assets/fonts/Univers/Univers-light-normal.ttf')
+        format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.app {
+    background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+    background-size:auto;
+    color: #f6fafd;
+    font-family: 'univers', sans-serif;
+}
+#stellar {
+    background: url(./assets/Images/Interfaces/Menu/motif_etoiles.png);
+    z-index: -500;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all 0.5s ease;
+}
+#stellar div {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-repeat: no-repeat;
+}
+#const {
+    background: url(./assets/Images/Interfaces/Menu/constellations0.png);
+    transition: all 1.5s ease;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+#const1 {
+    background: url(./assets/Images/Interfaces/Menu/constellations.png);
+    transition: all 1s ease;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+#terre {
+    background: url(./assets/Images/Interfaces/Menu/terre1.png);
+    transition: all 0.3s ease;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+@media (max-width: 512px) {
+    #stellar div {
+        transition: all 2s ease;
+        left: -1200px;
+        top: -400px!important;
+    }
+}
+@media (min-width: 1260px) {
+    #stellar div {
+        transition: all 0.5s ease;
+        left: 135px;
+        top: -400px;
+    }
+}

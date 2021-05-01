@@ -2,7 +2,7 @@
 
     <ul class="nav">
         <li class="navigation btn btn-nav">
-            <router-link to='/' exact>Acceuil</router-link>
+            <router-link to='/' exact>Accueil</router-link>
         </li>
         <li class="navigation btn btn-nav">
             <router-link to='/regles'>Règles</router-link>

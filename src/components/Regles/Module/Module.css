@@ -69,3 +69,45 @@ h2 {
 p {
     padding: 0.5rem 3rem 0.5rem 3rem;
 }
+@media (max-width: 512px) {
+    .TIPS {
+        font-size: 2rem;
+        padding: 0;
+    }
+    .button button {
+        display: none;
+    }
+    .Module {
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
+    .Module p {
+        padding: 0.5rem 1rem;
+        margin-top: .5rem;
+    }
+    .Module-list h2 {
+        padding: 0.5rem .3rem;
+        font-size: 1.3rem;
+    }
+    .Module-list {
+        margin: 0.5rem 0;
+    }
+    .img-top {
+        width: 80px;
+    }
+    .img-bot {
+        width: 50px;
+        max-height: 50px;
+        margin: 0.5rem 6.5rem;
+    }
+    .Module-SA {
+        flex-direction: column;
+    }
+    .Module-list.img {
+        max-width: 90%;
+        margin: .3rem 1rem;
+    }
+    .Module-list.img h2 {
+        font-size: 1.2rem;
+    }
+}

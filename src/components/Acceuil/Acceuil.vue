@@ -3,7 +3,7 @@
     <div class="container">
 
         <div class="body-top card-body text-center">
-            <h3>
+            <h3 class="acceuil">
                 Bienvenue sur la page FanMade du jeu de plateau Starcraft.
             </h3>
         </div>
