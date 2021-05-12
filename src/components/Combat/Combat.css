@@ -1,0 +1,50 @@
+.TIPS {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: black;
+    text-shadow: 0.5px 0.5px 0.8em white, 0 0 0.5em rgb(0, 0, 160), 0 0 0.2em rgb(0, 0, 160);
+    text-decoration: underline;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.Combat {
+    margin: 5vh 10vh;
+    padding: 1rem;
+    border-style: solid;
+    border-width: 6px 2px 6px 2px;
+    border-color: rgba(0, 0, 0);
+    border-radius: 2rem;
+    box-shadow: 
+        12px 0px 6px rgba(0, 173, 196, 0.2),
+        -12px 0px 6px rgba(0, 173, 196, 0.2);
+    background: rgba(50, 50, 50, 0.95);
+}
+.Combat-list h2 {
+    text-decoration: underline;
+}
+.Combat-list {
+    display: flex;
+    flex-direction: column;
+}
+.select-list {
+    display: flex;
+    flex-direction: row;
+}
+.select {
+    width: 50%;
+}
+.select select {
+    padding: 0 2rem;
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+}
+.selection {
+    display: flex;
+    flex-direction: row;
+}
+.selection p {
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+    width: 15%;
+}
