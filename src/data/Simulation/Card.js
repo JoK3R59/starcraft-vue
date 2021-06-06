@@ -9,7 +9,7 @@ export default {
                 img: 'char',
                 soutien_value: 2,
                 type: 'sol',
-                atk: 'sol_air'
+                atk: 'sol'
             },
             {
                 name: 'Cuirassé',
@@ -77,7 +77,7 @@ export default {
         combat: {
             troupe: [
                 {
-                    name: 'Cuirassé & Char de Siège',
+                    name: 'Cuirassé & Char de Siège 7/8',
                     img: 'cuir_char',
                     type: 'std',
                     figurine: [
@@ -108,7 +108,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Cuirassé & Char de Siège',
+                    name: 'Cuirassé & Char de Siège 8/8',
                     img: 'cuir_char_2',
                     figurine: [
                         {
@@ -139,7 +139,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Cuirassé & Ombre',
+                    name: 'Cuirassé & Ombre 7/7',
                     img: 'cuir_ombr',
                     figurine: [
                         {
@@ -170,7 +170,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Cuirassé & Ombre',
+                    name: 'Cuirassé & Ombre 7/8',
                     img: 'cuir_ombr_2',
                     figurine: [
                         {
@@ -201,7 +201,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Flammeur & Marine',
+                    name: 'Flammeur & Marine 5/5',
                     img: 'flam_mari',
                     figurine: [
                         {
@@ -224,7 +224,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Flammeur & Marine',
+                    name: 'Flammeur & Marine 6/6',
                     img: 'flam_mari_2',
                     figurine: [
                         {
@@ -265,7 +265,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Goliath & Char de Siège',
+                    name: 'Goliath & Char de Siège 7/8',
                     img: 'goli_char',
                     figurine: [
                         {
@@ -296,7 +296,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Goliath & Ombre',
+                    name: 'Goliath & Ombre 6/7',
                     img: 'goli_ombr',
                     figurine: [
                         {
@@ -321,14 +321,14 @@ export default {
                         condition: {
                             type: 'front',
                             unit: 'Goliath',
-                            by: 'vol'
+                            by: 'air'
                         },
                         type: 'atk',
                         result: 2
                     }
                 },
                 {
-                    name: 'Goliath & Ombre',
+                    name: 'Goliath & Ombre 6/7',
                     img: 'goli_ombr_2',
                     figurine: [
                         {
@@ -351,14 +351,15 @@ export default {
                     },
                     Tech: {
                         condition: {
-                            by: 'vol'
+                            type: 'front',
+                            by: 'air'
                         },
                         type: 'atk',
                         result: 1
                     }
                 },
                 {
-                    name: 'Marine & Fantôme',
+                    name: 'Marine & Fantôme 5/4',
                     img: 'mari_fant',
                     figurine: [
                         {
@@ -381,14 +382,15 @@ export default {
                     },
                     Tech: {
                         condition: {
-                            by: 'vol'
+                            type: 'front',
+                            by: 'air'
                         },
                         type: 'atk',
                         result: 1
                     }
                 },
                 {
-                    name: 'Marine & Fantôme',
+                    name: 'Marine & Fantôme 5/5',
                     img: 'mari_fant_2',
                     figurine: [
                         {
@@ -405,20 +407,21 @@ export default {
                             min: 2
                         },
                         def: {
-                            max: 4,
+                            max: 5,
                             min: 5
                         }
                     },
                     Tech: {
                         condition: {
-                            by: 'vol'
+                            type: 'front',
+                            by: 'air'
                         },
                         type: 'atk',
                         result: 1
                     }
                 },
                 {
-                    name: 'Marine & Fantôme & Flammeur',
+                    name: 'Marine & Fantôme & Flammeur 6/4',
                     img: 'mari_fant_flam',
                     figurine: [
                         {
@@ -444,7 +447,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Vautour & Fantôme',
+                    name: 'Vautour & Fantôme 5/6',
                     img: 'vaut_fant',
                     figurine: [
                         {
@@ -467,7 +470,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Vautour & Flammeur',
+                    name: 'Vautour & Flammeur 6/6',
                     img: 'vaut_flam',
                     figurine: [
                         {
@@ -490,7 +493,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Vautour & Flammeur',
+                    name: 'Vautour & Flammeur 6/5',
                     img: 'vaut_flam_2',
                     figurine: [
                         {
@@ -531,7 +534,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Vautour & Goliath & Char de Siège',
+                    name: 'Vautour & Goliath & Char de Siège 7/7',
                     img: 'vaut_goli_char',
                     figurine: [
                         {
@@ -559,7 +562,7 @@ export default {
                         condition: {
                             type: 'front',
                             unit: 'Goliath',
-                            by: 'vol'
+                            by: 'air'
                         },
                         type: 'atk',
                         result: 1
@@ -570,7 +573,11 @@ export default {
                 {
                     name: 'Arme Nucléaire',
                     img: 'arme_nucleaire',
-                    figurine: 'Fantôme',
+                    figurine: [
+                        {
+                            name: 'Fantôme'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -591,18 +598,13 @@ export default {
                     }
                 },
                 {
-                    name: 'Balayage de Scanner',
-                    img: 'balayage_scanner',
-                    type: 'tch',
-                    capacity: {
-                        name: 'Détecteur',
-                        for: 'all'
-                    },
-                },
-                {
-                    name: 'Canon Yamato',
+                    name: 'Canon Yamato 9/9',
                     img: 'canon_yamato',
-                    figurine: 'Cuirassé',
+                    figurine: [
+                        {
+                            name: 'Cuirassé'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -616,9 +618,13 @@ export default {
                     }
                 },
                 {
-                    name: 'Canon Yamato',
+                    name: 'Canon Yamato 10/9',
                     img: 'canon_yamato_2',
-                    figurine: 'Cuirassé',
+                    figurine: [
+                        {
+                            name: 'Cuirassé'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -632,22 +638,13 @@ export default {
                     }
                 },
                 {
-                    name: 'Matrice Défensive',
-                    img: 'matrice_defensive',
-                    type: 'tch',
-                    Tech: {
-                        condition: {
-                            unit: 'Vaisseau Laboratoire',
-                            type: 'renfort'
-                        },
-                        type: 'def',
-                        result: 1
-                    }
-                },
-                {
-                    name: 'Mines Araignées',
+                    name: 'Mines Araignées 7/7',
                     img: 'mines_araignees',
-                    figurine: 'Vautour',
+                    figurine: [
+                        {
+                            name: 'Vautour'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -661,15 +658,20 @@ export default {
                     },
                     Tech: {
                         condition: {
+                            byCondition: 'noDétecteur',
                             type: 'répercutés',
                             by: 'sol'
                         }
                     }
                 },
                 {
-                    name: 'Mines Araignées',
+                    name: 'Mines Araignées 8/7',
                     img: 'mines_araignees_2',
-                    figurine: 'Vautour',
+                    figurine: [
+                        {
+                            name: 'Vautour'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -683,15 +685,20 @@ export default {
                     },
                     Tech: {
                         condition: {
+                            byCondition: 'noDétecteur',
                             type: 'répercutés',
                             by: 'sol'
                         }
                     }
                 },
                 {
-                    name: 'Mode Siège',
+                    name: 'Mode Siège 8/8',
                     img: 'mode_siege',
-                    figurine: 'Char de Siège',
+                    figurine: [
+                        {
+                            name: 'Char de Siège'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -705,15 +712,20 @@ export default {
                     },
                     Tech: {
                         condition: {
+                            byCondition: 'noCondition',
                             type: 'répercutés',
                             by: 'sol'
                         }
                     }
                 },
                 {
-                    name: 'Mode Siège',
+                    name: 'Mode Siège 9/8',
                     img: 'mode_siege_2',
-                    figurine: 'Char de Siège',
+                    figurine: [
+                        {
+                            name: 'Char de Siège'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -727,13 +739,14 @@ export default {
                     },
                     Tech: {
                         condition: {
+                            byCondition: 'noCondition',
                             type: 'répercutés',
                             by: 'sol'
                         }
                     }
                 },
                 {
-                    name: 'Stimulant',
+                    name: 'Stimulant 7/3',
                     img: 'stimulant',
                     figurine: [
                         {
@@ -756,7 +769,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Stimulant',
+                    name: 'Stimulant 7/4',
                     img: 'stimulant_2',
                     figurine: [
                         {
@@ -904,7 +917,7 @@ export default {
                                     name: 'Zerg'
                                 }
                             ],
-                            by: 'sol_vol'
+                            by: 'sol_air'
                         },
                         type: 'atk',
                         result: 1
@@ -916,11 +929,9 @@ export default {
                     figurine: 'Vaisseau Laboratoire',
                     type: 'tch',
                     Tech: {
-                        condition: {
-                            type: 'renfort',
-                        },
                         capacity: {
                             name: 'Annulez',
+                            of: 'renfort',
                             for: 'Archonte'
                         },
                         result: [
@@ -939,7 +950,8 @@ export default {
                     figurine: 'Fantôme',
                     type: 'tch',
                     Tech: {
-                        condition: {
+                        capacity: {
+                            name: 'Verrou',
                             unit: [
                                 {
                                     name: 'Dragons'
@@ -963,7 +975,7 @@ export default {
                                     name: 'Cuirassé'
                                 },
                                 {
-                                    name: 'Porte-Nef'
+                                    name: 'Porte-Nefs'
                                 },
                                 {
                                     name: 'Scout'
@@ -980,13 +992,22 @@ export default {
         },
         zoneJeu: [
             {
+                name: 'Balayage de Scanner',
+                img: 'balayage_scanner',
+                type: 'tch',
+                capacity: {
+                    name: 'Détecteur',
+                    for: 'all'
+                }
+            },
+            {
                 name: 'Matrice Défensive',
                 img: 'matrice_defensive',
                 type: 'tch',
                 Tech: {
                     condition: {
-                        type: 'renfort',
-                        unit: 'Vaisseau Laboratoire'
+                        unit: 'Vaisseau Laboratoire',
+                        type: 'renfort'
                     },
                     type: 'def',
                     result: 1
@@ -1061,59 +1082,104 @@ export default {
         combat: {
             troupe: [
                 {
-                    name: 'Hydralisk',
+                    name: 'Hydralisk 6/6',
                     img: 'hydr',
+                    figurine: [
+                        {
+                            name: 'Hydralisk'
+                        }
+                    ],
                     type: 'std',
-                    atk_max: 6,
-                    atk_min: 2,
-                    def_max: 6,
-                    def_min: 5,
+                    degats: {
+                        atk: {
+                            max: 6,
+                            min: 2,
+                        },
+                        def: {
+                            max: 6,
+                            min: 5,
+                        }
+                    },
                     Tech: {
                         condition: {
-                            by: 'vol'
+                            type: 'front',
+                            by: 'air'
                         },
                         type: 'atk',
                         result: 1
                     }
                 },
                 {
-                    name: 'Masse',
+                    name: 'Masse 0/8',
                     img: 'mass',
                     type: 'std',
-                    atk_max: 0,
-                    atk_min: 5,
-                    def_max: 8,
-                    def_min: 2,
+                    figurine: [
+                        {
+                            name: 'Masse'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 0,
+                            min: 5,
+                        },
+                        def: {
+                            max: 8,
+                            min: 2,
+                        }
+                    },
                     Tech: {
                         condition: {
                             type: 'suicide',
-                            by: 'vol'
+                            by: 'air'
                         },
                     }
                 },
                 {
-                    name: 'Masse',
+                    name: 'Masse 0/9',
                     img: 'mass_2',
                     type: 'std',
-                    atk_max: 0,
-                    atk_min: 5,
-                    def_max: 9,
-                    def_min: 2,
+                    figurine: [
+                        {
+                            name: 'Masse'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 0,
+                            min: 5,
+                        },
+                        def: {
+                            max: 9,
+                            min: 2,
+                        }
+                    },
                     Tech: {
                         condition: {
                             type: 'suicide',
-                            by: 'vol'
+                            by: 'air'
                         },
                     }
                 },
                 {
-                    name: 'Mutalisk',
+                    name: 'Mutalisk 8/7',
                     img: 'muta',
                     type: 'std',
-                    atk_max: 8,
-                    atk_min: 3,
-                    def_max: 7,
-                    def_min: 4,
+                    figurine: [
+                        {
+                            name: 'Mutalisk'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 8,
+                            min: 3,
+                        },
+                        def: {
+                            max: 7,
+                            min: 4,
+                        }
+                    },
                     Tech: {
                         condition: {
                             type: 'répercutés',
@@ -1134,13 +1200,24 @@ export default {
                     }
                 },
                 {
-                    name: 'Mutalisk',
+                    name: 'Mutalisk 7/8',
                     img: 'muta_2',
                     type: 'std',
-                    atk_max: 7,
-                    atk_min: 3,
-                    def_max: 8,
-                    def_min: 4,
+                    figurine: [
+                        {
+                            name: 'Mutalisk'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 7,
+                            min: 3,
+                        },
+                        def: {
+                            max: 8,
+                            min: 4,
+                        }
+                    },
                     Tech: {
                         condition: {
                             type: 'répercutés',
@@ -1161,13 +1238,24 @@ export default {
                     }
                 },
                 {
-                    name: 'Mutalisk',
+                    name: 'Mutalisk 7/7',
                     img: 'muta_3',
                     type: 'std',
-                    atk_max: 7,
-                    atk_min: 3,
-                    def_max: 7,
-                    def_min: 4,
+                    figurine: [
+                        {
+                            name: 'Mutalisk'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 7,
+                            min: 3,
+                        },
+                        def: {
+                            max: 7,
+                            min: 4,
+                        }
+                    },
                     Tech: {
                         condition: {
                             type: 'répercutés',
@@ -1188,31 +1276,73 @@ export default {
                     }
                 },
                 {
-                    name: 'Mutalisk & Hydralisk',
+                    name: 'Mutalisk & Hydralisk 7/6',
                     img: 'muta_hydr',
                     type: 'std',
-                    atk_max: 7,
-                    atk_min: 2,
-                    def_max: 6,
-                    def_min: 5
+                    figurine: [
+                        {
+                            name: 'Mutalisk'
+                        },
+                        {
+                            name: 'Hydralisk'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 7,
+                            min: 2,
+                        },
+                        def: {
+                            max: 6,
+                            min: 5,
+                        }
+                    }
                 },
                 {
-                    name: 'Ultralisk & Gardien',
+                    name: 'Ultralisk & Gardien 7/8',
                     img: 'ultr_gard',
                     type: 'std',
-                    atk_max: 7,
-                    atk_min: 3,
-                    def_max: 8,
-                    def_min: 4
+                    figurine: [
+                        {
+                            name: 'Ultralisk'
+                        },
+                        {
+                            name: 'Gardien'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 7,
+                            min: 3,
+                        },
+                        def: {
+                            max: 8,
+                            min: 4,
+                        }
+                    }
                 },
                 {
-                    name: 'Ultralisk & Gardien',
+                    name: 'Ultralisk & Gardien 8/7',
                     img: 'ultr_gard_2',
                     type: 'std',
-                    atk_max: 8,
-                    atk_min: 3,
-                    def_max: 7,
-                    def_min: 4,
+                    figurine: [
+                        {
+                            name: 'Ultralisk'
+                        },
+                        {
+                            name: 'Gardien'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 8,
+                            min: 3,
+                        },
+                        def: {
+                            max: 7,
+                            min: 4,
+                        }
+                    },
                     Tech: {
                         condition: {
                             type: 'front',
@@ -1223,13 +1353,27 @@ export default {
                     }
                 },
                 {
-                    name: 'Ultralisk & Gardien',
+                    name: 'Ultralisk & Gardien 8/8',
                     img: 'ultr_gard_3',
                     type: 'std',
-                    atk_max: 8,
-                    atk_min: 5,
-                    def_max: 8,
-                    def_min: 2,
+                    figurine: [
+                        {
+                            name: 'Ultralisk'
+                        },
+                        {
+                            name: 'Gardien'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 8,
+                            min: 5,
+                        },
+                        def: {
+                            max: 8,
+                            min: 2,
+                        }
+                    },
                     Tech: {
                         condition: {
                             type: 'front',
@@ -1240,54 +1384,115 @@ export default {
                     }
                 },
                 {
-                    name: 'Zergling',
+                    name: 'Zergling 6/3',
                     img: 'zerg',
                     type: 'std',
-                    atk_max: 6,
-                    atk_min: 4,
-                    def_max: 3,
-                    def_min: 3
+                    figurine: [
+                        {
+                            name: 'Zergling'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 6,
+                            min: 4,
+                        },
+                        def: {
+                            max: 3,
+                            min: 3,
+                        }
+                    }
                 },
                 {
-                    name: 'Zergling',
+                    name: 'Zergling 4/5',
                     img: 'zerg_2',
                     type: 'std',
-                    atk_max: 4,
-                    atk_min: 4,
-                    def_max: 5,
-                    def_min: 3
+                    figurine: [
+                        {
+                            name: 'Zergling'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 4,
+                            min: 4,
+                        },
+                        def: {
+                            max: 5,
+                            min: 3,
+                        }
+                    }
                 },
                 {
-                    name: 'Zergling',
+                    name: 'Zergling 5/4',
                     img: 'zerg_3',
                     type: 'std',
-                    atk_max: 5,
-                    atk_min: 4,
-                    def_max: 4,
-                    def_min: 3
+                    figurine: [
+                        {
+                            name: 'Zergling'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 5,
+                            min: 4,
+                        },
+                        def: {
+                            max: 4,
+                            min: 3,
+                        }
+                    }
                 },
                 {
-                    name: 'Zergling & Hydralisk',
+                    name: 'Zergling & Hydralisk 5/5',
                     img: 'zerg_hydr',
                     type: 'std',
-                    atk_max: 5,
-                    atk_min: 1,
-                    def_max: 5,
-                    def_min: 6
+                    figurine: [
+                        {
+                            name: 'Zergling'
+                        },
+                        {
+                            name: 'Hydralisk'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 5,
+                            min: 1,
+                        },
+                        def: {
+                            max: 5,
+                            min: 6,
+                        }
+                    }
                 },
                 {
-                    name: 'Zergling & Hydralisk',
+                    name: 'Zergling & Hydralisk 5/6',
                     img: 'zerg_hydr_2',
                     type: 'std',
-                    atk_max: 5,
-                    atk_min: 1,
-                    def_max: 6,
-                    def_min: 6,
+                    figurine: [
+                        {
+                            name: 'Zergling'
+                        },
+                        {
+                            name: 'Hydralisk'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 5,
+                            min: 1,
+                        },
+                        def: {
+                            max: 6,
+                            min: 6,
+                        }
+                    },
                     Tech: {
                         condition: {
                             type: 'front',
                             unit: 'Hydralisk',
-                            by: 'vol'
+                            by: 'air'
                         },
                         type: 'atk',
                         result: 1
@@ -1296,9 +1501,13 @@ export default {
             ],
             techno: [
                 {
-                    name: 'Armure Chitineuse',
+                    name: 'Armure Chitineuse 9/9',
                     img: 'armure_chitineuse',
-                    figurine: 'Ultralisk',
+                    figurine: [
+                        {
+                            name: 'Ultralisk'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -1312,9 +1521,13 @@ export default {
                     }
                 },
                 {
-                    name: 'Armure Chitineuse',
+                    name: 'Armure Chitineuse 8/10',
                     img: 'armure_chitineuse_2',
-                    figurine: 'Ultralisk',
+                    figurine: [
+                        {
+                            name: 'Ultralisk'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -1328,9 +1541,13 @@ export default {
                     }
                 },
                 {
-                    name: 'Attaque Volante',
+                    name: 'Attaque Volante 9/8',
                     img: 'attaque_volante',
-                    figurine: 'Gardien',
+                    figurine: [
+                        {
+                            name: 'Gardien'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -1344,9 +1561,13 @@ export default {
                     }
                 },
                 {
-                    name: 'Attaque Volante',
+                    name: 'Attaque Volante 10/8',
                     img: 'attaque_volante_2',
-                    figurine: 'Gardien',
+                    figurine: [
+                        {
+                            name: 'Gardien'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -1360,20 +1581,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Boost Métabolique',
-                    img: 'boost_metabolique',
-                    type: 'tch',
-                    Tech: {
-                        capacity: {
-                            for: 'all',
-                            unit: 'Zergling'
-                        },
-                        type: 'def',
-                        result: 2
-                    }
-                },
-                {
-                    name: 'Enfouissage',
+                    name: 'Enfouissage 0/5',
                     img: 'enfouissage',
                     figurine: [
                         {
@@ -1415,7 +1623,7 @@ export default {
                     }
                 },
                 {
-                    name: 'Enfouissage',
+                    name: 'Enfouissage 0/6',
                     img: 'enfouissage_2',
                     figurine: [
                         {
@@ -1466,7 +1674,8 @@ export default {
                     type: 'std',
                     Tech: {
                         condition: {
-                            type: 'soutien'
+                            type: 'soutien',
+                            by: 'soutien'
                         },
                         type: 'atk',
                         result: 1
@@ -1546,6 +1755,7 @@ export default {
                     type: 'tch',
                     Tech: {
                         condition: {
+                            unit: 'Saboteur',
                             type: 'répercutés',
                             by: 'sol_vol'
                         },
@@ -1697,195 +1907,422 @@ export default {
         combat: {
             troupe: [
                 {
-                    name: 'Archonte',
+                    name: 'Archonte 9/8',
                     img: 'arch',
                     type: 'std',
-                    atk_max: 9,
-                    atk_min: 5,
-                    def_max: 8,
-                    def_min: 2,
+                    figurine: [
+                        {
+                            name: 'Archonte'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 9,
+                            min: 5
+                        },
+                        def: {
+                            max: 8,
+                            min: 2
+                        }
+                    },
                     Tech: {
                         condition: {
+                            byCondition: 'noCondition',
                             type: 'répercutés',
-                            by: 'sol_vol'
+                            by: 'sol_air'
                         }
                     }
-                },{
-                    name: 'Archonte & Destructeur',
+                },
+                {
+                    name: 'Archonte & Destructeur 8/8',
                     img: 'arch_dest',
                     type: 'std',
-                    atk_max: 8,
-                    atk_min: 2,
-                    def_max: 8,
-                    def_min: 5,
+                    figurine: [
+                        {
+                            name: 'Archonte'
+                        },
+                        {
+                            name: 'Destructeur'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 8,
+                            min: 2
+                        },
+                        def: {
+                            max: 8,
+                            min: 5
+                        }
+                    },
                     Tech: {
                         condition: {
+                            byCondition: 'noCondition',
                             type: 'répercutés',
                             by: 'sol'
                         }
                     }
-                },{
-                    name: 'Destructeur',
+                },
+                {
+                    name: 'Destructeur 7/7',
                     img: 'dest',
                     type: 'std',
-                    atk_max: 7,
-                    atk_min: 3,
-                    def_max: 7,
-                    def_min: 4,
+                    figurine: [
+                        {
+                            name: 'Destructeur'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 7,
+                            min: 3
+                        },
+                        def: {
+                            max: 7,
+                            min: 4
+                        }
+                    },
                     Tech: {
                         condition: {
+                            byCondition: 'noCondition',
                             type: 'répercutés',
                             by: 'sol'
                         }
                     }
-                },{
-                    name: 'Disciple',
+                },
+                {
+                    name: 'Disciple 6/7',
                     img: 'disc',
                     type: 'std',
-                    atk_max: 6,
-                    atk_min: 2,
-                    def_max: 7,
-                    def_min: 5
-                },{
-                    name: 'Disciple',
+                    figurine: [
+                        {
+                            name: 'Disciple'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 6,
+                            min: 2
+                        },
+                        def: {
+                            max: 7,
+                            min: 5
+                        }
+                    }
+                },
+                {
+                    name: 'Disciple 7/5',
                     img: 'disc_2',
                     type: 'std',
-                    atk_max: 7,
-                    atk_min: 2,
-                    def_max: 5,
-                    def_min: 5
-                },{
-                    name: 'Disciple',
+                    figurine: [
+                        {
+                            name: 'Disciple'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 7,
+                            min: 2
+                        },
+                        def: {
+                            max: 5,
+                            min: 5
+                        }
+                    }
+                },
+                {
+                    name: 'Disciple 5/6',
                     img: 'disc_3',
                     type: 'std',
-                    atk_max: 5,
-                    atk_min: 2,
-                    def_max: 6,
-                    def_min: 5
-                },{
-                    name: 'Disciple & Dragon',
+                    figurine: [
+                        {
+                            name: 'Disciple'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 5,
+                            min: 2
+                        },
+                        def: {
+                            max: 6,
+                            min: 5
+                        }
+                    }
+                },
+                {
+                    name: 'Disciple & Dragon 6/6',
                     img: 'disc_drag',
                     type: 'std',
-                    atk_max: 6,
-                    atk_min: 1,
-                    def_max: 6,
-                    def_min: 6,
+                    figurine: [
+                        {
+                            name: 'Disciple'
+                        },
+                        {
+                            name: 'Dragon'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 6,
+                            min: 1
+                        },
+                        def: {
+                            max: 6,
+                            min: 6
+                        }
+                    },
                     Tech: {
                         condition: {
                             type: 'front',
                             unit: 'Dragon',
-                            by: 'vol'
+                            by: 'air'
                         },
                         type: 'atk',
                         result: 1
                     }
-                },{
-                    name: 'Disciple & Dragon',
+                },
+                {
+                    name: 'Disciple & Dragon 5/7',
                     img: 'disc_drag_2',
                     type: 'std',
-                    atk_max: 5,
-                    atk_min: 1,
-                    def_max: 7,
-                    def_min: 6
-                },{
-                    name: 'Porte-Nefs & Archonte',
+                    figurine: [
+                        {
+                            name: 'Disciple'
+                        },
+                        {
+                            name: 'Dragon'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 5,
+                            min: 1
+                        },
+                        def: {
+                            max: 7,
+                            min: 6
+                        }
+                    }
+                },
+                {
+                    name: 'Porte-Nefs & Archonte 8/9',
                     img: 'port_arch',
                     type: 'std',
-                    atk_max: 8,
-                    atk_min: 2,
-                    def_max: 9,
-                    def_min: 5,
+                    figurine: [
+                        {
+                            name: 'Porte-Nefs'
+                        },
+                        {
+                            name: 'Archonte'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 8,
+                            min: 2
+                        },
+                        def: {
+                            max: 9,
+                            min: 5
+                        }
+                    },
                     Tech: {
                         condition: {
                             type: 'répercutés',
                             unit: 'Archonte',
-                            by: 'sol_vol'
+                            by: 'sol_air'
                         }
                     }
-                },{
-                    name: 'Porte-Nefs & Archonte',
+                },
+                {
+                    name: 'Porte-Nefs & Archonte 9/8',
                     img: 'port_arch_2',
                     type: 'std',
-                    atk_max: 9,
-                    atk_min: 5,
-                    def_max: 8,
-                    def_min: 2,
+                    figurine: [
+                        {
+                            name: 'Porte-Nefs'
+                        },
+                        {
+                            name: 'Archonte'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 9,
+                            min: 5
+                        },
+                        def: {
+                            max: 8,
+                            min: 2
+                        }
+                    },
                     Tech: {
                         condition: {
                             type: 'répercutés',
                             unit: 'Archonte',
-                            by: 'sol_vol'
+                            by: 'sol_air'
                         }
                     }
-                },{
-                    name: 'Porte-Nefs & Destructeur',
+                },
+                {
+                    name: 'Porte-Nefs & Destructeur 7/8',
                     img: 'port_dest',
                     type: 'std',
-                    atk_max: 7,
-                    atk_min: 3,
-                    def_max: 8,
-                    def_min: 4
-                },{
-                    name: 'Porte-Nefs & Destructeur',
+                    figurine: [
+                        {
+                            name: 'Porte-Nefs'
+                        },
+                        {
+                            name: 'Destructeur'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 7,
+                            min: 3
+                        },
+                        def: {
+                            max: 8,
+                            min: 4
+                        }
+                    }
+                },
+                {
+                    name: 'Porte-Nefs & Destructeur 8/8',
                     img: 'port_dest_2',
                     type: 'std',
-                    atk_max: 8,
-                    atk_min: 3,
-                    def_max: 8,
-                    def_min: 4
-                },{
-                    name: 'Scout',
+                    figurine: [
+                        {
+                            name: 'Porte-Nefs'
+                        },
+                        {
+                            name: 'Destructeur'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 8,
+                            min: 3
+                        },
+                        def: {
+                            max: 8,
+                            min: 4
+                        }
+                    }
+                },
+                {
+                    name: 'Scout 7/8',
                     img: 'scou',
                     type: 'std',
-                    atk_max: 7,
-                    atk_min: 4,
-                    def_max: 8,
-                    def_min: 3
-                },{
-                    name: 'Scout',
+                    figurine: [
+                        {
+                            name: 'Scout'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 7,
+                            min: 4
+                        },
+                        def: {
+                            max: 8,
+                            min: 3
+                        }
+                    }
+                },
+                {
+                    name: 'Scout 7/8',
                     img: 'scou_2',
                     type: 'std',
-                    atk_max: 7,
-                    atk_min: 4,
-                    def_max: 8,
-                    def_min: 3,
+                    figurine: [
+                        {
+                            name: 'Scout'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 7,
+                            min: 4
+                        },
+                        def: {
+                            max: 8,
+                            min: 4
+                        }
+                    },
                     Tech: {
                         condition: {
-                            by: 'vol'
+                            type: 'front',
+                            by: 'air'
                         },
                         type: 'atk',
                         result: 1
                     }
-                },{
-                    name: 'Scout & Dragon',
+                },
+                {
+                    name: 'Scout & Dragon 7/7',
                     img: 'scou_drag',
                     type: 'std',
-                    atk_max: 7,
-                    atk_min: 3,
-                    def_max: 7,
-                    def_min: 4,
+                    figurine: [
+                        {
+                            name: 'Scout'
+                        },
+                        {
+                            name: 'Dragon'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 7,
+                            min: 3
+                        },
+                        def: {
+                            max: 7,
+                            min: 4
+                        }
+                    },
                     Tech: {
                         condition: {
-                            by: 'vol'
+                            type: 'front',
+                            by: 'air'
                         },
                         type: 'atk',
                         result: 1
                     }
-                },{
-                    name: 'Scout & Dragon',
+                },
+                {
+                    name: 'Scout & Dragon 8/7',
                     img: 'scou_drag_2',
                     type: 'std',
-                    atk_max: 8,
-                    atk_min: 3,
-                    def_max: 7,
-                    def_min: 4
+                    figurine: [
+                        {
+                            name: 'Scout'
+                        },
+                        {
+                            name: 'Dragon'
+                        }
+                    ],
+                    degats: {
+                        atk: {
+                            max: 8,
+                            min: 3
+                        },
+                        def: {
+                            max: 7,
+                            min: 4
+                        }
+                    }
                 }
             ],
             techno: [
                 {
-                    name: 'Capacité Augmentée du Destructeur',
+                    name: 'Capacité Augmentée du Destructeur 9/8',
                     img: 'capacite_destructeur',
-                    figurine: 'Destructeur',
+                    figurine: [
+                        {
+                            name: 'Destructeur'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -1905,9 +2342,13 @@ export default {
                     }
                 },
                 {
-                    name: 'Capacité Augmentée du Destructeur',
+                    name: 'Capacité Augmentée du Destructeur 10/8',
                     img: 'capacite_destructeur_2',
-                    figurine: 'Destructeur',
+                    figurine: [
+                        {
+                            name: 'Destructeur'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -1927,9 +2368,13 @@ export default {
                     }
                 },
                 {
-                    name: 'Capacité Augmentée du Destructeur',
+                    name: 'Capacité Augmentée du Destructeur 9/7',
                     img: 'capacite_destructeur_3',
-                    figurine: 'Destructeur',
+                    figurine: [
+                        {
+                            name: 'Destructeur'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -1949,9 +2394,13 @@ export default {
                     }
                 },
                 {
-                    name: 'Capacité Augmentée du Porte-Nefs',
+                    name: 'Capacité Augmentée du Porte-Nefs 10/9',
                     img: 'capacite_porte-nefs',
-                    figurine: 'Porte-Nefs',
+                    figurine: [
+                        {
+                            name: 'Porte-Nefs'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -1965,9 +2414,13 @@ export default {
                     }
                 },
                 {
-                    name: 'Capacité Augmentée du Porte-Nefs',
+                    name: 'Capacité Augmentée du Porte-Nefs 9/9',
                     img: 'capacite_porte-nefs_2',
-                    figurine: 'Porte-Nefs',
+                    figurine: [
+                        {
+                            name: 'Porte-Nefs'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -1981,9 +2434,13 @@ export default {
                     }
                 },
                 {
-                    name: 'Capacité Augmentée du Porte-Nefs',
+                    name: 'Capacité Augmentée du Porte-Nefs 9/8',
                     img: 'capacite_porte-nefs_3',
-                    figurine: 'Porte-Nefs',
+                    figurine: [
+                        {
+                            name: 'Porte-Nefs'
+                        }
+                    ],
                     type: 'tch',
                     degats: {
                         atk: {
@@ -2067,8 +2524,9 @@ export default {
                     type: 'tch',
                     Tech: {
                         condition: {
+                            unit: 'Templier',
                             type: 'répercutés',
-                            by: 'sol_vol'
+                            by: 'sol_air'
                         },
                         capacity: {
                             name: 'Détecteur'
@@ -2131,14 +2589,14 @@ Tech: {
     condition: {
         type: 'front' ou 'répercutés' ou 'suicide' ou 'renfort' ou 'destroy', ou 'base', ou 'exception'
         unit: 'name' ou [{name},{name}],
-        by: 'sol_vol'
+        by: 'sol_air'
     },
     capacity: {
         name: 'capacité',
         for: 'all' ou [{name}, {name}],
         unit: 'name'
     },
-    type: 'atk def',
+    type: 'atk_def',
     result: , [{}, {}]
 }
 

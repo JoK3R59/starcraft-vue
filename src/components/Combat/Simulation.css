@@ -33,6 +33,11 @@
 }
 .carte {
     width: 50%;
+    margin-top: 1rem;
+}
+.base {
+    width: 50%;
+    margin-top: 1rem;
 }
 .atk-figurine {
     width: 100px;
@@ -49,4 +54,12 @@
 .def-card {
     width: 192px;
     height: 297px;
+}
+.imgBase {
+    width: 100px;
+    height: 100px;
+}
+.imgTurret {
+    width: 100px;
+    height: 100px;
 }

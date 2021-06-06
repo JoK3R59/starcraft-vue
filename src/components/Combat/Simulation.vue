@@ -1,7 +1,6 @@
 <template>
 
     <div class="Simulation">
-        
         <div class="Simulation-atk">
 
             <div class="figurine soutien">
@@ -10,19 +9,19 @@
 
                 <div>
                     <img class="atk-figurine front"
-                     :src="imgSoutienAtk(atk.selectFigurineSoutien)"
+                     :src="imgFigurine(atk.selectFigurineSoutien,atk.selectRace)"
                       alt="Selectionnez une Figurine">
                 </div>
 
             </div>
             
-            <div class=" figurine front">
+            <div class="figurine front">
                 
                 <h3>Front</h3>
 
                 <div>
                     <img class="atk-figurine soutien"
-                     :src="imgFrontAtk(atk.selectFigurineFront)"
+                     :src="imgFigurine(atk.selectFigurineFront,atk.selectRace)"
                       alt="Selectionnez une Figurine">
                 </div>
             </div>
@@ -33,7 +32,7 @@
 
                 <div>
                     <img class="atk-card soutien"
-                     :src="imgRenfortAtk(atk.selectCardRenfort)"
+                     :src="imgCarte(atk.selectCardRenfort,atk.selectRace)"
                       alt="Selectionnez une carte">
                 </div>
             </div>
@@ -44,7 +43,7 @@
 
                 <div>
                     <img class="atk-card soutien"
-                     :src="imgCombatAtk(atk.selectCardCombat)"
+                     :src="imgCarte(atk.selectCardCombat,atk.selectRace)"
                       alt="Selectionnez une carte">
                 </div>
             </div>
@@ -55,8 +54,21 @@
 
                 <div>
                     <img class="atk-card zone"
-                     :src="imgZoneAtk(atk.selectCardZone)"
+                     :src="imgCarte(atk.selectCardZone,atk.selectRace)"
                      alt="Selectionnez une carte Zone de Jeu">
+                </div>
+            </div>
+
+            <div class="base">
+                <div>
+                    <h3>Base</h3>
+                    <img class="imgBase"
+                     :src="imgBase(atk.base, atk.selectRace)" alt="Base ?">
+                </div>
+                <div>
+                    <h3>Tourelle</h3>
+                    <img class="imgTurret"
+                     :src="imgTurret(atk.turret, atk.selectRace)" alt="tourelle ?">
                 </div>
             </div>
         </div>
@@ -69,7 +81,7 @@
 
                 <div>
                     <img class="def-figurine front"
-                     :src="imgFrontDef(def.selectFigurineFront)"
+                     :src="imgFigurine(def.selectFigurineFront,def.selectRace)"
                       alt="Selectionnez une Figurine">
                 </div>
 
@@ -81,7 +93,7 @@
 
                 <div>
                     <img class="def-figurine soutien"
-                     :src="imgSoutienDef(def.selectFigurineSoutien)"
+                     :src="imgFigurine(def.selectFigurineSoutien,def.selectRace)"
                       alt="Selectionnez une Figurine">
                 </div>
 
@@ -93,7 +105,7 @@
 
                 <div>
                     <img class="def-card soutien"
-                     :src="imgCombatDef(def.selectCardCombat)"
+                     :src="imgCarte(def.selectCardCombat,def.selectRace)"
                       alt="Selectionnez une carte">
                 </div>
             </div>
@@ -104,8 +116,22 @@
 
                 <div>
                     <img class="def-card soutien"
-                     :src="imgRenfortDef(def.selectCardRenfort)"
-                      alt="Selectionnez une carte">
+                     :src="imgCarte(def.selectCardRenfort,def.selectRace)"
+                     alt="Selectionnez une carte">
+                </div>
+            </div>
+
+            <div class="base">
+                <div>
+                    <h3>Base</h3>
+                    <img class="imgBase"
+                     :src="imgBase(def.base, def.selectRace)" alt="Base ?">
+                </div>
+                <div>
+                    <h3>Tourelle</h3>
+                    <img class="imgTurret"
+                     :src="imgTurret(def.turret, def.selectRace)"
+                     alt="tourelle ?">
                 </div>
             </div>
 
@@ -115,7 +141,7 @@
 
                 <div>
                     <img class="def-card zone"
-                     :src="imgZoneDef(def.selectCardZone)"
+                     :src="imgCarte(def.selectCardZone,def.selectRace)"
                       alt="Selectionnez une carte Zone de Jeu">
                 </div>
             </div>
@@ -128,25 +154,9 @@ import Card from '../../data/Simulation/Card';
 
 export default {
     name: 'Simulation',
-    props: ['atk', 'def'],
+    props: ['atk', 'def', 'resultData'],
     data() {
         return {
-            // ATK
-            selectAtk: {
-                figurineFront: {},
-                figurineSoutien: {},
-                cardCombat: {},
-                cardRenfort: {},
-                cardZone: {}
-            },
-            // DEF
-            selectDef: {
-                figurineFront: {},
-                figurineSoutien: {},
-                cardCombat: {},
-                cardRenfort: {},
-                cardZone: {}
-            },
             iconFlat: '../../assets/Images/Interfaces/Combat/Flat_plus_icon.svg'
         }
     },
@@ -165,281 +175,47 @@ export default {
                 return ''
             }
         },
-        imgFrontAtk(pic) {
-            var Race = this.atk.selectRace
+        imgFigurine(pic, race) {
             if (pic != '') {
-                if (Race === 'terran') {
-                    var selectIdT = Card.terran.figurine[pic]
-                    this.selectAtk.figurineFront = selectIdT
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdT.img + '.png')
-                } else if (Race === 'zerg') {
-                    var selectIdZ = Card.zerg.figurine[pic]
-                    this.selectAtk.figurineFront = selectIdZ
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdZ.img + '.png')
-                } else if (Race === 'protoss') {
-                    var selectIdP = Card.protoss.figurine[pic]
-                    this.selectAtk.figurineFront = selectIdP
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdP.img + '.png')
+                return require('../../assets/Images/Interfaces/Combat/Icon/' + race + '/' + pic + '.png')
+            } else {
+                return ''
+            }
+        },
+        imgCarte(pic, race) {
+            if (pic != '') {
+                if (race === 'terran') {
+                    return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + pic + '.png')
+                } else if (race === 'zerg') {
+                    return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + pic + '.png')
+                } else if (race === 'protoss') {
+                    return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + pic + '.png')
                 }
             } else {
                 return ''
             }
         },
-        imgSoutienAtk(pic) {
-            var Race = this.atk.selectRace
-            if (pic != '') {
-                if (Race === 'terran') {
-                    var selectIdT = Card.terran.figurine[pic]
-                    this.selectAtk.figurineSoutien = selectIdT
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdT.img + '.png')
-                } else if (Race === 'zerg') {
-                    var selectIdZ = Card.zerg.figurine[pic]
-                    this.selectAtk.figurineSoutien = selectIdZ
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdZ.img + '.png')
-                } else if (Race === 'protoss') {
-                    var selectIdP = Card.protoss.figurine[pic]
-                    this.selectAtk.figurineSoutien = selectIdP
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdP.img + '.png')
+        imgBase(pic, race) {
+            if (pic) {
+                if (race === 'terran') {
+                    return require('../../assets/Images/DataScan/Factions/Bleu/jeton/base.png')
+                } else if (race === 'zerg') {
+                    return require('../../assets/Images/DataScan/Factions/Violet/jeton/base.png')
+                } else if (race === 'protoss') {
+                    return require('../../assets/Images/DataScan/Factions/Jaune/jeton/base.png')
                 }
             } else {
                 return ''
             }
         },
-        imgCombatAtk(pic) {
-            var Race = this.atk.selectRace
-            if (pic != '') {
-                var type = pic.substr(0,3)
-                var index = pic.slice(3)
-                if (Race === 'terran') {
-                    if (type === 'std') {
-                        var selectIdTerranStd = Card.terran.combat.troupe[index]
-                        this.selectAtk.cardCombat = selectIdTerranStd
-                        return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + selectIdTerranStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdTerranTch = Card.terran.combat.techno[index]
-                        this.selectAtk.cardCombat = selectIdTerranTch
-                        return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + selectIdTerranTch.img + '.png')
-                    }
-                } else if (Race === 'zerg') {
-                    if (type === 'std') {
-                        var selectIdZergStd = Card.zerg.combat.troupe[index]
-                        this.selectAtk.cardCombat = selectIdZergStd
-                        return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + selectIdZergStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdZergTch = Card.zerg.combat.techno[index]
-                        this.selectAtk.cardCombat = selectIdZergTch
-                        return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + selectIdZergTch.img + '.png')
-                    }
-                } else if (Race === 'protoss') {
-                    if (type === 'std') {
-                        var selectIdProtossStd = Card.protoss.combat.troupe[index]
-                        this.selectAtk.cardCombat = selectIdProtossStd
-                        return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + selectIdProtossStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdProtossTch = Card.protoss.combat.techno[index]
-                        this.selectAtk.cardCombat = selectIdProtossTch
-                        return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + selectIdProtossTch.img + '.png')
-                    }
-                }
-            } else {
-                return ''
-            }
-        },
-        imgRenfortAtk(pic) {
-            var Race = this.atk.selectRace
-            if (pic != '') {
-                var type = pic.substr(0,3)
-                var index = pic.slice(3)
-                if (Race === 'terran') {
-                    if (type === 'std') {
-                        var selectIdTerranStd = Card.terran.renfort.troupe[index]
-                        this.selectAtk.cardRenfort = selectIdTerranStd
-                        return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + selectIdTerranStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdTerranTch = Card.terran.renfort.techno[index]
-                        this.selectAtk.cardRenfort = selectIdTerranTch
-                        return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + selectIdTerranTch.img + '.png')
-                    }
-                } else if (Race === 'zerg') {
-                    if (type === 'std') {
-                        var selectIdZergStd = Card.zerg.renfort.troupe[index]
-                        this.selectAtk.cardRenfort = selectIdZergStd
-                        return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + selectIdZergStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdZergTch = Card.zerg.renfort.techno[index]
-                        this.selectAtk.cardRenfort = selectIdZergTch
-                        return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + selectIdZergTch.img + '.png')
-                    }
-                } else if (Race === 'protoss') {
-                    if (type === 'std') {
-                        var selectIdProtossStd = Card.protoss.renfort.troupe[index]
-                        this.selectAtk.cardRenfort = selectIdProtossStd
-                        return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + selectIdProtossStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdProtossTch = Card.protoss.renfort.techno[index]
-                        this.selectAtk.cardRenfort = selectIdProtossTch
-                        return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + selectIdProtossTch.img + '.png')
-                    }
-                }
-            } else {
-                return ''
-            }
-        },
-        imgZoneAtk(pic) {
-            var Race = this.atk.selectRace
-            if (pic != '') {
-                if (Race === 'terran') {
-                    var selectIdT = Card.terran.zoneJeu[pic]
-                    this.selectAtk.cardZone = selectIdT
-                    return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + selectIdT.img + '.png')
-                } else if (Race === 'zerg') {
-                    var selectIdZ = Card.zerg.zoneJeu[pic]
-                    this.selectAtk.cardZone = selectIdZ
-                    return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + selectIdZ.img + '.png')
-                } else if (Race === 'protoss') {
-                    var selectIdP = Card.protoss.zoneJeu[pic]
-                    this.selectAtk.cardZone = selectIdP
-                    return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + selectIdP.img + '.png')
-                }
-            } else {
-                return ''
-            }
-        },
-        imgFrontDef(pic) {
-            var Race = this.def.selectRace
-            if (pic != '') {
-                if (Race === 'terran') {
-                    var selectIdT = Card.terran.figurine[pic]
-                    this.selectDef.figurineFront = selectIdT
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdT.img + '.png')
-                } else if (Race === 'zerg') {
-                    var selectIdZ = Card.zerg.figurine[pic]
-                    this.selectDef.figurineFront = selectIdZ
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdZ.img + '.png')
-                } else if (Race === 'protoss') {
-                    var selectIdP = Card.protoss.figurine[pic]
-                    this.selectDef.figurineFront = selectIdP
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdP.img + '.png')
-                }
-            } else {
-                return ''
-            }
-        },
-        imgSoutienDef(pic) {
-            var Race = this.def.selectRace
-            if (pic != '') {
-                if (Race === 'terran') {
-                    var selectIdT = Card.terran.figurine[pic]
-                    this.selectDef.figurineSoutien = selectIdT
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdT.img + '.png')
-                } else if (Race === 'zerg') {
-                    var selectIdZ = Card.zerg.figurine[pic]
-                    this.selectDef.figurineSoutien = selectIdZ
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdZ.img + '.png')
-                } else if (Race === 'protoss') {
-                    var selectIdP = Card.protoss.figurine[pic]
-                    this.selectDef.figurineSoutien = selectIdP
-                    return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectIdP.img + '.png')
-                }
-            } else {
-                return ''
-            }
-        },
-        imgCombatDef(pic) {
-            var Race = this.def.selectRace
-            if (pic != '') {
-                var type = pic.substr(0,3)
-                var index = pic.slice(3)
-                if (Race === 'terran') {
-                    if (type === 'std') {
-                        var selectIdTerranStd = Card.terran.combat.troupe[index]
-                        this.selectDef.cardCombat = selectIdTerranStd
-                        return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + selectIdTerranStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdTerranTch = Card.terran.combat.techno[index]
-                        this.selectDef.cardCombat = selectIdTerranTch
-                        return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + selectIdTerranTch.img + '.png')
-                    }
-                } else if (Race === 'zerg') {
-                    if (type === 'std') {
-                        var selectIdZergStd = Card.zerg.combat.troupe[index]
-                        this.selectDef.cardCombat = selectIdZergStd
-                        return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + selectIdZergStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdZergTch = Card.zerg.combat.techno[index]
-                        this.selectDef.cardCombat = selectIdZergTch
-                        return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + selectIdZergTch.img + '.png')
-                    }
-                } else if (Race === 'protoss') {
-                    if (type === 'std') {
-                        var selectIdProtossStd = Card.protoss.combat.troupe[index]
-                        this.selectDef.cardCombat = selectIdProtossStd
-                        return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + selectIdProtossStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdProtossTch = Card.protoss.combat.techno[index]
-                        this.selectDef.cardCombat = selectIdProtossTch
-                        return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + selectIdProtossTch.img + '.png')
-                    }
-                }
-            } else {
-                return ''
-            }
-        },
-        imgRenfortDef(pic) {
-            var Race = this.def.selectRace
-            if (pic != '') {
-                var type = pic.substr(0,3)
-                var index = pic.slice(3)
-                if (Race === 'terran') {
-                    if (type === 'std') {
-                        var selectIdTerranStd = Card.terran.renfort.troupe[index]
-                        this.selectDef.cardRenfort = selectIdTerranStd
-                        return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + selectIdTerranStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdTerranTch = Card.terran.renfort.techno[index]
-                        this.selectDef.cardRenfort = selectIdTerranTch
-                        return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + selectIdTerranTch.img + '.png')
-                    }
-                } else if (Race === 'zerg') {
-                    if (type === 'std') {
-                        var selectIdZergStd = Card.zerg.renfort.troupe[index]
-                        this.selectDef.cardRenfort = selectIdZergStd
-                        return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + selectIdZergStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdZergTch = Card.zerg.renfort.techno[index]
-                        this.selectDef.cardRenfort = selectIdZergTch
-                        return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + selectIdZergTch.img + '.png')
-                    }
-                } else if (Race === 'protoss') {
-                    if (type === 'std') {
-                        var selectIdProtossStd = Card.protoss.renfort.troupe[index]
-                        this.selectDef.cardRenfort = selectIdProtossStd
-                        return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + selectIdProtossStd.img + '.png')
-                    } else if (type === 'tch') {
-                        var selectIdProtossTch = Card.protoss.renfort.techno[index]
-                        this.selectDef.cardRenfort = selectIdProtossTch
-                        return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + selectIdProtossTch.img + '.png')
-                    }
-                }
-            } else {
-                return ''
-            }
-        },
-        imgZoneDef(pic) {
-            var Race = this.def.selectRace
-            if (pic != '') {
-                if (Race === 'terran') {
-                    var selectIdT = Card.terran.zoneJeu[pic]
-                    this.selectDef.cardZone = selectIdT
-                    return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + selectIdT.img + '.png')
-                } else if (Race === 'zerg') {
-                    var selectIdZ = Card.zerg.zoneJeu[pic]
-                    this.selectDef.cardZone = selectIdZ
-                    return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + selectIdZ.img + '.png')
-                } else if (Race === 'protoss') {
-                    var selectIdP = Card.protoss.zoneJeu[pic]
-                    this.selectDef.cardZone = selectIdP
-                    return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + selectIdP.img + '.png')
+        imgTurret(pic, race) {
+            if (pic) {
+                if (race === 'terran') {
+                    return require('../../assets/Images/DataScan/Factions/Bleu/jeton/module_tower.png')
+                } else if (race === 'zerg') {
+                    return require('../../assets/Images/DataScan/Factions/Violet/jeton/module_tower.png')
+                } else if (race === 'protoss') {
+                    return require('../../assets/Images/DataScan/Factions/Jaune/jeton/module_tower.png')
                 }
             } else {
                 return ''
