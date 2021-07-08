@@ -1,0 +1,56 @@
+.Escarmouche {
+    display: flex;
+    flex-direction: row;
+    margin: 1vh;
+    padding: .5rem;
+    border: 8px solid transparent;
+    border-image: url(../../../assets/Images/Interfaces/Menu/Border-Image81x81.png) 16 stretch;
+    background: rgba(0, 0, 0);
+}
+.Escarmouche-atk {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-right: 1px solid white;
+    border-radius: .3rem;
+}
+.Escarmouche-def {
+    padding-left: .5rem;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: 1px solid white;
+    border-radius: .3rem;
+    text-align: right;
+}
+.first {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.second {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.third {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.figurine {
+    width: 50%;
+}
+.carte {
+    width: 50%;
+    margin-top: 1rem;
+}
+.base {
+    width: 50%;
+    margin-top: 1rem;
+}
+.title-escarmouche {
+    text-align: center;
+}

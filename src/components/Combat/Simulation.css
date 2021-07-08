@@ -28,6 +28,18 @@
     border-radius: .3rem;
     text-align: right;
 }
+.atk-figurine--soutien {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 200px;
+}
+.def-figurine--soutien {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+    max-height: 200px;
+}
 .figurine {
     width: 50%;
 }
@@ -39,17 +51,27 @@
     width: 50%;
     margin-top: 1rem;
 }
-.atk-figurine {
+.figurine-front {
+    width: 150px;
+    height: 150px;
+}
+.img-figurine {
+    display: block;
     width: 100px;
     height: 100px;
+}
+.img-figurineNone {
+    display: none;
+}
+.atk-figurine--soutien img{
+    padding: .2rem 0;
+}
+.def-figurine--soutien img{
+    padding: .2rem 0;
 }
 .atk-card {
     width: 192px;
     height: 297px;
-}
-.def-figurine {
-    width: 100px;
-    height: 100px;
 }
 .def-card {
     width: 192px;

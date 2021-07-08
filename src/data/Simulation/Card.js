@@ -995,10 +995,12 @@ export default {
                 name: 'Balayage de Scanner',
                 img: 'balayage_scanner',
                 type: 'tch',
-                capacity: {
-                    name: 'Détecteur',
-                    for: 'all'
-                }
+                Tech: {
+                    capacity: {
+                        name: 'Détecteur',
+                        for: 'bataille'
+                    }
+                },
             },
             {
                 name: 'Matrice Défensive',
@@ -1007,7 +1009,8 @@ export default {
                 Tech: {
                     condition: {
                         unit: 'Vaisseau Laboratoire',
-                        type: 'renfort'
+                        type: 'renfort',
+                        for: 'escarmouche'
                     },
                     type: 'def',
                     result: 1
@@ -1755,7 +1758,7 @@ export default {
                     type: 'tch',
                     Tech: {
                         condition: {
-                            unit: 'Saboteur',
+                            name: 'Peste',
                             type: 'répercutés',
                             by: 'sol_vol'
                         },
@@ -1819,6 +1822,7 @@ export default {
                     condition: {
                         type: 'front',
                         unit: 'Zergling',
+                        for: 'escarmouche'
                     },
                     type: 'def',
                     result: 2,
@@ -1833,7 +1837,8 @@ export default {
                         unit: 'Reine'
                     },
                     capacity: {
-                        name: 'Détecteur'
+                        name: 'Détecteur',
+                        for: 'escarmouche'
                     }
                 }
             }
@@ -2490,7 +2495,7 @@ export default {
                     type: 'tch',
                     Tech: {
                         capacity: {
-                            name: 'stase'
+                            name: 'Stase'
                         },
                         type: 'atk',
                         result: 0,
@@ -2513,7 +2518,8 @@ export default {
                     type: 'tch',
                     Tech: {
                         capacity: {
-                            name: 'Annulez'
+                            name: 'Annulez',
+                            of: 'combat'
                         }
                     }
                 },
@@ -2524,7 +2530,7 @@ export default {
                     type: 'tch',
                     Tech: {
                         condition: {
-                            unit: 'Templier',
+                            name: 'Tempête',
                             type: 'répercutés',
                             by: 'sol_air'
                         },
@@ -2549,7 +2555,7 @@ export default {
                     },
                     capacity: {
                         name: 'Camouflage',
-                        for: 'all'
+                        for: 'escarmouche'
                     }
                 }
             },
@@ -2560,7 +2566,7 @@ export default {
                 Tech: {
                     capacity: {
                         name: 'Détecteur',
-                        for: 'all'
+                        for: 'bataille'
                     }
                 }
             }

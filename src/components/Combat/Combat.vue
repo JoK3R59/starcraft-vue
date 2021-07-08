@@ -4,6 +4,8 @@
 
         <h1 class="TIPS">Simulation de Combat</h1>
 
+        <h2 class="title-escarmouche">Escarmouche n°{{ this.numberEscarmouche + 1}}</h2>
+
         <div class="Combat-list">
 
             <div class="select-list">
@@ -50,17 +52,86 @@
 
                         <p>Figurine Soutien :</p>
 
-                        <select name="comFigurine_ref" id="atk-fig-soutien"
-                         @change="selectFigurineSoutienAtk($event)">
-                            <option value="select" selected>
-                                Select Figurine Soutien
-                            </option>
-                            <option :key="i"
-                             v-for="(figurine, i) in figurineAtkFront"
-                             :value="i">
-                                {{ figurine.name }}
-                            </option>
-                        </select>
+                        <div id='select-soutienAtk'>
+
+                            <select name="comFigurine_ref0" id="atk-fig-soutien0"
+                            @change="selectFigurineSoutienAtk($event)">
+                                <option value="select" selected>
+                                    Select Figurine Soutien
+                                </option>
+                                <option :key="i"
+                                v-for="(figurine, i) in figurineAtkFront"
+                                :value="i">
+                                    {{ figurine.name }}
+                                </option>
+                            </select>
+
+                            <select v-if="this.selectionCounterSoutienAtk >= 1"
+                             name="comFigurine_ref1" id="atk-fig-soutien1"
+                            @change="selectFigurineSoutienAtk($event)">
+                                <option value="select" selected>
+                                    Select Figurine Soutien
+                                </option>
+                                <option :key="i"
+                                v-for="(figurine, i) in figurineAtkFront"
+                                :value="i">
+                                    {{ figurine.name }}
+                                </option>
+                            </select>
+
+                            <select v-if="this.selectionCounterSoutienAtk >= 2"
+                             name="comFigurine_ref2" id="atk-fig-soutien2"
+                            @change="selectFigurineSoutienAtk($event)">
+                                <option value="select" selected>
+                                    Select Figurine Soutien
+                                </option>
+                                <option :key="i"
+                                v-for="(figurine, i) in figurineAtkFront"
+                                :value="i">
+                                    {{ figurine.name }}
+                                </option>
+                            </select>
+
+                            <select v-if="this.selectionCounterSoutienAtk >= 3"
+                             name="comFigurine_ref3" id="atk-fig-soutien3"
+                            @change="selectFigurineSoutienAtk($event)">
+                                <option value="select" selected>
+                                    Select Figurine Soutien
+                                </option>
+                                <option :key="i"
+                                v-for="(figurine, i) in figurineAtkFront"
+                                :value="i">
+                                    {{ figurine.name }}
+                                </option>
+                            </select>
+
+                            <select v-if="this.selectionCounterSoutienAtk === 4"
+                             name="comFigurine_ref4" id="atk-fig-soutien4"
+                            @change="selectFigurineSoutienAtk($event)">
+                                <option value="select" selected>
+                                    Select Figurine Soutien
+                                </option>
+                                <option :key="i"
+                                v-for="(figurine, i) in figurineAtkFront"
+                                :value="i">
+                                    {{ figurine.name }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <button
+                         v-if="this.selectionCounterSoutienAtk < 4"
+                         v-on:click="addSoutienAtk()"
+                         id="btn-plusSoutien">
+                            <img src="../../assets/Flat_plus_icon.svg" alt="add">
+                        </button>
+                       
+                        <button
+                         v-if="this.selectionCounterSoutienAtk >= 1"
+                         v-on:click="supprSoutienAtk()"
+                         id="btn-supprSoutien">
+                            <img src="../../assets/remove.svg" alt="suppr">
+                        </button>
                     </div>
 
                     <div class="selection card-combat">
@@ -137,7 +208,7 @@
                             Base :
                         </label>
                         <input @change="selectBaseAtk($event)"
-                         type="checkbox" name="baseAtk" id="base-atk">
+                         type="checkbox" name="base-atk" id="base-atk">
                     </div>
 
                     <div class="selection turret-atk">
@@ -145,7 +216,7 @@
                             Tourelle active :
                         </label>
                         <input @change="selectTurretAtk($event)"
-                         type="checkbox" name="turretAtk" id="turret-atk">
+                         type="checkbox" name="turret-atk" id="turret-atk">
                     </div>
                 </div>
 
@@ -191,17 +262,86 @@
 
                         <p>Figurine Soutien :</p>
 
-                        <select name="comFigurine_ref" id="def-fig-soutien"
-                         @change="selectFigurineSoutienDef($event)">
-                            <option value="select" selected>
-                                Select Figurine Soutien
-                            </option>
-                            <option :key="i"
-                             v-for="(figurine, i) in figurineDefFront"
-                             :value="i">
-                                {{ figurine.name }}
-                            </option>
-                        </select>
+                        <div id='select-soutienDef'>
+
+                            <select name="comFigurine_ref0" id="def-fig-soutien0"
+                             v-on:change="selectFigurineSoutienDef($event)">
+                                <option value="select" selected>
+                                    Select Figurine Soutien
+                                </option>
+                                <option :key="i"
+                                v-for="(figurine, i) in figurineDefFront"
+                                :value="i">
+                                    {{ figurine.name }}
+                                </option>
+                            </select>
+
+                            <select v-if="this.selectionCounterSoutienDef >= 1"
+                             name="comFigurine_ref1" id="def-fig-soutien1"
+                             v-on:change="selectFigurineSoutienDef($event)">
+                                <option value="select" selected>
+                                    Select Figurine Soutien
+                                </option>
+                                <option :key="i"
+                                v-for="(figurine, i) in figurineDefFront"
+                                :value="i">
+                                    {{ figurine.name }}
+                                </option>
+                            </select>
+
+                            <select v-if="this.selectionCounterSoutienDef >= 2"
+                             name="comFigurine_ref2" id="def-fig-soutien2"
+                             v-on:change="selectFigurineSoutienDef($event)">
+                                <option value="select" selected>
+                                    Select Figurine Soutien
+                                </option>
+                                <option :key="i"
+                                v-for="(figurine, i) in figurineDefFront"
+                                :value="i">
+                                    {{ figurine.name }}
+                                </option>
+                            </select>
+
+                            <select v-if="this.selectionCounterSoutienDef >= 3"
+                             name="comFigurine_ref3" id="def-fig-soutien3"
+                             v-on:change="selectFigurineSoutienDef($event)">
+                                <option value="select" selected>
+                                    Select Figurine Soutien
+                                </option>
+                                <option :key="i"
+                                v-for="(figurine, i) in figurineDefFront"
+                                :value="i">
+                                    {{ figurine.name }}
+                                </option>
+                            </select>
+
+                            <select v-if="this.selectionCounterSoutienDef === 4"
+                             name="comFigurine_ref4" id="def-fig-soutien4"
+                             v-on:change="selectFigurineSoutienDef($event)">
+                                <option value="select" selected>
+                                    Select Figurine Soutien
+                                </option>
+                                <option :key="i"
+                                v-for="(figurine, i) in figurineDefFront"
+                                :value="i">
+                                    {{ figurine.name }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <button
+                         v-if="this.selectionCounterSoutienDef < 4"
+                         v-on:click="addSoutienDef()"
+                         id="btn-plusSoutienDef">
+                            <img src="../../assets/Flat_plus_icon.svg" alt="add">
+                        </button>
+                       
+                        <button
+                         v-if="this.selectionCounterSoutienDef >= 1"
+                         v-on:click="supprSoutienDef()"
+                         id="btn-supprSoutienDef">
+                            <img src="../../assets/remove.svg" alt="suppr">
+                        </button>
                     </div>
 
                     <div class="selection card-combat">
@@ -278,7 +418,7 @@
                             Base :
                         </label>
                         <input @change="selectBaseDef($event)"
-                         type="checkbox" name="baseDef" id="base-def">
+                         type="checkbox" name="base-def" id="base-def">
                     </div>
 
                     <div class="selection turret-def">
@@ -286,27 +426,51 @@
                             Tourelle active :
                         </label>
                         <input @change="selectTurretDef($event)"
-                         type="checkbox" name="turretDef" id="turret-def">
+                         type="checkbox" name="turret-def" id="turret-def">
                     </div>
                 </div>
             </div>
             
-            <button type="button" class="btn btn-outline-success"
-            v-on:click="resultat(selectData)">
-                Lancer Simulation
-            </button>
+            <div class="buttons">
+
+                <button type="button" class="btn btn-outline-warning"
+                 v-on:click="addEscarmouche()"
+                 v-if="numberEscarmouche != 3">
+                    Ajouter Escarmouche
+                </button>
+                <button type="button" class="btn btn-outline-success"
+                 v-on:click="simulActive(selectData)">
+                    Lancer Simulation
+                </button>
+
+            </div>
 
             <simul :atk="atk" :def="def"></simul>
 
+            <div id="escarmouche-list">
+
+                <escarmouche
+                 v-if="this.numberEscarmouche > 0"
+                 :numberEscarmouche="this.selectData[0].numberEscarmouche"
+                 :data="this.selectData[0].data"></escarmouche>
+                <escarmouche
+                 v-if="this.numberEscarmouche > 1"
+                 :numberEscarmouche="this.selectData[1].numberEscarmouche"
+                 :data="this.selectData[1].data"></escarmouche>
+                <escarmouche
+                 v-if="this.numberEscarmouche > 2"
+                 :numberEscarmouche="this.selectData[2].numberEscarmouche"
+                 :data="this.selectData[2].data"></escarmouche>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import Simulation from './Simulation';
+import Escarmouche from './items/Escarmouche';
 
 import Card from '../../data/Simulation/Card';
-
 import {resultat} from './Simul-Combat.js';
 
 export default {
@@ -315,6 +479,9 @@ export default {
         return {
             Card,
             resultat,
+            numberEscarmouche : 0,
+            selectionCounterSoutienAtk : 0,
+            selectionCounterSoutienDef : 0,
             figurineAtkFront: [],
             selectCardCombatAtk: [],
             selectCardTechAtk: [],
@@ -328,51 +495,142 @@ export default {
             selectCardRenfortTechDef: [],
             selectCardZoneDef: [],
             resultData: {
-                atk: {
-                    damage: '',
-                    target: ''
-                },
-                def: {
-                    damage:  '',
-                    target: ''
-                }
+                active: false,
+                data: [
+                    {
+                        atk: {
+                            damage: '',
+                            target: ''
+                        },
+                        def: {
+                            damage:  '',
+                            target: ''
+                        }
+                    }
+                ]
             },
-            selectData: {
-                atk: {
-                    race: '',
-                    figurineFront: '',
-                    figurineSoutien: '',
-                    cardCombat: '',
-                    cardRenfort: '',
-                    cardZone: '',
-                    base: false,
-                    turret: false,
+            selectData: [
+                {
+                    active : false,
+                    numberEscarmouche: 1,
+                    data: {
+                        atk: {
+                            race: '',
+                            figurineFront: '',
+                            figurineSoutien: [],
+                            cardCombat: '',
+                            cardRenfort: '',
+                            cardZone: '',
+                            base: false,
+                            turret: false,
+                        },
+                        def: {
+                            race: '',
+                            figurineFront: '',
+                            figurineSoutien: [],
+                            cardCombat: '',
+                            cardRenfort: '',
+                            cardZone: '',
+                            base: false,
+                            turret: false,
+                        }
+                    }
                 },
-                def: {
-                    race: '',
-                    figurineFront: '',
-                    figurineSoutien: '',
-                    cardCombat: '',
-                    cardRenfort: '',
-                    cardZone: '',
-                    base: false,
-                    turret: false,
+                {
+                    active : false,
+                    numberEscarmouche: 2,
+                    data: {
+                        atk: {
+                            race: '',
+                            figurineFront: '',
+                            figurineSoutien: [],
+                            cardCombat: '',
+                            cardRenfort: '',
+                            cardZone: '',
+                            base: false,
+                            turret: false,
+                        },
+                        def: {
+                            race: '',
+                            figurineFront: '',
+                            figurineSoutien: [],
+                            cardCombat: '',
+                            cardRenfort: '',
+                            cardZone: '',
+                            base: false,
+                            turret: false,
+                        }
+                    }
+                },
+                {
+                    active : false,
+                    numberEscarmouche: 3,
+                    data: {
+                        atk: {
+                            race: '',
+                            figurineFront: '',
+                            figurineSoutien: [],
+                            cardCombat: '',
+                            cardRenfort: '',
+                            cardZone: '',
+                            base: false,
+                            turret: false,
+                        },
+                        def: {
+                            race: '',
+                            figurineFront: '',
+                            figurineSoutien: [],
+                            cardCombat: '',
+                            cardRenfort: '',
+                            cardZone: '',
+                            base: false,
+                            turret: false,
+                        }
+                    }
+                },
+                {
+                    active : false,
+                    numberEscarmouche: 4,
+                    data: {
+                        atk: {
+                            race: '',
+                            figurineFront: '',
+                            figurineSoutien: [],
+                            cardCombat: '',
+                            cardRenfort: '',
+                            cardZone: '',
+                            base: false,
+                            turret: false,
+                        },
+                        def: {
+                            race: '',
+                            figurineFront: '',
+                            figurineSoutien: [],
+                            cardCombat: '',
+                            cardRenfort: '',
+                            cardZone: '',
+                            base: false,
+                            turret: false,
+                        }
+                    }
                 }
-            },
+            ],
+            // IMG pour Simulation ATK
             atk: {
                 selectRace: '',
                 selectFigurineFront: '',
-                selectFigurineSoutien: '',
+                selectFigurineSoutien: [],
                 selectCardCombat: '',
                 selectCardRenfort: '',
                 selectCardZone: '',
                 base: false,
                 turret: false
             },
+            // IMG pour Simulation DEF
             def: {
                 selectRace: '',
                 selectFigurineFront: '',
-                selectFigurineSoutien: '',
+                selectFigurineSoutien: [],
                 selectCardCombat: '',
                 selectCardRenfort: '',
                 selectCardZone: '',
@@ -382,66 +640,109 @@ export default {
         }
     },
     components : {
-        'simul' : Simulation
+        'simul' : Simulation,
+        'escarmouche' : Escarmouche
     },
     methods: {
         onChange(event) {
             console.log('test ' + event.target.value)
+        },
+        // TODO: supprimer selection BASE & TURRET visuellement.
+        resetSelect(atk, def, atkZone, defZone) {
+            if (atk === 1) {
+                document.getElementById('atk-fig-front').value = 'select'
+                document.getElementById('atk-fig-soutien0').value = 'select'
+                document.getElementById('atk-card-combat').value = 'select'
+                document.getElementById('atk-card-renfort').value = 'select'
+            }
+            if (def === 1) {
+                document.getElementById('def-fig-front').value = 'select'
+                document.getElementById('def-fig-soutien0').value = 'select'
+                document.getElementById('def-card-combat').value = 'select'
+                document.getElementById('def-card-renfort').value = 'select'
+            }
+            if (atkZone) {
+                document.getElementById('atk-card-zone').value = 'select'
+            }
+            if (defZone) {
+                document.getElementById('def-card-zone').value = 'select'
+            }
+        },
+        resetImg() {
+            let atkImg = this.atk
+            atkImg.selectFigurineFront = ''
+            atkImg.selectFigurineSoutien = []
+            atkImg.selectCardCombat = ''
+            atkImg.selectCardRenfort = ''
+            atkImg.selectCardZone = ''
+            atkImg.base = false
+            atkImg.turret = false
+            let defImg = this.def
+            defImg.selectFigurineFront = ''
+            defImg.selectFigurineSoutien = []
+            defImg.selectCardCombat = ''
+            defImg.selectCardRenfort = ''
+            defImg.selectCardZone = ''
+            defImg.base = false
+            defImg.turret = false
         },
         changeValueCard(pic, i) {
             var result = pic.toString() + i.toString()
             return result
         },
         selectRaceAtk(event) {
-            var select = event.target.value
+            let select = event.target.value
             this.atk = {
                 selectRace: select,
                 selectFigurineFront: '',
-                selectFigurineSoutien: '',
+                selectFigurineSoutien: [],
                 selectCardCombat: '',
                 selectCardRenfort: '',
                 selectCardZone: '',
                 base: false,
                 turret: false
             }
+            this.selectData[this.numberEscarmouche].data.atk = {
+                    race: '',
+                    figurineFront: '',
+                    figurineSoutien: [],
+                    cardCombat: '',
+                    cardRenfort: '',
+                    cardZone: '',
+                    base: false,
+                    turret: false,
+            }
+            this.selectionCounterSoutienAtk = 0
             if (select === 'terran') {
                 this.figurineAtkFront = Card.terran.figurine
-                document.getElementById('atk-fig-front').value = 'select'
-                document.getElementById('atk-fig-soutien').value = 'select'
                 this.selectCardCombatAtk = Card.terran.combat.troupe
                 this.selectCardTechAtk = Card.terran.combat.techno
-                document.getElementById('atk-card-combat').value = 'select'
                 this.selectCardRenfortCombatAtk = Card.terran.renfort.troupe
                 this.selectCardRenfortTechAtk = Card.terran.renfort.techno
-                document.getElementById('atk-card-renfort').value = 'select'
                 this.selectCardZoneAtk = Card.terran.zoneJeu
-                document.getElementById('atk-card-zone').value = 'select'
+                this.resetSelect(1, 0, true, false)
+
             }else if (select === 'zerg') {
                 this.figurineAtkFront = Card.zerg.figurine
-                document.getElementById('atk-fig-front').value = 'select'
-                document.getElementById('atk-fig-soutien').value = 'select'
                 this.selectCardCombatAtk = Card.zerg.combat.troupe
                 this.selectCardTechAtk = Card.zerg.combat.techno
-                document.getElementById('atk-card-combat').value = 'select'
                 this.selectCardRenfortCombatAtk = Card.zerg.renfort.troupe
                 this.selectCardRenfortTechAtk = Card.zerg.renfort.techno
-                document.getElementById('atk-card-renfort').value = 'select'
                 this.selectCardZoneAtk = Card.zerg.zoneJeu
-                document.getElementById('atk-card-zone').value = 'select'
+                this.resetSelect(1, 0, true, false)
+
             }else if (select === 'protoss') {
                 this.figurineAtkFront = Card.protoss.figurine
-                document.getElementById('atk-fig-front').value = 'select'
-                document.getElementById('atk-fig-soutien').value = 'select'
                 this.selectCardCombatAtk = Card.protoss.combat.troupe
                 this.selectCardTechAtk = Card.protoss.combat.techno
-                document.getElementById('atk-card-combat').value = 'select'
                 this.selectCardRenfortCombatAtk = Card.protoss.renfort.troupe
                 this.selectCardRenfortTechAtk = Card.protoss.renfort.techno
-                document.getElementById('atk-card-renfort').value = 'select'
                 this.selectCardZoneAtk = Card.protoss.zoneJeu
-                document.getElementById('atk-card-zone').value = 'select'
+                this.resetSelect(1, 0, true, false)
+
             } else {
                 this.selectRaceAtk = []
+
             }
         },
         selectFigurineFrontAtk(event) {
@@ -449,36 +750,141 @@ export default {
             var Race = this.atk.selectRace
             if (Race === 'terran') {
                 var selectIdT = Card.terran.figurine[id]
-                this.selectData.atk.figurineFront = selectIdT
+                this.selectData[this.numberEscarmouche].data.atk.figurineFront = selectIdT
                 this.atk.selectFigurineFront = selectIdT.img
-                this.selectData.atk.race = Race
+                this.selectData[this.numberEscarmouche].data.atk.race = Race
+                this.selectData[this.numberEscarmouche].active = true
             } else if (Race === 'zerg') {
                 var selectIdZ = Card.zerg.figurine[id]
-                this.selectData.atk.figurineFront = selectIdZ
+                this.selectData[this.numberEscarmouche].data.atk.figurineFront = selectIdZ
                 this.atk.selectFigurineFront = selectIdZ.img
-                this.selectData.atk.race = Race
+                this.selectData[this.numberEscarmouche].data.atk.race = Race
+                this.selectData[this.numberEscarmouche].active = true
             } else if (Race === 'protoss') {
                 var selectIdP = Card.protoss.figurine[id]
-                this.selectData.atk.figurineFront = selectIdP
+                this.selectData[this.numberEscarmouche].data.atk.figurineFront = selectIdP
                 this.atk.selectFigurineFront = selectIdP.img
-                this.selectData.atk.race = Race
+                this.selectData[this.numberEscarmouche].data.atk.race = Race
+                this.selectData[this.numberEscarmouche].active = true
             }
         },
         selectFigurineSoutienAtk(event) {
-            var id = event.target.value
+            let classId = event.target.id.substring(15)
+            var numId = event.target.value
             var Race = this.atk.selectRace
             if (Race === 'terran') {
-                var selectIdT = Card.terran.figurine[id]
-                this.selectData.atk.figurineSoutien = selectIdT
-                this.atk.selectFigurineSoutien = selectIdT.img
+                let selectIdT = Card.terran.figurine[numId]
+                if (classId > 0 && this.atk.selectFigurineSoutien.length === 0) {
+
+                    for (let i = 0; i <= classId; i++) {
+                        if (i == classId) {
+                            this.selectData[this.numberEscarmouche].data.atk.figurineSoutien[classId] = selectIdT
+                            this.$set(this.atk.selectFigurineSoutien,[i],{
+                                id : i,
+                                icon : selectIdT.img
+                            })
+
+                        } else {
+                            this.atk.selectFigurineSoutien[i] = {
+                                id : i,
+                                icon : undefined
+                            }
+
+                        }
+                    }
+                } else {
+
+                    if (numId != 'select') {
+                        this.selectData[this.numberEscarmouche].data.atk.figurineSoutien[classId] = selectIdT
+                        this.$set(this.atk.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : selectIdT.img
+                        })
+    
+                    } else {
+                        this.selectData[this.numberEscarmouche].data.atk.figurineSoutien[classId] = undefined
+                        this.$set(this.atk.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : undefined
+                        })
+
+                    }
+                }
             } else if (Race === 'zerg') {
-                var selectIdZ = Card.zerg.figurine[id]
-                this.selectData.atk.figurineSoutien = selectIdZ
-                this.atk.selectFigurineSoutien = selectIdZ.img
+                let selectIdZ = Card.zerg.figurine[numId]
+                if (classId > 0 && this.atk.selectFigurineSoutien.length === 0) {
+
+                    for (let i = 0; i <= classId; i++) {
+                        if (i == classId) {
+                            this.selectData[this.numberEscarmouche].data.atk.figurineSoutien[classId] = selectIdZ
+                            this.$set(this.atk.selectFigurineSoutien,[i],{
+                                id : i,
+                                icon : selectIdZ.img
+                            })
+
+                        } else {
+                            this.atk.selectFigurineSoutien[i] = {
+                                id : i,
+                                icon : undefined
+                            }
+
+                        }
+                    }
+                } else {
+
+                    if (numId != 'select') {
+                        this.selectData[this.numberEscarmouche].data.atk.figurineSoutien[classId] = selectIdZ
+                        this.$set(this.atk.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : selectIdZ.img
+                        })
+                        
+                    } else {
+                        this.selectData[this.numberEscarmouche].data.atk.figurineSoutien[classId] = undefined
+                        this.$set(this.atk.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : undefined
+                        })
+    
+                    }
+                }
             } else if (Race === 'protoss') {
-                var selectIdP = Card.protoss.figurine[id]
-                this.selectData.atk.figurineSoutien = selectIdP
-                this.atk.selectFigurineSoutien = selectIdP.img
+                var selectIdP = Card.protoss.figurine[numId]
+                if (classId > 0 && this.atk.selectFigurineSoutien.length === 0) {
+
+                    for (let i = 0; i <= classId; i++) {
+                        if (i == classId) {
+                            this.selectData[this.numberEscarmouche].data.atk.figurineSoutien[classId] = selectIdP
+                            this.$set(this.atk.selectFigurineSoutien,[i],{
+                                id : i,
+                                icon : selectIdP.img
+                            })
+
+                        } else {
+                            this.atk.selectFigurineSoutien[i] = {
+                                id : i,
+                                icon : undefined
+                            }
+
+                        }
+                    }
+                } else {
+                    if (numId != 'select') {
+                        this.selectData[this.numberEscarmouche].data.atk.figurineSoutien[classId] = selectIdP
+                        this.$set(this.atk.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : selectIdP.img
+                        })
+                        
+                    } else {
+                        this.selectData[this.numberEscarmouche].data.atk.figurineSoutien[classId] = undefined
+                        this.$set(this.atk.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : undefined
+                        })
+    
+                    }
+                }
             }
         },
         selectCardStandardAtk(event) {
@@ -490,31 +896,31 @@ export default {
                 if (Race === 'terran') {
                     if (type === 'std') {
                         var selectIdTerranStd = Card.terran.combat.troupe[index]
-                        this.selectData.atk.cardCombat = selectIdTerranStd
+                        this.selectData[this.numberEscarmouche].data.atk.cardCombat = selectIdTerranStd
                         this.atk.selectCardCombat = selectIdTerranStd.img
                     } else if (type === 'tch') {
                         var selectIdTerranTch = Card.terran.combat.techno[index]
-                        this.selectData.atk.cardCombat = selectIdTerranTch
+                        this.selectData[this.numberEscarmouche].data.atk.cardCombat = selectIdTerranTch
                         this.atk.selectCardCombat = selectIdTerranTch.img
                     }
                 } else if (Race === 'zerg') {
                     if (type === 'std') {
                         var selectIdZergStd = Card.zerg.combat.troupe[index]
-                        this.selectData.atk.cardCombat = selectIdZergStd
+                        this.selectData[this.numberEscarmouche].data.atk.cardCombat = selectIdZergStd
                         this.atk.selectCardCombat = selectIdZergStd.img
                     } else if (type === 'tch') {
                         var selectIdZergTch = Card.zerg.combat.techno[index]
-                        this.selectData.atk.cardCombat = selectIdZergTch
+                        this.selectData[this.numberEscarmouche].data.atk.cardCombat = selectIdZergTch
                         this.atk.selectCardCombat = selectIdZergTch.img
                     }
                 } else if (Race === 'protoss') {
                     if (type === 'std') {
                         var selectIdProtossStd = Card.protoss.combat.troupe[index]
-                        this.selectData.atk.cardCombat = selectIdProtossStd
+                        this.selectData[this.numberEscarmouche].data.atk.cardCombat = selectIdProtossStd
                         this.atk.selectCardCombat = selectIdProtossStd.img
                     } else if (type === 'tch') {
                         var selectIdProtossTch = Card.protoss.combat.techno[index]
-                        this.selectData.atk.cardCombat = selectIdProtossTch
+                        this.selectData[this.numberEscarmouche].data.atk.cardCombat = selectIdProtossTch
                         this.atk.selectCardCombat = selectIdProtossTch.img
                     }
                 }
@@ -531,31 +937,31 @@ export default {
                 if (Race === 'terran') {
                     if (type === 'std') {
                         var selectIdTerranStd = Card.terran.renfort.troupe[index]
-                        this.selectData.atk.cardRenfort = selectIdTerranStd
+                        this.selectData[this.numberEscarmouche].data.atk.cardRenfort = selectIdTerranStd
                         this.atk.selectCardRenfort = selectIdTerranStd.img
                     } else if (type === 'tch') {
                         var selectIdTerranTch = Card.terran.renfort.techno[index]
-                        this.selectData.atk.cardRenfort = selectIdTerranTch
+                        this.selectData[this.numberEscarmouche].data.atk.cardRenfort = selectIdTerranTch
                         this.atk.selectCardRenfort = selectIdTerranTch.img
                     }
                 } else if (Race === 'zerg') {
                     if (type === 'std') {
                         var selectIdZergStd = Card.zerg.renfort.troupe[index]
-                        this.selectData.atk.cardRenfort = selectIdZergStd
+                        this.selectData[this.numberEscarmouche].data.atk.cardRenfort = selectIdZergStd
                         this.atk.selectCardRenfort = selectIdZergStd.img
                     } else if (type === 'tch') {
                         var selectIdZergTch = Card.zerg.renfort.techno[index]
-                        this.selectData.atk.cardRenfort = selectIdZergTch
+                        this.selectData[this.numberEscarmouche].data.atk.cardRenfort = selectIdZergTch
                         this.atk.selectCardRenfort = selectIdZergTch.img
                     }
                 } else if (Race === 'protoss') {
                     if (type === 'std') {
                         var selectIdProtossStd = Card.protoss.renfort.troupe[index]
-                        this.selectData.atk.cardRenfort = selectIdProtossStd
+                        this.selectData[this.numberEscarmouche].data.atk.cardRenfort = selectIdProtossStd
                         this.atk.selectCardRenfort = selectIdProtossStd.img
                     } else if (type === 'tch') {
                         var selectIdProtossTch = Card.protoss.renfort.techno[index]
-                        this.selectData.atk.cardRenfort = selectIdProtossTch
+                        this.selectData[this.numberEscarmouche].data.atk.cardRenfort = selectIdProtossTch
                         this.atk.selectCardRenfort = selectIdProtossTch.img
                     }
                 }
@@ -563,21 +969,23 @@ export default {
                 return ''
             } 
         },
+        // REVOIR ZONE DE JEU POUR AJOUTER TOUTES LES CARTES ZONE -exemple SOUTIEN
+        // AJOUTER CARDZONE DANS TOUT LES OBJETS DE SELECTDATA comme BASE & TURRET
         selectCardZoneJeuAtk(event) {
             var Race = this.atk.selectRace
             var id = event.target.value
             if (id != '') {
                 if (Race === 'terran') {
                     var selectIdTerranStd = Card.terran.zoneJeu[id]
-                    this.selectData.atk.cardZone = selectIdTerranStd
+                    this.selectData[0].data.atk.cardZone = selectIdTerranStd
                     this.atk.selectCardZone = selectIdTerranStd.img
                 } else if (Race === 'zerg') {
                     var selectIdZergStd = Card.zerg.zoneJeu[id]
-                    this.selectData.atk.cardZone = selectIdZergStd
+                    this.selectData[0].data.atk.cardZone = selectIdZergStd
                     this.atk.selectCardZone = selectIdZergStd.img
                 } else if (Race === 'protoss') {
                     var selectIdProtossStd = Card.protoss.zoneJeu[id]
-                    this.selectData.atk.cardZone = selectIdProtossStd
+                    this.selectData[0].data.atk.cardZone = selectIdProtossStd
                     this.atk.selectCardZone = selectIdProtossStd.img
                 }
             } else {
@@ -587,64 +995,81 @@ export default {
         selectBaseAtk(event) {
             var select = event.target.checked
             select ? this.atk.base = true : this.atk.base = false
-            select ? this.selectData.atk.base = true : this.selectData.atk.base = false
+
+            if (select) {
+                for (let i = 0; i < this.selectData.length; i++) {
+                    this.selectData[i].data.atk.base = true
+                }
+            } else if (!select) {
+                for (let i = 0; i < this.selectData.length; i++) {
+                    this.selectData[i].data.atk.base = false
+                }
+            }
         },
         selectTurretAtk(event) {
             var select = event.target.checked
             select ? this.atk.turret = true : this.atk.turret = false
-            select ? this.selectData.atk.turret = true : this.selectData.atk.turret = false
+
+            if (select) {
+                for (let i = 0; i < this.selectData.length; i++) {
+                    this.selectData[i].data.atk.turret = true
+                }
+            } else if (!select) {
+                for (let i = 0; i < this.selectData.length; i++) {
+                    this.selectData[i].data.atk.turret = false
+                }
+            }
         },
         selectRaceDef(event) {
             var select = event.target.value
             this.def = {
                 selectRace: select,
                 selectFigurineFront: '',
-                selectFigurineSoutien: '',
+                selectFigurineSoutien: [],
                 selectCardCombat: '',
                 selectCardRenfort: '',
                 selectCardZone: '',
                 base: false,
                 turret: false
             }
+            this.selectData[this.numberEscarmouche].data.def = {
+                    race: '',
+                    figurineFront: '',
+                    figurineSoutien: [],
+                    cardCombat: '',
+                    cardRenfort: '',
+                    cardZone: '',
+                    base: false,
+                    turret: false,
+            }
+            this.selectionCounterSoutienDef = 0
             if (select === 'terran') {
                 this.figurineDefFront = Card.terran.figurine
-                document.getElementById('def-fig-front').value = 'select'
-                document.getElementById('def-fig-soutien').value = 'select'
                 this.selectCardCombatDef = Card.terran.combat.troupe
                 this.selectCardTechDef = Card.terran.combat.techno
-                document.getElementById('def-card-combat').value = 'select'
                 this.selectCardRenfortCombatDef = Card.terran.renfort.troupe
                 this.selectCardRenfortTechDef = Card.terran.renfort.techno
-                document.getElementById('def-card-renfort').value = 'select'
                 this.selectCardZoneDef = Card.terran.zoneJeu
-                document.getElementById('def-card-zone').value = 'select'
-                // document.getElementById('base-def').checked = false
+                this.resetSelect(0, 1, false, true)
+
             }else if (select === 'zerg') {
                 this.figurineDefFront = Card.zerg.figurine
-                document.getElementById('def-fig-front').value = 'select'
-                document.getElementById('def-fig-soutien').value = 'select'
                 this.selectCardCombatDef = Card.zerg.combat.troupe
                 this.selectCardTechDef = Card.zerg.combat.techno
-                document.getElementById('def-card-combat').value = 'select'
                 this.selectCardRenfortCombatDef = Card.zerg.renfort.troupe
                 this.selectCardRenfortTechDef = Card.zerg.renfort.techno
-                document.getElementById('def-card-renfort').value = 'select'
                 this.selectCardZoneDef = Card.zerg.zoneJeu
-                document.getElementById('def-card-zone').value = 'select'
-                // document.getElementById('base-def').checked = false
+                this.resetSelect(0, 1, false, true)
+
             }else if (select === 'protoss') {
                 this.figurineDefFront = Card.protoss.figurine
-                document.getElementById('def-fig-front').value = 'select'
-                document.getElementById('def-fig-soutien').value = 'select'
                 this.selectCardCombatDef = Card.protoss.combat.troupe
                 this.selectCardTechDef = Card.protoss.combat.techno
-                document.getElementById('def-card-combat').value = 'select'
                 this.selectCardRenfortCombatDef = Card.protoss.renfort.troupe
                 this.selectCardRenfortTechDef = Card.protoss.renfort.techno
-                document.getElementById('def-card-renfort').value = 'select'
                 this.selectCardZoneDef = Card.protoss.zoneJeu
-                document.getElementById('def-card-zone').value = 'select'
-                // document.getElementById('base-def').checked = false
+                this.resetSelect(0, 1, false, true)
+
             } else {
                 this.figurineDefFront = []
             }
@@ -654,36 +1079,142 @@ export default {
             var Race = this.def.selectRace
             if (Race === 'terran') {
                 var selectIdT = Card.terran.figurine[id]
-                this.selectData.def.figurineFront = selectIdT
+                this.selectData[this.numberEscarmouche].data.def.figurineFront = selectIdT
                 this.def.selectFigurineFront = selectIdT.img
-                this.selectData.def.race = Race
+                this.selectData[this.numberEscarmouche].data.def.race = Race
+                this.selectData[this.numberEscarmouche].active = true
             } else if (Race === 'zerg') {
                 var selectIdZ = Card.zerg.figurine[id]
-                this.selectData.def.figurineFront = selectIdZ
+                this.selectData[this.numberEscarmouche].data.def.figurineFront = selectIdZ
                 this.def.selectFigurineFront = selectIdZ.img
-                this.selectData.def.race = Race
+                this.selectData[this.numberEscarmouche].data.def.race = Race
+                this.selectData[this.numberEscarmouche].active = true
             } else if (Race === 'protoss') {
                 var selectIdP = Card.protoss.figurine[id]
-                this.selectData.def.figurineFront = selectIdP
+                this.selectData[this.numberEscarmouche].data.def.figurineFront = selectIdP
                 this.def.selectFigurineFront = selectIdP.img
-                this.selectData.def.race = Race
+                this.selectData[this.numberEscarmouche].data.def.race = Race
+                this.selectData[this.numberEscarmouche].active = true
             }
         },
         selectFigurineSoutienDef(event) {
-            var id = event.target.value
+            var numId = event.target.value
             var Race = this.def.selectRace
+            let classId = event.target.id.substring(15)
             if (Race === 'terran') {
-                var selectIdT = Card.terran.figurine[id]
-                this.selectData.def.figurineSoutien = selectIdT
-                this.def.selectFigurineSoutien = selectIdT.img
+                let selectIdT = Card.terran.figurine[numId]
+                if (classId > 0 && this.def.selectFigurineSoutien.length === 0) {
+
+                    for (let i = 0; i <= classId; i++) {
+                        if (i == classId) {
+                            this.selectData[this.numberEscarmouche].data.def.figurineSoutien[classId] = selectIdT
+                            this.$set(this.def.selectFigurineSoutien,[i],{
+                                id : i,
+                                icon : selectIdT.img
+                            })
+
+                        } else {
+                            this.def.selectFigurineSoutien[i] = {
+                                id : i,
+                                icon : undefined
+                            }
+
+                        }
+                    }
+                } else {
+
+                    if (numId != 'select') {
+                        this.selectData[this.numberEscarmouche].data.def.figurineSoutien[classId] = selectIdT
+                        this.$set(this.def.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : selectIdT.img
+                        })
+    
+                    } else {
+                        this.selectData[this.numberEscarmouche].data.def.figurineSoutien[classId] = undefined
+                        this.$set(this.def.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : undefined
+                        })
+    
+                    }
+                }
             } else if (Race === 'zerg') {
-                var selectIdZ = Card.zerg.figurine[id]
-                this.selectData.def.figurineSoutien = selectIdZ
-                this.def.selectFigurineSoutien = selectIdZ.img
+                let selectIdZ = Card.zerg.figurine[numId]
+                if (classId > 0 && this.def.selectFigurineSoutien.length === 0) {
+
+                    for (let i = 0; i <= classId; i++) {
+                        if (i == classId) {
+                            this.selectData[this.numberEscarmouche].data.def.figurineSoutien[classId] = selectIdZ
+                            this.$set(this.def.selectFigurineSoutien,[i],{
+                                id : i,
+                                icon : selectIdZ.img
+                            })
+
+                        } else {
+                            this.def.selectFigurineSoutien[i] = {
+                                id : i,
+                                icon : undefined
+                            }
+
+                        }
+                    }
+                } else {
+
+                    if (numId != 'select') {
+                        this.selectData[this.numberEscarmouche].data.def.figurineSoutien[classId] = selectIdZ
+                        this.$set(this.def.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : selectIdZ.img
+                        })
+    
+                    } else {
+                        this.selectData[this.numberEscarmouche].data.def.figurineSoutien[classId] = undefined
+                        this.$set(this.def.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : undefined
+                        })
+    
+                    }
+                }
             } else if (Race === 'protoss') {
-                var selectIdP = Card.protoss.figurine[id]
-                this.selectData.def.figurineSoutien = selectIdP
-                this.def.selectFigurineSoutien = selectIdP.img
+                let selectIdP = Card.protoss.figurine[numId]
+                if (classId > 0 && this.def.selectFigurineSoutien.length === 0) {
+                    
+                    for (let i = 0; i <= classId; i++) {
+                        if (i == classId) {
+                            this.selectData[this.numberEscarmouche].data.def.figurineSoutien[classId] = selectIdP
+                            this.$set(this.def.selectFigurineSoutien,[i],{
+                                id : i,
+                                icon : selectIdP.img
+                            })
+
+                        } else {
+                            this.def.selectFigurineSoutien[i] = {
+                                id : i,
+                                icon : undefined
+                            }
+
+                        }
+                    }
+                } else {
+
+                    if (numId != 'select') {
+                        this.selectData[this.numberEscarmouche].data.def.figurineSoutien[classId] = selectIdP
+                        this.$set(this.def.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : selectIdP.img
+                        })
+    
+                    } else {
+                        this.selectData[this.numberEscarmouche].data.def.figurineSoutien[classId] = undefined
+                        this.$set(this.def.selectFigurineSoutien,[classId],{
+                            id : classId,
+                            icon : undefined
+                        })
+    
+                    }
+                }
             }
         },
         selectCardStandardDef(event) {
@@ -695,31 +1226,31 @@ export default {
                 if (Race === 'terran') {
                     if (type === 'std') {
                         var selectIdTerranStd = Card.terran.combat.troupe[index]
-                        this.selectData.def.cardCombat = selectIdTerranStd
+                        this.selectData[this.numberEscarmouche].data.def.cardCombat = selectIdTerranStd
                         this.def.selectCardCombat = selectIdTerranStd.img
                     } else if (type === 'tch') {
                         var selectIdTerranTch = Card.terran.combat.techno[index]
-                        this.selectData.def.cardCombat = selectIdTerranTch
+                        this.selectData[this.numberEscarmouche].data.def.cardCombat = selectIdTerranTch
                         this.def.selectCardCombat = selectIdTerranTch.img
                     }
                 } else if (Race === 'zerg') {
                     if (type === 'std') {
                         var selectIdZergStd = Card.zerg.combat.troupe[index]
-                        this.selectData.def.cardCombat = selectIdZergStd
+                        this.selectData[this.numberEscarmouche].data.def.cardCombat = selectIdZergStd
                         this.def.selectCardCombat = selectIdZergStd.img
                     } else if (type === 'tch') {
                         var selectIdZergTch = Card.zerg.combat.techno[index]
-                        this.selectData.def.cardCombat = selectIdZergTch
+                        this.selectData[this.numberEscarmouche].data.def.cardCombat = selectIdZergTch
                         this.def.selectCardCombat = selectIdZergTch.img
                     }
                 } else if (Race === 'protoss') {
                     if (type === 'std') {
                         var selectIdProtossStd = Card.protoss.combat.troupe[index]
-                        this.selectData.def.cardCombat = selectIdProtossStd
+                        this.selectData[this.numberEscarmouche].data.def.cardCombat = selectIdProtossStd
                         this.def.selectCardCombat = selectIdProtossStd.img
                     } else if (type === 'tch') {
                         var selectIdProtossTch = Card.protoss.combat.techno[index]
-                        this.selectData.def.cardCombat = selectIdProtossTch
+                        this.selectData[this.numberEscarmouche].data.def.cardCombat = selectIdProtossTch
                         this.def.selectCardCombat = selectIdProtossTch.img
                     }
                 }
@@ -736,31 +1267,31 @@ export default {
                 if (Race === 'terran') {
                     if (type === 'std') {
                         var selectIdTerranStd = Card.terran.renfort.troupe[index]
-                        this.selectData.def.cardRenfort = selectIdTerranStd
+                        this.selectData[this.numberEscarmouche].data.def.cardRenfort = selectIdTerranStd
                         this.def.selectCardRenfort = selectIdTerranStd.img
                     } else if (type === 'tch') {
                         var selectIdTerranTch = Card.terran.renfort.techno[index]
-                        this.selectData.def.cardRenfort = selectIdTerranTch
+                        this.selectData[this.numberEscarmouche].data.def.cardRenfort = selectIdTerranTch
                         this.def.selectCardRenfort = selectIdTerranTch.img
                     }
                 } else if (Race === 'zerg') {
                     if (type === 'std') {
                         var selectIdZergStd = Card.zerg.renfort.troupe[index]
-                        this.selectData.def.cardRenfort = selectIdZergStd
+                        this.selectData[this.numberEscarmouche].data.def.cardRenfort = selectIdZergStd
                         this.def.selectCardRenfort = selectIdZergStd.img
                     } else if (type === 'tch') {
                         var selectIdZergTch = Card.zerg.renfort.techno[index]
-                        this.selectData.def.cardRenfort = selectIdZergTch
+                        this.selectData[this.numberEscarmouche].data.def.cardRenfort = selectIdZergTch
                         this.def.selectCardRenfort = selectIdZergTch.img
                     }
                 } else if (Race === 'protoss') {
                     if (type === 'std') {
                         var selectIdProtossStd = Card.protoss.renfort.troupe[index]
-                        this.selectData.def.cardRenfort = selectIdProtossStd
+                        this.selectData[this.numberEscarmouche].data.def.cardRenfort = selectIdProtossStd
                         this.def.selectCardRenfort = selectIdProtossStd.img
                     } else if (type === 'tch') {
                         var selectIdProtossTch = Card.protoss.renfort.techno[index]
-                        this.selectData.def.cardRenfort = selectIdProtossTch
+                        this.selectData[this.numberEscarmouche].data.def.cardRenfort = selectIdProtossTch
                         this.def.selectCardRenfort = selectIdProtossTch.img
                     }
                 }
@@ -768,21 +1299,23 @@ export default {
                 return ''
             } 
         },
+        // REVOIR ZONE DE JEU POUR AJOUTER TOUTES LES CARTES ZONE -exemple SOUTIEN
+        // AJOUTER CARDZONE DANS TOUT LES OBJETS DE SELECTDATA comme BASE & TURRET
         selectCardZoneJeuDef(event) {
             var Race = this.def.selectRace
             var id = event.target.value
             if (id != '') {
                 if (Race === 'terran') {
                     var selectIdTerranStd = Card.terran.zoneJeu[id]
-                    this.selectData.def.cardZone = selectIdTerranStd
+                    this.selectData[0].data.def.cardZone = selectIdTerranStd
                     this.def.selectCardZone = selectIdTerranStd.img
                 } else if (Race === 'zerg') {
                     var selectIdZergStd = Card.zerg.zoneJeu[id]
-                    this.selectData.def.cardZone = selectIdZergStd
+                    this.selectData[0].data.def.cardZone = selectIdZergStd
                     this.def.selectCardZone = selectIdZergStd.img
                 } else if (Race === 'protoss') {
                     var selectIdProtossStd = Card.protoss.zoneJeu[id]
-                    this.selectData.def.cardZone = selectIdProtossStd
+                    this.selectData[0].data.def.cardZone = selectIdProtossStd
                     this.def.selectCardZone = selectIdProtossStd.img
                 }
             } else {
@@ -792,12 +1325,95 @@ export default {
         selectBaseDef(event) {
             var select = event.target.checked
             select ? this.def.base = true : this.def.base = false
-            select ? this.selectData.def.base = true : this.selectData.def.base = false
+            
+            if (select) {
+                for (let i = 0; i < this.selectData.length; i++) {
+                    this.selectData[i].data.def.base = true
+                }
+            } else if (!select) {
+                for (let i = 0; i < this.selectData.length; i++) {
+                    this.selectData[i].data.def.base = false
+                }
+            }
         },
         selectTurretDef(event) {
             var select = event.target.checked
             select ? this.def.turret = true : this.def.turret = false
-            select ? this.selectData.def.turret = true : this.selectData.def.turret = false
+            
+            if (select) {
+                for (let i = 0; i < this.selectData.length; i++) {
+                    this.selectData[i].data.def.turret = true
+                }
+            } else if (!select) {
+                for (let i = 0; i < this.selectData.length; i++) {
+                    this.selectData[i].data.def.turret = false
+                }
+            }
+        },
+        addSoutienAtk() {
+            if (this.selectionCounterSoutienAtk < 4) {
+                this.selectionCounterSoutienAtk++
+                let id = this.selectionCounterSoutienAtk
+                this.atk.selectFigurineSoutien[id] = {
+                    id : id,
+                    icon : undefined
+
+                }
+            } else {
+                console.log('Nombre maximum de 5 autorisé en Soutien')
+            }
+        },
+        supprSoutienAtk() {
+            let id = this.selectionCounterSoutienAtk
+            this.$delete(this.atk.selectFigurineSoutien, id)
+            this.$delete(this.selectData.atk.figurineSoutien, id)
+            this.selectionCounterSoutienAtk--
+        },
+        addSoutienDef() {
+            if (this.selectionCounterSoutienDef < 4) {
+                this.selectionCounterSoutienDef++
+                let id = this.selectionCounterSoutienDef
+                this.def.selectFigurineSoutien[id] = {
+                    id : id,
+                    icon : undefined
+
+                }
+            } else {
+                console.log('Nombre maximum de 5 autorisé en Soutien')
+            }
+        },
+        supprSoutienDef() {
+            let id = this.selectionCounterSoutienDef
+            this.$delete(this.def.selectFigurineSoutien, id)
+            this.$delete(this.selectData.def.figurineSoutien, id)
+            this.selectionCounterSoutienDef--
+        },
+        addEscarmouche() {
+            if(this.numberEscarmouche < 3) {
+                this.numberEscarmouche++
+                this.resetSelect(1, 1, false, false)
+                this.resetImg()
+
+            }
+        },
+        simulActive(data) {
+            let dataMultiResult = []
+
+            for (let i = 0; i < data.length; i++) {
+                let elementData = data[i];
+
+                // Lancement de la simulation
+                if (elementData.active) {
+                    dataMultiResult[i] = {
+                        result: resultat(elementData.data)
+                    }
+
+                } else {
+                    i = 3
+                }
+            }
+            console.log(dataMultiResult)
+            console.log('FINISH')
         }
     }
 }

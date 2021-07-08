@@ -20,8 +20,15 @@
         -12px 0px 6px rgba(0, 173, 196, 0.2);
     background: rgba(50, 50, 50, 0.95);
 }
-.btn {
+.title-escarmouche {
+    text-align: center;
+    margin: .5rem auto;
+}
+.buttons {
     margin: 1rem auto;
+}
+.buttons button {
+    margin: 0 .5rem;
 }
 .Combat-list h2 {
     text-decoration: underline;
@@ -49,11 +56,48 @@
     height: 1.5rem;
     width: 1.5rem;
 }
+#btn-plusSoutien {
+    background: none;
+    border: none;
+    margin-left: .5rem;
+    max-height: 30px;
+}
+#btn-supprSoutien {
+    background: none;
+    border: none;
+    margin-left: .5rem;
+    max-height: 30px;
+}
+#btn-plusSoutien img {
+    width: 30px!important;
+}
+#btn-supprSoutien img {
+    width: 30px!important;
+}
+#btn-plusSoutienDef {
+    background: none;
+    border: none;
+    margin-left: .5rem;
+    max-height: 30px;
+}
+#btn-supprSoutienDef {
+    background: none;
+    border: none;
+    margin-left: .5rem;
+    max-height: 30px;
+}
+#btn-plusSoutienDef img {
+    width: 30px!important;
+}
+#btn-supprSoutienDef img {
+    width: 30px!important;
+}
 @media (min-width: 1260px) {
     .selection p {
         margin-top: .2rem;
         margin-bottom: .2rem;
-        width: 28%;
+        min-width: 28%;
+        max-width: 28%;
     }
     .selection label {
         width: 28%;
@@ -71,10 +115,17 @@
     }
 }
 @media (min-width: 1800px) {
+    #select-soutienAtk {
+        max-width: 264px;
+    }
+    #select-soutienDef {
+        max-width: 264px;
+    }
     .selection p {
         margin-top: .2rem;
         margin-bottom: .2rem;
-        width: 20%;
+        min-width: 20%;
+        max-width: 20%;
     }
     .selection label {
         width: 20%;

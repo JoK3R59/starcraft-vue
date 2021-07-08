@@ -6,13 +6,15 @@
             <div class="figurine soutien">
 
                 <h3>Soutien</h3>
+                
+                <div class="atk-figurine--soutien">
 
-                <div>
-                    <img class="atk-figurine front"
-                     :src="imgFigurine(atk.selectFigurineSoutien,atk.selectRace)"
-                      alt="Selectionnez une Figurine">
+                    <imgSoutien v-for="stringImg in atk.selectFigurineSoutien"
+                     :key="stringImg.id"
+                     :imgSrc="stringImg.icon"
+                     :race="atk.selectRace"
+                     :classSelect="imgDisplaySoutien(stringImg.icon)"></imgSoutien>
                 </div>
-
             </div>
             
             <div class="figurine front">
@@ -20,7 +22,7 @@
                 <h3>Front</h3>
 
                 <div>
-                    <img class="atk-figurine soutien"
+                    <img class="figurine-front"
                      :src="imgFigurine(atk.selectFigurineFront,atk.selectRace)"
                       alt="Selectionnez une Figurine">
                 </div>
@@ -80,7 +82,7 @@
                 <h3>Front</h3>
 
                 <div>
-                    <img class="def-figurine front"
+                    <img class="figurine-front"
                      :src="imgFigurine(def.selectFigurineFront,def.selectRace)"
                       alt="Selectionnez une Figurine">
                 </div>
@@ -91,10 +93,13 @@
 
                 <h3>Soutien</h3>
 
-                <div>
-                    <img class="def-figurine soutien"
-                     :src="imgFigurine(def.selectFigurineSoutien,def.selectRace)"
-                      alt="Selectionnez une Figurine">
+                <div class="def-figurine--soutien">
+
+                    <imgSoutien v-for="stringImg in def.selectFigurineSoutien"
+                     :key="stringImg.id"
+                     :imgSrc="stringImg.icon"
+                     :race="def.selectRace"
+                     :classSelect="imgDisplaySoutien(stringImg.icon)"></imgSoutien>
                 </div>
 
             </div>
@@ -151,14 +156,13 @@
 
 <script>
 import Card from '../../data/Simulation/Card';
+import imgSoutien from './items/imgFigSoutien';
 
 export default {
     name: 'Simulation',
     props: ['atk', 'def', 'resultData'],
-    data() {
-        return {
-            iconFlat: '../../assets/Images/Interfaces/Combat/Flat_plus_icon.svg'
-        }
+    components : {
+        'imgSoutien' : imgSoutien
     },
     methods: {
         getImgFront(pic) {
@@ -180,6 +184,15 @@ export default {
                 return require('../../assets/Images/Interfaces/Combat/Icon/' + race + '/' + pic + '.png')
             } else {
                 return ''
+            }
+        },
+        imgDisplaySoutien(pic) {
+            if (pic != undefined) {
+
+                return "img-figurine"
+            } else {
+
+                return "img-figurineNone"
             }
         },
         imgCarte(pic, race) {
@@ -223,6 +236,7 @@ export default {
         }
     }
 }
+
 </script>
 
 <style src='./Simulation.css' scoped>
