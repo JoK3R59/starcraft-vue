@@ -249,6 +249,7 @@ export default {
                         condition: {
                             type: 'répercutés',
                             by: 'sol',
+                            byCondition : 'unitSpecifique',
                             unit: [
                                 {
                                     name: 'Marine'
@@ -518,6 +519,7 @@ export default {
                         condition: {
                             type: 'répercutés',
                             by: 'sol',
+                            byCondition : 'unitSpecifique',
                             unit: [
                                 {
                                     name: 'Marine'
@@ -658,7 +660,7 @@ export default {
                     },
                     Tech: {
                         condition: {
-                            byCondition: 'noDétecteur',
+                            byCondition: 'noDetecteur',
                             type: 'répercutés',
                             by: 'sol'
                         }
@@ -685,7 +687,7 @@ export default {
                     },
                     Tech: {
                         condition: {
-                            byCondition: 'noDétecteur',
+                            byCondition: 'noDetecteur',
                             type: 'répercutés',
                             by: 'sol'
                         }
@@ -1043,7 +1045,8 @@ export default {
                 value: 'masse',
                 img: 'masse',
                 soutien_value: 0,
-                type: 'air'
+                type: 'air',
+                atk: 'air'
             },
             {
                 name: 'Mutalisk',
@@ -1056,12 +1059,14 @@ export default {
             {
                 name: 'Reine',
                 value: 'reine',
+                soutien_value: 0,
                 img: 'reine',
                 type: 'air'
             },
             {
                 name: 'Saboteur',
                 value: 'saboteur',
+                soutien_value: 0,
                 img: 'saboteur',
                 type: 'sol'
             },
@@ -1187,6 +1192,7 @@ export default {
                         condition: {
                             type: 'répercutés',
                             by: 'sol',
+                            byCondition : 'unitSpecifique',
                             unit: [
                                 {
                                     name: 'Marine'
@@ -1225,6 +1231,7 @@ export default {
                         condition: {
                             type: 'répercutés',
                             by: 'sol',
+                            byCondition : 'unitSpecifique',
                             unit: [
                                 {
                                     name: 'Marine'
@@ -1263,6 +1270,7 @@ export default {
                         condition: {
                             type: 'répercutés',
                             by: 'sol',
+                            byCondition : 'unitSpecifique',
                             unit: [
                                 {
                                     name: 'Marine'
@@ -2342,6 +2350,7 @@ export default {
                     Tech: {
                         condition: {
                             type: 'répercutés',
+                            byCondition : 'noCondition',
                             by: 'sol'
                         }
                     }
@@ -2368,6 +2377,7 @@ export default {
                     Tech: {
                         condition: {
                             type: 'répercutés',
+                            byCondition : 'noCondition',
                             by: 'sol'
                         }
                     }
@@ -2394,6 +2404,7 @@ export default {
                     Tech: {
                         condition: {
                             type: 'répercutés',
+                            byCondition : 'noCondition',
                             by: 'sol'
                         }
                     }
@@ -2571,39 +2582,5 @@ export default {
                 }
             }
         ]
-    },
-}
-
-/* 
-
-name: '',
-img: '',
-figurine: '', [{}, {}],
-// std = Standard / tch = Techno
-type: 'std', 'tch',
-degats: {
-    atk: {
-        max: ,
-        min: 
-    },
-    def: {
-        max: ,
-        min: 
     }
-},
-Tech: {
-    condition: {
-        type: 'front' ou 'répercutés' ou 'suicide' ou 'renfort' ou 'destroy', ou 'base', ou 'exception'
-        unit: 'name' ou [{name},{name}],
-        by: 'sol_air'
-    },
-    capacity: {
-        name: 'capacité',
-        for: 'all' ou [{name}, {name}],
-        unit: 'name'
-    },
-    type: 'atk_def',
-    result: , [{}, {}]
-}
-
-*/
+};

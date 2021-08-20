@@ -54,11 +54,19 @@
 .figurine-front {
     width: 150px;
     height: 150px;
+    border-style: solid;
+    border-color: black;
+    border-width: .2px;
+    border-radius: 1rem;
 }
 .img-figurine {
     display: block;
     width: 100px;
-    height: 100px;
+    height: 105px;
+    border-style: solid;
+    border-color: black;
+    border-width: .2px;
+    border-radius: 1rem;
 }
 .img-figurineNone {
     display: none;
@@ -72,16 +80,32 @@
 .atk-card {
     width: 192px;
     height: 297px;
+    border-style: solid;
+    border-color: black;
+    border-width: .2px;
+    border-radius: 1.5rem;
 }
 .def-card {
     width: 192px;
     height: 297px;
+    border-style: solid;
+    border-color: black;
+    border-width: .2px;
+    border-radius: 1.5rem;
 }
 .imgBase {
     width: 100px;
     height: 100px;
+    border-style: solid;
+    border-color: black;
+    border-width: .2px;
+    border-radius: 1rem;
 }
 .imgTurret {
     width: 100px;
     height: 100px;
+    border-style: solid;
+    border-color: black;
+    border-width: .2px;
+    border-radius: 1rem;
 }

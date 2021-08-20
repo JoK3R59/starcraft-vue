@@ -1,0 +1,35 @@
+.resultat {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.45);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.resultat-container {
+    margin: 1vh 10vh;
+    border-style: solid;
+    border-width: 6px 2px 6px 2px;
+    border-color: rgba(0, 0, 0);
+    border-radius: 2rem;
+    box-shadow: 
+        12px 0px 6px rgba(0, 173, 196, 0.4),
+        -12px 0px 6px rgba(0, 173, 196, 0.4);
+    background: rgba(50, 50, 50, 0.95);
+}
+button {
+    display: block;
+    margin: 1rem auto 0.5rem auto;
+}
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: black;
+    text-shadow: 0.5px 0.5px 0.8em white, 0 0 0.5em rgb(0, 0, 160), 0 0 0.2em rgb(0, 0, 160);
+    text-decoration: underline;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}

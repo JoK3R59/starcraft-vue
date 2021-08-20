@@ -91,9 +91,7 @@ export const resultat = (select) => {
 
     // Figurine
     let unitFrontAtk = atk.figurineFront
-    let unitSoutienAtk = atk.figurineSoutien
     let unitFrontDef = def.figurineFront
-    let unitSoutienDef = def.figurineSoutien
 
     // Carte Combat
     let cardCombatAtk = atk.cardCombat
@@ -109,32 +107,25 @@ export const resultat = (select) => {
 
     
     // Vérification et modification du Soutien != undefined ATK
-    if (unitSoutienAtk.length != 0) {
-        let newUnitSoutien = []
-
-        for (let i = 0; i < unitSoutienAtk.length; i++) {
-
-            if (unitSoutienAtk[i] != undefined) {
-                
-                newUnitSoutien.push(unitSoutienAtk[i])
-            }
-            
-        }
-        unitSoutienAtk = newUnitSoutien
-    }
+    let unitSoutienAtk = verifiedSupport(atk.figurineSoutien)
 
     // Vérification et modification du Soutien != undefined DEF
-    if (unitSoutienDef.length != 0) {
-        let newUnitSoutien = []
+    let unitSoutienDef = verifiedSupport(def.figurineSoutien)
 
-        for (let i = 0; i < unitSoutienDef.length; i++) {
-
-            if (unitSoutienDef[i] != undefined) {
-                newUnitSoutien.push(unitSoutienDef[i])
-
-            }
-        }
-        unitSoutienDef = newUnitSoutien
+    // Récupération de toutes les unitées de cette escarmouche
+    let unitAtk = {
+        front : atk.figurineFront,
+        soutien : atk.figurineSoutien,
+        target : '',
+        race: atk.race,
+        degats: ''
+    }
+    let unitDef = {
+        front : def.figurineFront,
+        soutien : def.figurineSoutien,
+        target : '',
+        race: def.race,
+        degats: ''
     }
 
     ///////
@@ -146,43 +137,355 @@ export const resultat = (select) => {
 
     // degats de l'ATK : MAX ou MIN
     let nameAtkFront = unitFrontAtk.name
-    let combatNameFigurineAtk = cardCombatAtk.figurine
-    let combatDegatsAtk = cardCombatAtk.degats
 
-    for (let i=0; i < combatNameFigurineAtk.length; i++) {
+    result.atk.damage = damageMaxOrMin(atk.figurineFront.name ,atk.cardCombat)
 
-        let nameFigurine = combatNameFigurineAtk[i].name
-        if (nameFigurine === nameAtkFront) {
-            result.atk.damage.type = 'max'
-            result.atk.damage.atk = combatDegatsAtk.atk.max
-            result.atk.damage.def = combatDegatsAtk.def.max
+    // ciblage de l'ATK vers DEF
+    let tempoTargetAtk = target(unitFrontAtk, unitFrontDef, unitSoutienDef)
+    unitAtk.target = tempoTargetAtk.unitTarget
+    logResult.atk.target = tempoTargetAtk.logTarget
+    result.atk.target = tempoTargetAtk.targetResult
 
-        } else if (result.atk.damage.type != 'max') {
-            result.atk.damage.type = 'min'
-            result.atk.damage.atk = combatDegatsAtk.atk.min
-            result.atk.damage.def = combatDegatsAtk.def.min
+    // Ajout degat Soutien a Front ATK 
+    let tempoDamageSupportAtk = supportDamage(unitSoutienAtk, result.atk)
+    result.atk.soutien = tempoDamageSupportAtk.resultSupport
+    logResult.atk.soutien = tempoDamageSupportAtk.logSupport
+
+    // prise en compte Tech de la carte Combat/Technologie ATK
+    if (cardCombatAtk.Tech) {
+        let tempoCardCombat = techCombatTechno(cardCombatAtk.Tech, result.atk.damage, unitAtk, unitDef)
+        result.atk.tech = tempoCardCombat.resultTech
+
+    }
+
+    // Prise en compte de la carte Renfort ATK 
+    if (cardRenfortAtk != '') {
+        let tempoCardRenfort = techRenfort(cardRenfortAtk, unitAtk, unitDef, atk.base, def.race)
+        result.atk.renfort = tempoCardRenfort.resultRenfort
+
+    }
+
+    // Prise en compte de la carte Zone de Jeu ATK
+    if (zoneJeuAtk != '') {
+        let tempoCardZone = techZone(zoneJeuAtk, unitAtk)
+        result.atk.zoneJeu = tempoCardZone.resultZoneJeu
+
+    }
+
+    // Prise en compte de la Tourelle dans Base ATK
+    let tempoTurretAtk = turretBase(atk.base, atk.turret, unitFrontDef.type)
+    result.atk.turret = tempoTurretAtk.turretBase
+
+    ///////
+    //
+    // DEF
+    //
+    ///////
+    console.log('-------------_ DEFENSEUR _-------------')
+
+    // degats de DEF : MAX ou MIN
+    let nameDefFront = unitFrontDef.name
+
+    result.def.damage = damageMaxOrMin(def.figurineFront.name ,def.cardCombat)
+
+    // ciblage de DEF vers ATK
+    let tempoTargetDef = target(unitFrontDef, unitFrontAtk, unitSoutienAtk)
+    unitDef.target = tempoTargetDef.unitTarget
+    logResult.def.target = tempoTargetDef.logTarget
+    result.def.target = tempoTargetDef.targetResult
+
+    // Ajout degat Soutien a Front DEF
+    let tempoDamageSupportDef = supportDamage(unitSoutienDef, result.def)
+    result.def.soutien = tempoDamageSupportDef.resultSupport
+    logResult.def.soutien = tempoDamageSupportDef.logSupport
+
+    // prise en compte Tech DEF de la carte Combat/Technologie
+    if (cardCombatDef.Tech) {
+        let tempoCardCombat = techCombatTechno(cardCombatDef.Tech, result.def.damage, unitDef, unitAtk)
+        result.def.tech = tempoCardCombat.resultTech
+
+    }
+
+    // Prise en compte de la carte Renfort DEF
+    if (cardRenfortDef != '') {
+        let tempoCardRenfort = techRenfort(cardRenfortDef, unitDef, unitAtk, def.base, atk.race)
+        result.def.renfort = tempoCardRenfort.resultRenfort
+
+    }
+
+    // Prise en compte de la carte Zone de Jeu DEF
+    if (zoneJeuDef != '') {
+        let tempoCardZone = techZone(zoneJeuDef, unitDef)
+        result.def.zoneJeu = tempoCardZone.resultZoneJeu
+        
+    }
+
+    // Prise en compte de la Tourelle dans Base DEF
+    let tempoTurretDef = turretBase(def.base, def.turret, unitFrontAtk.type)
+    result.def.turret = tempoTurretDef.turretBase
+
+    ///////
+    //
+    // RESULTAT
+    //
+    ///////
+    console.log('-------------_ RESULTAT _-------------')
+    console.log('*** RESULTAT STEP 1 ***')
+    console.log(result)
+
+    // Calcul des valeurs Final
+    let resultAtk = result.atk
+    let resultDef = result.def
+
+    let atkFinal = {
+        atk : resultAtk.damage.atk + resultAtk.soutien + resultAtk.renfort.atk + resultAtk.tech.atk +  resultAtk.turret.atk,
+        def : resultAtk.damage.def + resultAtk.zoneJeu.def + resultAtk.renfort.def + resultAtk.tech.def
+    }
+
+    let defFinal = {
+        atk: resultDef.damage.atk + resultDef.soutien + resultDef.renfort.atk + resultDef.tech.atk + resultDef.turret.atk,
+        def: resultDef.damage.def + resultDef.zoneJeu.def + resultDef.renfort.def + resultDef.tech.def
+    }
+
+    console.log('*** RESULTAT STEP 2 ***')
+    // console.log(atkFinal)
+    // console.log(defFinal)
+
+    // Comparaison des valeurs Final ATK
+    if (resultAtk.target != 'noTarget') {
+
+        if (atkFinal.atk >= defFinal.def) {
+            logResult.atk.damage.info = "L'unité " + nameAtkFront + " a la force suffisante pour détruire " + resultAtk.target.name + "."
+            logResult.atk.damage.statutAdv = 'destroy'
+    
+        } else if (atkFinal.atk < defFinal.def) {
+            logResult.atk.damage.info = "L'unité " + nameAtkFront + " n'a pas la force suffisante pour détruire " + resultAtk.target.name + "."
+    
+        }
+    } else if (resultAtk.target === 'noTarget') {
+        logResult.atk.damage.info = "L'unité " + nameAtkFront + " est incapable de cibler."
+
+    }
+
+    // Comparaison des valeurs Final DEF
+    if (resultDef.target != 'noTarget') {
+        
+        if (defFinal.atk >= atkFinal.def) {
+            logResult.def.damage.info = "L'unité " + nameDefFront + " a la force suffisante pour détruire " + resultDef.target.name + "."
+            logResult.def.damage.statutAdv = 'destroy'
+    
+        } else if (defFinal.atk < atkFinal.def) {
+            logResult.def.damage.info = "L'unité " + nameDefFront + " n'a pas la force suffisante pour détruire " + resultDef.target.name + "."
+    
+        }
+    } else if (resultDef.target === 'noTarget') {
+        logResult.def.damage.info = "L'unité " + nameDefFront + " est incapable de cibler."
+
+    }
+
+    // Résolution Destruction d'unités front/soutien ATK
+    if (logResult.atk.damage.statutAdv === 'destroy') {
+        let unitFinalDef = {}
+
+        if (unitAtk.target === 'front') {
+            unitFinalDef = {
+                unit : unitDef.front,
+                statut : 'dead'
+            }
+            unitDef.front = unitFinalDef
+
+        } else if (unitAtk.target === 'soutien') {
+
+            if (unitDef.soutien.length === 1) {
+                unitFinalDef = {
+                    unit : unitDef.soutien,
+                    statut : 'dead'
+                }
+                unitDef.soutien = unitFinalDef
+
+            } else if (unitDef.soutien.length > 1) {
+                let targetName = resultAtk.target.name
+                
+                for (let i = 0; i < unitDef.soutien.length; i++) {
+                    let selectUnitName = unitDef.soutien[i].name
+
+                    if (selectUnitName === targetName) {
+                        unitFinalDef = {
+                            unit : unitDef.soutien[i],
+                            statut : 'dead'
+                        }
+                        unitDef.soutien[i] = unitFinalDef
+                    }
+                    
+                }
+            }
 
         }
     }
 
-    // ciblage de l'ATK vers DEF
+    // Résolution Destruction d'unités front/soutien DEF
+    if (logResult.def.damage.statutAdv === 'destroy') {
+        let unitFinalAtk = {}
+
+        if (unitDef.target === 'front') {
+            unitFinalAtk = {
+                unit : unitAtk.front,
+                statut : 'dead'
+            }
+            unitAtk.front = unitFinalAtk
+
+        } else if (unitDef.target === 'soutien') {
+
+            if (unitAtk.soutien.length === 1) {
+                unitFinalAtk = {
+                    unit : unitAtk.soutien,
+                    statut : 'dead'
+                }
+                unitAtk.soutien = unitFinalAtk
+
+            } else if (unitAtk.soutien.length > 1) {
+                let targetName = resultDef.target.name
+                
+                for (let i = 0; i < unitAtk.soutien.length; i++) {
+                    let selectUnitName = unitAtk.soutien[i].name
+
+                    if (selectUnitName === targetName) {
+                        unitFinalAtk = {
+                            unit : unitAtk.soutien[i],
+                            statut : 'dead'
+                        }
+                        unitAtk.soutien[i] = unitFinalAtk
+                    }
+                    
+                }
+            }
+
+        }
+    }
+
+    ///////
+    //
+    // ATK
+    //
+    ///////
+
+    // Gestion des capacités Combat/Tech Escarmouche
+    if (resultAtk.tech.type != '') {
+        let tempoResult = capacityCombatTech(resultAtk.tech.type, resultDef, unitAtk, unitDef, logResult.atk, logResult.def)
+        logResult.atk.tech = tempoResult.logResultAtk.tech
+        { tempoResult.tempoUnitAtk.front != '' ? unitAtk.front = tempoResult.tempoUnitAtk.front : null }
+        { tempoResult.tempoUnitAtk.tech != '' ? unitAtk.tech = tempoResult.tempoUnitAtk.tech : null }
+        { tempoResult.tempoUnitDef.front != '' ? unitDef.front = tempoResult.tempoUnitDef.front : null }
+
+    }
+
+    ///////
+    //
+    // DEF
+    //
+    ///////
+
+    // Gestion des capacités Combat/Tech Escarmouche
+    if (resultDef.tech.type != '') {
+        let tempoResult = capacityCombatTech(resultDef.tech.type, resultAtk, unitDef, unitAtk, logResult.def, logResult.atk)
+        logResult.def.tech = tempoResult.logResultAtk.tech
+        { tempoResult.tempoUnitAtk.front != '' ? unitDef.front = tempoResult.tempoUnitAtk.front : null }
+        { tempoResult.tempoUnitAtk.tech != '' ? unitDef.tech = tempoResult.tempoUnitAtk.tech : null }
+        { tempoResult.tempoUnitDef.front != '' ? unitAtk.front = tempoResult.tempoUnitDef.front : null }
+
+    }
+
+    // console.log(logResult)
+    let resultat = {resultAtk, resultDef}
+    unitAtk.degats = atkFinal
+    unitDef.degats = defFinal
+    let unites = {unitAtk, unitDef}
+    
+    return {logResult, resultat, unites};
+};
+
+// Vérification et modification du Soutien != undefined
+const verifiedSupport = (supportFigurine) => {
+    
+    if (supportFigurine.length != 0) {
+        let newUnitSoutien = []
+
+        for (let i = 0; i < supportFigurine.length; i++) {
+
+            if (supportFigurine[i] != undefined) {
+                
+                newUnitSoutien.push(supportFigurine[i])
+            }
+            
+        }
+        supportFigurine = newUnitSoutien
+    } else {
+        return supportFigurine;
+    }
+    return supportFigurine;
+};
+
+// degats MAX || MIN
+const damageMaxOrMin = (unitName, cardCombat) => {
+    let combatNameFigurine = cardCombat.figurine
+    let combatDegats = cardCombat.degats
+
+    let type = ''
+    let atk = ''
+    let def = ''
+
+    for (let i=0; i < combatNameFigurine.length; i++) {
+        let nameFigurine = combatNameFigurine[i].name
+
+        if (nameFigurine === unitName) {
+            type = 'max'
+            atk = combatDegats.atk.max
+            def = combatDegats.def.max
+
+            return {type, atk, def}
+
+        } else if (type != 'max' && i === combatNameFigurine.length ) {
+            type = 'min'
+            atk = combatDegats.atk.min
+            def = combatDegats.def.min
+
+            return {type, atk, def}
+        }
+    }
+    
+};
+
+// ciblage
+const target = (unitFrontAtk, unitFrontDef, unitSoutienDef) => {
+    let unitTarget = ''
+    let logTarget = ''
+    let targetResult = ''
+
     if (unitFrontAtk.atk === unitFrontDef.type || unitFrontAtk.atk === 'sol_air') {
-        result.atk.target = unitFrontDef
-        logResult.atk.target = "L'unité " + nameAtkFront + " peut cibler " + unitFrontDef.name + " au front."
+        targetResult = unitFrontDef
+        unitTarget = {
+            type : 'front',
+            unit : unitFrontDef
+        }
+        logTarget = "L'unité " + unitFrontAtk.name + " peut cibler " + unitFrontDef.name + " au front."
 
     } else if (unitSoutienDef.length === 1) {
 
         if (unitFrontAtk.atk === unitSoutienDef[0].type || unitFrontAtk.atk === 'sol_air') {
-            result.atk.target = unitSoutienDef[0]
-            logResult.atk.target = "L'unité " + nameAtkFront + " ne peut pas cibler " + unitFrontDef.name + " au front, mais il peut cibler " + unitSoutienDef[0].name + " en soutien."
+            targetResult = unitSoutienDef[0]
+            unitTarget = {
+                type : 'soutien',
+                unit : unitSoutienDef[0]
+            }
+            logTarget = "L'unité " + unitFrontAtk.name + " ne peut pas cibler " + unitFrontDef.name + " au front, mais il peut cibler " + unitSoutienDef[0].name + " en soutien."
     
         } else {
-            result.atk.target = 'noTarget'
-            logResult.atk.target = "L'unité " + nameAtkFront + " ne peut pas cibler " + unitFrontDef.name + " au front, ni cibler " + unitSoutienDef[0].name + " en soutien."
+            targetResult = 'noTarget'
+            logTarget = "L'unité " + unitFrontAtk.name + " ne peut pas cibler " + unitFrontDef.name + " au front, ni cibler " + unitSoutienDef[0].name + " en soutien."
         }
     } else if (unitSoutienDef.length > 1) {
         let multiTarget = []
-        logResult.atk.target = {
+        logTarget = {
             hit: '',
             lost: ''
         }
@@ -202,20 +505,28 @@ export const resultat = (select) => {
 
             }
         }
-        if (targetHit.length > 0) {
-            let stringHit = "L'unité " + nameAtkFront + " ne peut pas cibler " + unitFrontDef.name + " au front, mais il peut cibler "
-            stringHit = stringHit.concat(...targetHit)
-            logResult.atk.target.hit = stringHit + "en soutien."
 
+        if (targetHit.length > 0) {
+            let stringHit = "L'unité " + unitFrontAtk.name + " ne peut pas cibler " + unitFrontDef.name + " au front, mais il peut cibler "
+            stringHit = stringHit.concat(...targetHit)
+            logTarget.hit = stringHit + "en soutien."
+            unitTarget = {
+                type : 'soutien',
+                unit : unitSoutienDef[0]
+            }
         }
         if (targetLost.length > 0) {
-            let stringLost = "L'unité " + nameAtkFront + " ne peut pas cibler " + unitFrontDef.name + " au front, ni cibler "
+            let stringLost = "L'unité " + unitFrontAtk.name + " ne peut pas cibler " + unitFrontDef.name + " au front, ni cibler "
             stringLost = stringLost.concat(...targetLost)
-            logResult.atk.target.lost = stringLost + "en soutien."
+            logTarget.lost = stringLost + "en soutien."
 
         }
         if (multiTarget.length > 0) {
             let target = ''
+            unitTarget = {
+                type : 'soutien',
+                unit : unitSoutienDef[0]
+            }
 
             for (let i = 0; i < multiTarget.length; i++) {
                 if (multiTarget[i] != 'noTarget' && target === '') {
@@ -223,34 +534,41 @@ export const resultat = (select) => {
                 
                 }                
             }
-            result.atk.target = target
+            targetResult = target
         }
     } else {
-        result.atk.target = 'noTarget'
-        logResult.atk.target = "L'unité " + nameAtkFront + " ne peut pas cibler " + unitFrontDef.name + " au front."
+        targetResult = 'noTarget'
+        logTarget = "L'unité " + unitFrontAtk.name + " ne peut pas cibler " + unitFrontDef.name + " au front."
 
     }
+    
+    return {unitTarget, logTarget, targetResult}
+};
 
-    // Ajout degat Soutien a Front ATK 
+// Ajout degat Soutien
+const supportDamage = (unitSoutienAtk, resultAtk) => {
+    let resultSupport = 0
+    let logSupport = ''
+
     if (unitSoutienAtk.length != 0) {
 
-        if (result.atk.target != 'noTarget') {
+        if (resultAtk.target != 'noTarget') {
             console.log("Vérification de degats possible pour soutien")
     
             if (unitSoutienAtk.length === 1) {
 
-                if (unitSoutienAtk[0].atk === result.atk.target.type || unitSoutienAtk[0].atk === 'sol_air') {
-                    // console.log('Soutien peut cibler, ajout degats soutien')
-                    result.atk.soutien = unitSoutienAtk[0].soutien_value
-                    logResult.atk.soutien = "L'unité " + unitSoutienAtk[0].name + " en soutien peut attaquer la cible, sa valeur d'attaque est ajouté."
+                if (unitSoutienAtk[0].atk === resultAtk.target.type || unitSoutienAtk[0].atk === 'sol_air') {
+                    // Soutien peut cibler, ajout degats soutien
+                    resultSupport = unitSoutienAtk[0].soutien_value
+                    logSupport = "L'unité " + unitSoutienAtk[0].name + " en soutien peut attaquer la cible, sa valeur d'attaque est ajouté."
         
                 } else {
-                    // console.log('Soutien ne peut pas cibler malgré la cible de la figurine au FRONT, aucun degats ajouté')
-                    logResult.atk.soutien = "L'unité " + unitSoutienAtk[0].name + " en soutien ne peut pas attaquer la cible."
+                    // Soutien ne peut pas cibler malgré la cible de la figurine au FRONT, aucun degats ajouté
+                    logSupport = "L'unité " + unitSoutienAtk[0].name + " en soutien ne peut pas attaquer la cible."
         
                 }
             } else if (unitSoutienAtk.length > 1) {
-                logResult.atk.soutien = {
+                logSupport = {
                     hit: '',
                     miss: ''
                 }
@@ -260,13 +578,13 @@ export const resultat = (select) => {
                 for (let i = 0; i < unitSoutienAtk.length; i++) {
 
                     let selectSoutien = unitSoutienAtk[i];
-                    if (selectSoutien.atk === result.atk.target.type || selectSoutien.atk === 'sol_air') {
-                        // console.log('Soutien peut cibler, ajout degats soutien')
-                        result.atk.soutien = result.atk.soutien + selectSoutien.soutien_value
+                    if (selectSoutien.atk === resultAtk.target.type || selectSoutien.atk === 'sol_air') {
+                        // Soutien peut cibler, ajout degats soutien
+                        resultSupport = resultSupport + selectSoutien.soutien_value
                         unitHit.push(selectSoutien.name + ', ')
             
                     } else {
-                        // console.log('Soutien ne peut pas cibler malgré la cible de la figurine au FRONT, aucun degats ajouté')
+                        // Soutien ne peut pas cibler malgré la cible de la figurine au FRONT, aucun degats ajouté
                         unitMiss.push(selectSoutien.name + ', ')
             
                     }
@@ -274,28 +592,41 @@ export const resultat = (select) => {
                 if (unitHit.length != 0) {
                     let stringHit = "L'unité "
                     stringHit = stringHit.concat(...unitHit)
-                    logResult.atk.soutien.hit = stringHit + "en soutien peut attaquer la cible, sa valeur d'attaque est ajouté."
+                    logSupport.hit = stringHit + "en soutien peut attaquer la cible, sa valeur d'attaque est ajouté."
 
                 }
                 if (unitMiss.length != 0) {
                     let stringMiss = "L'unité "
                     stringMiss = stringMiss.concat(...unitMiss)
-                    logResult.atk.soutien.miss = stringMiss + "en soutien ne peut pas attaquer la cible."
+                    logSupport.miss = stringMiss + "en soutien ne peut pas attaquer la cible."
 
                 }
             }
         } else {
-            // console.log("Soutien ne peut pas cibler - aucun degats n'est ajouté")
-            logResult.atk.soutien = "Aucune cible disponible."
+            // Soutien ne peut pas cibler - aucun degats n'est ajouté
+            logSupport = "Aucune cible disponible."
     
         }
     }
 
-    // prise en compte Tech de la carte Combat/Technologie ATK
-    if (cardCombatAtk.Tech) {
+    return {resultSupport, logSupport}
+};
+
+// prise en compte Tech de la carte Combat/Technologie
+const techCombatTechno = (cardCombatTech, resultDamage, unitAtk, unitDef) => {
+    let nameAtkFront = unitAtk.front.name
+    let unitSoutienAtk = unitAtk.soutien
+    let unitFrontDef = unitDef.front
+    let resultTech = {
+        atk: 0,
+        def: 0,
+        type: ''
+    }
+
+    if (cardCombatTech) {
         console.log('** Lecture Tech de cardCombat ATK **')
-        let combatTech = cardCombatAtk.Tech
-        let verifTechCondition = result.atk.damage.type
+        let combatTech = cardCombatTech
+        let verifTechCondition = resultDamage.type
 
         if (combatTech.condition && verifTechCondition === 'max') {
             console.log('Lecture Condition de cardCombat')
@@ -318,23 +649,27 @@ export const resultat = (select) => {
 
                             if (conditionBy === targetATK.type) {
                                 console.log('BONUS CONTRE VALIDEE condition respecté')
-                                result.atk.tech.atk = combatTech.result
+                                resultTech.atk = combatTech.result
+
                             } else {
                                 console.log('BONUS CONTRE NON validée condition non respectée')
+
                             }
                         } else {
+
                             if (techType === 'atk') {
                                 console.log('Ajout Atk de la condition')
-                                result.atk.tech.atk = combatTech.result
+                                resultTech.atk = combatTech.result
     
                             } else if (techType === 'def') {
                                 console.log('Ajout Def de la condition')
-                                result.atk.tech.def = combatTech.result
+                                resultTech.def = combatTech.result
     
                             } else if (techType === 'atk_def') {
                                 console.log('Ajout Def et Atk de la condition')
-                                result.atk.tech.atk = combatTech.result
-                                result.atk.tech.def = combatTech.result
+                                resultTech.atk = combatTech.result
+                                resultTech.def = combatTech.result
+
                             }
                         }
                     } else if (!techCondition.unit && techCondition.by) {
@@ -344,13 +679,14 @@ export const resultat = (select) => {
 
                         if (conditionBy === targetATK.type) {
                             console.log('BONUS CONTRE VALIDEE condition respecté')
-                            result.atk.tech.atk = combatTech.result
+                            resultTech.atk = combatTech.result
                             
                         } else {
                             console.log('BONUS CONTRE NON validée condition non respecté')
                         }
                     } else {
                         console.log("La Condition n'est pas respecté - aucun BONUS")
+
                     }
                 } else if (techCondition.type === 'répercutés') {
                     console.log('vérification de la condition degat REPERCUTEE')
@@ -358,15 +694,15 @@ export const resultat = (select) => {
 
                     if (typeOfTech ===  'object') {
                         console.log('réception VALIDE de degat REPERCUTEE avec cibles par Type')
-                        result.atk.tech.type = techCondition
+                        resultTech.type = techCondition
 
-                    } else if (typeOfTech ===  'string' && techCondition.unit === unitFrontAtk.name) {
+                    } else if (typeOfTech ===  'string' && techCondition.unit === nameAtkFront) {
                         console.log('réception VALIDE de degat REPERCUTEE selon figurine par Type')
-                        result.atk.tech.type = techCondition
+                        resultTech.type = techCondition
 
                     } else if (techCondition.byCondition) {
                         console.log('réception VALIDE de degat REPERCUTEE avec|sans condition par Type')
-                        result.atk.tech.type = techCondition
+                        resultTech.type = techCondition
 
                     } else {
                         console.log("BONUS non validée la condition n'est pas respecté les Figurines ne correspondent pas")
@@ -374,12 +710,12 @@ export const resultat = (select) => {
                     }
                 } else if (techCondition.type === 'suicide') {
                     console.log('réception VALIDE de degat SUICIDE par Type')
-                    result.atk.tech.type = techCondition
+                    resultTech.type = techCondition
 
                 } else if (techCondition.type === 'destroy') {
                     console.log('réception VALIDE de degat DESTROY par Type')
-                    result.atk.tech.type = techCondition
-                    result.atk.tech.number = combatTech.result
+                    resultTech.type = techCondition
+                    resultTech.number = combatTech.result
 
                 } else {
                     console.log("BONUS non validée la condition n'est pas respecté les Figurines ne correspondent pas")
@@ -388,18 +724,19 @@ export const resultat = (select) => {
             }
         } else if (combatTech.capacity) {
             console.log('Lecture Capacity de cardCombat et Ajout de type')
-            result.atk.tech.type = combatTech.capacity.name
+            resultTech.type = combatTech.capacity.name
             let capacityFor = combatTech.capacity.for
-            result.atk.tech.unit = []
+            resultTech.unit = []
+
             for (let i = 0; i < capacityFor.length; i++) {
                 let forName = capacityFor[i].name;
-                if (forName === nameAtkFront || forName === unitSoutienAtk.name) {
+
+                if (forName === nameAtkFront || forName === unitSoutienAtk[i].name) {
                     console.log('Ajout de la figurine valide dans Renfort Unit')
-                    result.atk.tech.unit.push(forName)
-                } else if (combatTech.length === i + 1 && result.atk.tech.unit.length === 0) {
+                    resultTech.unit.push(forName)
+                } else if (combatTech.length === i + 1 && resultTech.unit.length === 0) {
                     console.log('Aucune figurine ne correspond a la Capacitée, BONUS non valide')
                 }
-                
             }
         } else {
             console.log('Les figurines ne correspondent pas a la carte Combat')
@@ -407,9 +744,24 @@ export const resultat = (select) => {
         }
     }
 
-    // Prise en compte de la carte Renfort ATK 
+    return {resultTech}
+};
+
+// Prise en compte de la carte Renfort
+const techRenfort = (cardRenfortAtk, unitAtk, unitDef, base, race) => {
+    let unitSoutienAtk = unitAtk.soutien
+    let nameAtkFront = unitAtk.front.name
+    let targetAtk = unitAtk.target
+    let defFront = unitDef.front
+    let defSoutien = unitDef.soutien
+    let resultRenfort = {
+        atk : 0,
+        def : 0,
+        type : ''
+    }
+
     if (cardRenfortAtk != '') {
-        console.log('** Lecture de la carte Renfort ATK **')
+        console.log('** Lecture de la carte Renfort **')
         let renfortTech = cardRenfortAtk.Tech
 
         if (renfortTech.condition && !renfortTech.capacity) {
@@ -428,9 +780,9 @@ export const resultat = (select) => {
 
                         if (unit === nameAtkFront) {
                             console.log ('BONUS valide - envoi dans Renfort')
-                            result.atk.renfort.def = renfortTech.result
+                            resultRenfort.def = renfortTech.result
 
-                        } else if (conditionUnit.length === i + 1 && result.atk.renfort.def === 0) {
+                        } else if (conditionUnit.length === i + 1 && resultRenfort.def === 0) {
                             console.log("BONUS non valide, la condition n'est pas respectée")
                         }
                         
@@ -440,7 +792,7 @@ export const resultat = (select) => {
                     
                     if (unitSoutienAtk != '') {
                         console.log("BONUS valide, envoi dans Renfort")
-                        result.atk.renfort.atk = renfortTech.result
+                        renfortTech.atk = renfortTech.result
 
                     } else {
                         console.log("BONUS non valide, la condition n'est pas respectée")
@@ -448,12 +800,11 @@ export const resultat = (select) => {
                     }
                 } else {
                     console.log('BONUS valide pour Protoss, sans condition')
-                    result.atk.renfort.def = renfortTech.result
+                    renfortTech.def = renfortTech.result
 
                 }
             } else if (techCondition.type === 'base') {
                 console.log('vérification de la Condition base')
-                let base = atk.base
                 let techType = renfortTech.type
 
                 if (base && techType === 'def') {
@@ -467,25 +818,25 @@ export const resultat = (select) => {
 
                             if (unitName === nameAtkFront) {
                                 console.log('BONUS Valide, envoi dans Renfort')
-                                result.atk.renfort.def = renfortTech.result
+                                resultRenfort.def = renfortTech.result
 
-                            } else if (conditionUnit.length === i + 1 && result.atk.renfort.def === 0) {
+                            } else if (conditionUnit.length === i + 1 && resultRenfort.def === 0) {
                                 console.log('BONUS non valide, condition non respectée')
 
                             }
                         }
                     } else {
                         console.log('BONUS valide pour Protoss, envoi dans Renfort')
-                        result.atk.renfort.def = renfortTech.result
+                        resultRenfort.def = renfortTech.result
 
                     }
                 } else if (base && techType === 'atk') {
                     console.log('Vérification des conditions de Base')
                     let conditionBy = techCondition.by
 
-                    if (conditionBy === unitFrontDef.type) {
+                    if (conditionBy === defFront.type) {
                         console.log('BONUS valide, envoi dans Renfort')
-                        result.atk.renfort.atk = renfortTech.result
+                        renfortTech.atk = renfortTech.result
 
                     } else {
                         console.log('BONUS non valide, condition non respectée')
@@ -499,83 +850,153 @@ export const resultat = (select) => {
                 console.log('Vérification de la Condition figurine de degats Répercutés')
                 let figurineName = cardRenfortAtk.figurine
 
-                if (figurineName === unitFrontAtk.name || figurineName === unitSoutienAtk.name) {
+                if (figurineName === nameAtkFront) {
                     console.log('Nom de la figurine vérifiée, la correspondance est bonne, BONUS valide')
-                    result.atk.renfort.type = techCondition
+                    resultRenfort.type = techCondition
 
                     if (renfortTech.type) {
                         console.log("Ajout Supplémentaire de degats")
-                        result.atk.renfort.atk = renfortTech.result
+                        resultRenfort.atk = renfortTech.result
 
+                    }
+                } else if (unitSoutienAtk.length > 0) {
+
+                    for (let i = 0; i < unitSoutienAtk.length; i++) {
+                        let SoutienName = unitSoutienAtk[i].name;
+    
+                        if (figurineName === SoutienName) {
+                            console.log('Nom de la figurine vérifiée, la correspondance est bonne, BONUS valide')
+                            resultRenfort.type = techCondition
+        
+                            if (renfortTech.type) {
+                                console.log("Ajout Supplémentaire de degats")
+                                resultRenfort.atk = renfortTech.result
+        
+                            }
+                        } else if (unitSoutienAtk.length === i + 1 && resultRenfort.type === '') {
+                            console.log('BONUS non valide, la figurine ne correspond pas')
+        
+                        }
                     }
                 } else {
                     console.log('BONUS non valide, la figurine ne correspond pas')
                 }
-
             } else if (!techCondition) {
                 console.log('BONUS valide, sans condition')
-                result.atk.renfort.def = renfortTech.result
+                resultRenfort.def = renfortTech.result
             } else if (techCondition.type === 'exception') {
                 console.log("Vérification de la Condition figurine d'Exception")
                 let figurineName = cardRenfortAtk.figurine
 
-                if (figurineName === unitFrontAtk.name || figurineName === unitSoutienAtk.name) {
+                if (figurineName === nameAtkFront) {
                     console.log('BONUS ajouté Exception dans Type Renfort')
-                    result.atk.renfort.type = techCondition
+                    resultRenfort.type = techCondition
 
+                } else if (unitSoutienAtk.length > 0) {
+
+                    for (let i = 0; i < unitSoutienAtk.length; i++) {
+                        let SoutienName = unitSoutienAtk[i].name;
+
+                        if (figurineName === SoutienName) {
+                            console.log('BONUS ajouté Exception dans Type Renfort')
+                            resultRenfort.type = techCondition
+
+                        } else if (unitSoutienAtk.length === i + 1 && resultRenfort.type === '') {
+                            console.log('BONUS non valide, la figurine ne correspond pas')
+        
+                        }
+                    }
                 } else {
                     console.log('BONUS non valide, la figurine ne correspond pas')
                 }
             } else if (techCondition.type === 'destroy') {
                 console.log('Vérification de la Condition Destroy')
                 let figurineName = cardRenfortAtk.figurine
+                let condition = false
 
-                if (figurineName === unitFrontAtk.name || figurineName === unitSoutienAtk.name) {
+                if (figurineName === nameAtkFront) {
+                    condition = true
+
+                } else if (unitSoutienAtk.length > 0) {
+
+                    for (let i = 0; i < unitSoutienAtk.length; i++) {
+                        let soutienName = unitSoutienAtk[i].name;
+
+                        if (figurineName === soutienName) {
+                            condition = true
+                        }
+                    }
+                }
+
+                if (condition) {
                     console.log('BONUS valide, vérification des conditions')
                     let conditionUnit = techCondition.unit
-                    result.atk.renfort.type = {
+                    resultRenfort.type = {
                         type: techCondition.type
                     }
-                    result.atk.renfort.type.unit = []
+                    resultRenfort.type.unit = []
+
                     for (let i = 0; i < conditionUnit.length; i++) {
                         let unitName = conditionUnit[i].name;
 
-                        if (unitName === unitFrontDef.name || unitName === unitSoutienDef.name) {
+                        if (unitName === defFront.name) {
                             console.log('Unité valide, envoi dans Type Renfort')
-                            result.atk.renfort.type.unit.push(unitName)
+                            resultRenfort.type.unit.push(unitName)
 
-                        } else if (unitName === 'Zerg' && def.race === 'zerg') {
+                        } else if (defSoutien.length > 0) {
+
+                            for (let i = 0; i < defSoutien.length; i++) {
+                                let soutienName = defSoutien[i].name;
+        
+                                if (figurineName === soutienName) {
+                                    console.log('Unité valide, envoi dans Type Renfort')
+                                    resultRenfort.type.unit.push(unitName)
+                                }
+                            }
+                        } else if (unitName === 'Zerg' && race === 'zerg') {
                             console.log('BONUS valide pour ZERG, figurine SOL uniquement')
-                            result.atk.renfort.type.unit.push(unitName)
-                            result.atk.renfort.type.by = 'sol'
+                            resultRenfort.type.unit.push(unitName)
+                            resultRenfort.type.by = 'sol'
 
-                        } else if (conditionUnit.length === i + 1 && result.atk.renfort.type.unit.length === 0) {
+                        } else if (conditionUnit.length === i + 1 && resultRenfort.type.unit.length === 0) {
                             console.log('BONUS non valide, aucune unitées ne correspond a la condition')
 
                         }
                     }
-                } else {
+                } else if (!condition) {
                     console.log('La Figurine ne correspond pas, BONUS non valide')
                 }
-
             }
         } else if (!renfortTech.condition && renfortTech.capacity) {
             console.log('Vérification de la Capacité sans Condition')
             let capacityName = renfortTech.capacity.name
 
             if (capacityName === 'Camouflage') {
-                console.log('Vérification de la capacitée Camouflage')
+                console.log('Vérification de la capacité Camouflage')
                 let capacityUnit = renfortTech.capacity.unit
-                result.atk.renfort.type = capacityName
-                result.atk.renfort.unit = []
+                resultRenfort.type = capacityName
+                resultRenfort.unit = []
+
                 for (let i = 0; i < capacityUnit.length; i++) {
                     let unitName = capacityUnit[i].name
-                    if (unitName === nameAtkFront || unitName === unitSoutienAtk.name) {
-                        console.log('Ajout du nom de la figurine pour la Capacitée Active')
-                        result.atk.renfort.unit.push(unitName)
-    
-                    } else if (capacityUnit.length === i + 1 && result.atk.renfort.unit.length === 0) {
-                        console.log('Aucune figurine ne correspond a la Capacitée, BONUS non valide')
+
+                    if (unitName === nameAtkFront) {
+                        console.log('Ajout du nom de la figurine pour la Capacité Active')
+                        resultRenfort.unit.push(unitName)
+
+                    } else if (unitSoutienAtk.length > 0) {
+
+                        for (let i = 0; i < unitSoutienAtk.length; i++) {
+                            let soutienName = unitSoutienAtk[i].name;
+                            
+                            if (unitName === soutienName) {
+                                console.log('Ajout du nom de la figurine pour la Capacité Active')
+                                resultRenfort.unit.push(unitName)
+
+                            }
+                        }
+                    } else if (capacityUnit.length === i + 1 && resultRenfort.unit.length === 0) {
+                        console.log('Aucune figurine ne correspond a la Capacité, BONUS non valide')
     
                     }                
                 }
@@ -583,64 +1004,126 @@ export const resultat = (select) => {
                 console.log('Vérification de la capacitée Annulez')
                 let techCapacity = renfortTech.capacity
                 let figurineName = cardRenfortAtk.figurine
+                let condition = false
 
-                if (figurineName === unitFrontAtk.name || figurineName === unitSoutienAtk.name) {
+                if (figurineName === nameAtkFront) {
+                    condition = true
+
+                } else if (unitSoutienAtk.length > 0) {
+
+                    for (let i = 0; i < unitSoutienAtk.length; i++) {
+                        let soutienName = unitSoutienAtk[i].name;
+                        
+                        if (figurineName === soutienName) {
+                            condition = true
+
+                        }
+                    }
+                }
+
+                if (condition) {
                     console.log('Vérification de la figurine pour BONUS')
                     
                     if (techCapacity.of === 'renfort') {
                         console.log('BONUS Annulez ajouté dans Renfort')
-                        result.atk.renfort.type = {
+                        resultRenfort.type = {
                             name: techCapacity.name,
                             of: techCapacity.of
                         }
                         
-                        if (techCapacity.for === result.atk.target.name) {
+                        if (techCapacity.for === targetAtk.unit.name) {
                             console.log('BONUS SUPPLEMENTAIRE pour figurine spécifique ARCHONTE')
-                            result.atk.renfort.atk = renfortTech.result[0].number
+                            resultRenfort.atk = renfortTech.result[0].number
 
-                        } else if (def.race === 'protoss') {
+                        } else if (race === 'protoss') {
                             console.log('BONUS SUPPLEMENTAIRE pour Race spécifique PROTOSS')
-                            result.atk.renfort.atk = renfortTech.result[1].number
+                            resultRenfort.atk = renfortTech.result[1].number
 
+                        } else {
+                            console.log('Probleme de BONUS dans renfort')
                         }
                     } else if (techCapacity.of === 'combat') {
                         console.log('BONUS Annulez ajouté dans Renfort')
-                        result.atk.renfort.type = {
+                        resultRenfort.type = {
                             name: techCapacity.name,
                             of: techCapacity.of
                         }
-
                     }
                 } else {
                     console.log('la Figurine ne correspond pas, BONUS non valide')
+
                 }
             } else if (capacityName === 'Verrou') {
                 console.log('Vérification de la capacitée Verrou')
                 let capacityUnit = renfortTech.capacity.unit
+                let condition = false
 
-                if (cardRenfortAtk.figurine === 'Fantôme') {
+                if (cardRenfortAtk.figurine === nameAtkFront) {
+                    condition = true
+
+                } else if (unitSoutienAtk.length > 0) {
+
+                    for (let i = 0; i < unitSoutienAtk.length; i++) {
+                        let supportName = unitSoutienAtk[i].name;
+
+                        if (cardRenfortAtk.figurine === supportName) {
+                            condition = true
+
+                        }
+                    }
+                }
+
+                if (condition) {
                     console.log('BONUS en cours, la figurine correspond')
-                    result.atk.renfort.unit = []
-                    result.atk.renfort.type = capacityName
+                    resultRenfort.unit = []
+                    resultRenfort.type = capacityName
+
                     for (let i = 0; i < capacityUnit.length; i++) {
                         let unitName = capacityUnit[i].name
-                        if (unitName === unitFrontDef.name || unitName === unitSoutienDef.name ) {
-                            console.log('Ajout du nom de la figurine valide dans Renfort Unit')
-                            result.atk.renfort.unit.push(unitName)
 
-                        } else if (capacityUnit.length === i + 1 && result.atk.renfort.unit.length === 0) {
+                        if (unitName === defFront.name) {
+                            console.log('Ajout du nom de la figurine valide dans Renfort Unit')
+                            resultRenfort.unit.push(unitName)
+
+                        } else if (defSoutien.length > 0 ) {
+
+                            for (let i = 0; i < defSoutien.length; i++) {
+                                let supportName = defSoutien[i].name;
+                                
+                                if (unitName === supportName) {
+                                    console.log('Ajout du nom de la figurine valide dans Renfort Unit')
+                                    resultRenfort.unit.push(unitName)
+
+                                }
+                            }
+                        } else if (capacityUnit.length === i + 1 && resultRenfort.unit.length === 0) {
                             console.log('Aucune figurine ne correspond a la Capacitée, BONUS non valide')
                         }
                     }
+                } else {
+                    console.log('BONUS non valide, la figurine ne correspond pas')
                 }
             } else if (capacityName === 'Détecteur') {
                 console.log('Vérification de la figurine correspondante')
                 let figurineName = cardRenfortAtk.figurine
 
-                if (figurineName === 'Reine' && figurineName === unitFrontAtk.name || figurineName === 'Reine' && figurineName === unitSoutienAtk.name) {
+                if (figurineName === nameAtkFront) {
                     console.log('BONUS valide, capacité ajouter dans Type RENFORT')
-                    result.atk.renfort.type = renfortTech.capacity
-                    result.atk.renfort.def = renfortTech.result
+                    resultRenfort.type = renfortTech.capacity
+                    resultRenfort.def = renfortTech.result
+
+                } else if (unitSoutienAtk.length > 0) {
+
+                    for (let i = 0; i < unitSoutienAtk.length; i++) {
+                        let supportName = unitSoutienAtk[i].name;
+                        
+                        if (figurineName === supportName) {
+                            console.log('BONUS valide, capacité ajouter dans Type RENFORT')
+                            resultRenfort.type = renfortTech.capacity
+                            resultRenfort.def = renfortTech.result
+
+                        }
+                    }
                 } else {
                     console.log('BONUS non valide, la figurine ne correspond pas')
                 }
@@ -648,10 +1131,21 @@ export const resultat = (select) => {
                 console.log('Vérification de la figurine correspondante')
                 let figurineName = cardRenfortAtk.figurine
 
-                if (figurineName === unitFrontAtk.name ||figurineName === unitSoutienAtk.name) {
+                if (figurineName === nameAtkFront) {
                     console.log('Figurine valide, BONUS ajouté dans type Renfort')
-                    result.atk.renfort.type = renfortTech.capacity
+                    resultRenfort.type = renfortTech.capacity
 
+                } else if (unitSoutienAtk.length > 0) {
+
+                    for (let i = 0; i < unitSoutienAtk.length; i++) {
+                        let supportName = unitSoutienAtk[i].name;
+
+                        if (figurineName === supportName) {
+                            console.log('Figurine valide, BONUS ajouté dans type Renfort')
+                            resultRenfort.type = renfortTech.capacity
+
+                        }
+                    }
                 } else {
                     console.log('BONUS non valide, la figurine ne correspond pas')
 
@@ -660,8 +1154,24 @@ export const resultat = (select) => {
         } else if (renfortTech.condition && renfortTech.capacity) {
             console.log('Vérification de la Capacité avec sa Condition')
             let figurineName = cardRenfortAtk.figurine
+            let condition = false
 
-            if (figurineName === unitFrontAtk.name ||figurineName === unitSoutienAtk.name) {
+            if (figurineName === nameAtkFront) {
+                condition = true
+
+            } else if (unitSoutienAtk.length > 0) {
+                
+                for (let i = 0; i < unitSoutienAtk.length; i++) {
+                    let supportName = unitSoutienAtk[i].name;
+                    
+                    if (figurineName === supportName) {
+                        condition = true
+
+                    }
+                }
+            }
+
+            if (condition) {
                 console.log('Vérification figurine valide, Condition en cours')
                 let conditionName = cardRenfortAtk.Tech.condition.name
 
@@ -669,7 +1179,7 @@ export const resultat = (select) => {
                     console.log('Peste envoyé dans Type Renfort')
                     let techCondition = cardRenfortAtk.Tech.condition
                     let techCapacity = cardRenfortAtk.Tech.capacity
-                    result.atk.renfort.type = {
+                    resultRenfort.type = {
                         name: techCondition.name,
                         type: techCondition.type,
                         by: techCondition.by,
@@ -680,13 +1190,13 @@ export const resultat = (select) => {
                     console.log('Tempête envoyé dans Type Renfort')
                     let techCondition = cardRenfortAtk.Tech.condition
                     let techCapacity = cardRenfortAtk.Tech.capacity
-                    result.atk.renfort.type = {
+                    resultRenfort.type = {
                         name: techCondition.name,
                         type: techCondition.type,
                         by: techCondition.by,
                         capacity : techCapacity.name
                     }
-                    result.atk.renfort.atk = cardRenfortAtk.Tech.result
+                    resultRenfort.atk = cardRenfortAtk.Tech.result
                 }
             } else {
                 console.log('BONUS non valide, la figurine ne correspond pas')
@@ -695,10 +1205,21 @@ export const resultat = (select) => {
             console.log('Vérification du BONUS sans Condition, ni Capacité')
             let figurineName = cardRenfortAtk.figurine
 
-            if (figurineName === nameAtkFront || figurineName === unitSoutienAtk.name) {
+            if (figurineName === nameAtkFront) {
                 console.log('BONUS valide, ajout de degat dans Renfort')
-                result.atk.renfort.atk = cardRenfortAtk.Tech.result
+                resultRenfort.atk = cardRenfortAtk.Tech.result
 
+            } else if (unitSoutienAtk.length > 0) {
+
+                for (let i = 0; i < unitSoutienAtk.length; i++) {
+                    let supportName = unitSoutienAtk[i].name;
+                    
+                    if (figurineName === supportName) {
+                        console.log('BONUS valide, ajout de degat dans Renfort')
+                        resultRenfort.atk = cardRenfortAtk.Tech.result
+
+                    }
+                }
             } else {
                 console.log('BONUS non valide, la figurine ne correspond pas')
 
@@ -706,9 +1227,20 @@ export const resultat = (select) => {
         }
     }
 
-    // Prise en compte de la carte Zone de Jeu ATK
+    return {resultRenfort}
+};
+
+// Prise en compte de la carte Zone de Jeu
+const techZone = (zoneJeuAtk, unitAtk) => {
+    let unitSoutienAtk = unitAtk.soutien
+    let unitFrontAtk = unitAtk.front
+    let resultZoneJeu = {
+        def : 0,
+        type : ''
+    }
+
     if (zoneJeuAtk != '') {
-        console.log('** Lecture de la carte Zone de Jeu ATK **')
+        console.log('** Lecture de la carte Zone de Jeu DEF **')
         let zoneTech = zoneJeuAtk.Tech
         
         if (zoneTech.capacity && !zoneTech.condition) {
@@ -717,7 +1249,7 @@ export const resultat = (select) => {
 
             if (techCapacity.name === 'Détecteur') {
                 console.log('Détecteur ajouté dans ZoneJeu')
-                result.atk.zoneJeu.type = techCapacity
+                resultZoneJeu.type = techCapacity
 
             } else {
                 console.log('Probleme dans la Capacité sans condition de Lecture de la carte Zone de Jeu')
@@ -731,13 +1263,21 @@ export const resultat = (select) => {
                 console.log('Vérification de la figurine correspondante en Soutien')
                 let conditionUnit = techCondition.unit
 
-                if (conditionUnit === unitSoutienAtk.name) {
-                    console.log('BONUS valide, ajout de Condition dans Type ZoneJeu')
-                    result.atk.zoneJeu.type = techCondition
-                    result.atk.zoneJeu.def = zoneJeuAtk.Tech.result
+                if (unitSoutienAtk.length > 0) {
 
-                } else {
-                    console.log('BONUS non valide, la figurine ne correspond pas en Soutien')
+                    for (let i = 0; i < unitSoutienAtk.length; i++) {
+                        let unitSoutien = unitSoutienAtk[i];
+
+                        if (conditionUnit === unitSoutien.name) {
+                            console.log('BONUS valide, ajout de Condition dans Type ZoneJeu')
+                            resultZoneJeu.type = techCondition
+                            resultZoneJeu.def = zoneJeuAtk.Tech.result
+
+                        } else {
+                            console.log('BONUS non valide, la figurine ne correspond pas en Soutien')
+
+                        }
+                    }
                 }
             } else if (techCondition.type === 'front') {
                 console.log('Vérification de la figurine correspondante en Front')
@@ -745,8 +1285,8 @@ export const resultat = (select) => {
 
                 if (conditionUnit === unitFrontAtk.name) {
                     console.log('BONUS valide, ajout de Condition dans Type ZoneJeu')
-                    result.atk.zoneJeu.type = techCondition
-                    result.atk.zoneJeu.def = zoneJeuAtk.Tech.result
+                    resultZoneJeu.type = techCondition
+                    resultZoneJeu.def = zoneJeuAtk.Tech.result
 
                 } else {
                     console.log('BONUS non valide, la figurine ne correspond pas au Front')
@@ -758,34 +1298,48 @@ export const resultat = (select) => {
 
         } else if (zoneTech.capacity && zoneTech.condition) {
             console.log('Vérification de la Condition et de sa Capacité')
-            let techCondition = zoneJeuAtk.Tech.condition
+            let conditionUnit = zoneJeuAtk.Tech.condition.unit
 
-            if (techCondition.unit === unitSoutienAtk.name) {
-                console.log('BONUS valide, ajout dans Type ZoneJeu')
-                result.atk.zoneJeu.type = zoneJeuAtk.Tech.capacity
+            if (unitSoutienAtk.length > 0) {
 
-            } else {
-                console.log('Probleme de lecture de la capacité avec condition')
+                for (let i = 0; i < unitSoutienAtk.length; i++) {
+                    let unitSoutien = unitSoutienAtk[i];
+
+                    if (conditionUnit === unitSoutien.name) {
+                        console.log('BONUS valide, ajout dans Type ZoneJeu')
+                        resultZoneJeu.type = zoneJeuAtk.Tech.capacity
+
+                    } else {
+                        console.log('Probleme de lecture de la capacité avec condition')
+                    }
+                }
             }
-        } else {
-            console.log('NE repond a aucune condition')
         }
     } 
 
-    // Prise en compte de la Tourelle dans Base ATK
-    if (atk.base) {
+    return {resultZoneJeu}
+};
+
+// Prise en compte de la Tourelle dans Base
+const turretBase = (base, turret, unitFrontType) => {
+    let turretBase = {
+        atk : 0,
+        capacity : ''
+    }
+
+    if (base) {
         console.log('** Base active dans la Bataille, vérification de la présence de Tourelle **')
 
-        if (atk.turret) {
+        if (turret) {
             console.log('Tourelle active, BONUS en cours')
-            result.atk.turret.capacity = 'Détecteur'
+            turretBase.capacity = 'Détecteur'
 
-            if (unitFrontDef.type === 'air') {
-                console.log('BONUS valide, ajout dans Turret')
-                result.atk.turret.atk = 1
+            if (unitFrontType === 'air') {
+                console.log('BONUS anti-Volant valide, ajout dans Turret')
+                turretBase.atk = 1
 
             } else {
-                console.log("BONUS ATK non valide, la condition n'est pas respectée")
+                console.log("BONUS anti-Volant non valide, la condition n'est pas respectée")
 
             }
         } else {
@@ -793,721 +1347,90 @@ export const resultat = (select) => {
 
         }
     }
+    return {turretBase}
+};
 
-    ///////
-    //
-    // DEF
-    //
-    ///////
-    console.log('-------------_ DEFENSEUR _-------------')
-
-    // degats de DEF : MAX ou MIN
-    let nameDefFront = unitFrontDef.name
-    let combatNameFigurineDef = cardCombatDef.figurine
-    let combatDegatsDef = cardCombatDef.degats
-
-    for (let i=0; i < combatNameFigurineDef.length; i++) {
-
-        let nameFigurine = combatNameFigurineDef[i].name
-        if (nameFigurine === nameDefFront) {
-            result.def.damage.type = 'max'
-            result.def.damage.atk = combatDegatsDef.atk.max
-            result.def.damage.def = combatDegatsDef.def.max
-
-        } else if (result.def.damage.type != 'max') {
-            result.def.damage.type = 'min'
-            result.def.damage.atk = combatDegatsDef.atk.min
-            result.def.damage.def = combatDegatsDef.def.min
-
-        }
+// Gestion des capacités Combat/Tech Escarmouche
+    // TODO A CONTINUER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const capacityCombatTech = (resultTechType, resultDef, unitAtk, unitDef, logAtk, logDef) => {
+    let logResultAtk = {
+        tech : ''
+    }
+    let tempoUnitAtk = {
+        front: '',
+        tech: ''
+    }
+    let tempoUnitDef = {
+        front: '',
     }
 
-    // ciblage de DEF vers ATK
-    if (unitFrontDef.atk === unitFrontAtk.type || unitFrontDef.atk === 'sol_air') {
-        result.def.target = unitFrontAtk
-        logResult.def.target = "L'unité " + nameDefFront + " peut cibler " + nameAtkFront + " au front."
+    // Validation des Degats Répercutés
+    if (resultTechType.type === 'répercutés') {
+        // Vérification de la cible détruite pour activer la compétance
+        if (logAtk.damage.statutAdv === 'destroy') {
+            // Vérification des conditions
+            if (resultTechType.byCondition === 'noCondition') {
+                // pas de condition, capacité valide
+                tempoUnitAtk.tech = resultTechType
+                logResultAtk.tech = "Dégats Répercutés " + resultTechType.by + " valide."
 
-    } else if (unitSoutienAtk.length === 1) {
-
-        if (unitFrontDef.atk === unitSoutienAtk[0].type || unitFrontDef.atk === 'sol_air') {
-            result.def.target = unitSoutienAtk[0]
-            logResult.def.target = "L'unité " + nameDefFront + " ne peut pas cibler " + nameAtkFront + " au front, mais il peut cibler " + unitSoutienAtk[0].name + " en soutien."
-    
-        } else {
-            result.def.target = 'noTarget'
-            logResult.def.target = "L'unité " + nameDefFront + " ne peut pas cibler " + nameAtkFront + " au front, ni cibler " + unitSoutienAtk[0].name + " en soutien."
-
-        }
-    } else if (unitSoutienAtk.length > 1) {
-        let multiTarget = []
-        logResult.def.target = {
-            hit: '',
-            lost: ''
-        }
-        let targetHit = []
-        let targetLost = []
-
-        for (let i = 0; i < unitSoutienAtk.length; i++) {
-            let selectSoutien = unitSoutienAtk[i];
-
-            if (unitFrontDef.atk === selectSoutien.type || unitFrontDef.atk === 'sol_air') {
-                multiTarget[i] = selectSoutien
-                targetHit.push(selectSoutien.name + ', ')
-        
-            } else {
-                multiTarget[i] = 'noTarget'
-                targetLost.push(selectSoutien.name + ', ')
-
-            }
-        }
-        if (targetHit.length > 0) {
-            let stringHit = "L'unité " + nameDefFront + " ne peut pas cibler " + unitFrontAtk.name + " au front, mais il peut cibler "
-            stringHit = stringHit.concat(...targetHit)
-            logResult.def.target.hit = stringHit + "en soutien."
-
-        }
-        if (targetLost.length > 0) {
-            let stringLost = "L'unité " + nameDefFront + " ne peut pas cibler " + unitFrontAtk.name + " au front, ni cibler "
-            stringLost = stringLost.concat(...targetLost)
-            logResult.def.target.lost = stringLost + "en soutien."
-
-        }
-        if (multiTarget.length > 0) {
-            let target = ''
-
-            for (let i = 0; i < multiTarget.length; i++) {
-                if (multiTarget[i] != 'noTarget' && target === '') {
-                    target = multiTarget[i]
-                
-                }                
-            }
-            result.def.target = target
-        }
-    } else {
-        result.def.target = 'noTarget'
-        logResult.def.target = "L'unité " + nameDefFront + " ne peut pas cibler " + nameAtkFront + " au front."
-
-    }
-
-    // Ajout degat Soutien a Front DEF
-    if (unitSoutienDef.length != 0) {
-        
-        if (result.def.target != 'noTarget') {
-            console.log("Vérification de degats possible pour soutien")
-    
-            if (unitSoutienAtk.length === 1) {
-
-                if (unitSoutienDef[0].atk === result.def.target.type || unitSoutienDef[0].atk === 'sol_air') {
-                    // console.log('Soutien peut cibler, ajout degats soutien')
-                    result.def.soutien = unitSoutienDef[0].soutien_value
-                    logResult.def.soutien = "L'unité " + unitSoutienDef[0].name + " en soutien peut attaquer la cible, sa valeur d'attaque est ajouté."
-        
-                } else {
-                    // console.log('Soutien ne peut pas cibler malgré la cible de la figurine au FRONT, aucun degats ajouté')
-                    logResult.atk.soutien = "L'unité " + unitSoutienDef[0].name + " en soutien ne peut pas attaquer la cible."
-        
-                }
-            } else if (unitSoutienAtk.length > 1) {
-
-                logResult.def.soutien = {
-                    hit: '',
-                    miss: ''
-                }
-                let unitHit = []
-                let unitMiss = []
-
-                for (let i = 0; i < unitSoutienDef.length; i++) {
-
-                    let selectSoutien = unitSoutienDef[i];
-                    if (selectSoutien.atk === result.def.target.type || selectSoutien.atk === 'sol_air') {
-                        result.def.soutien = result.def.soutien + selectSoutien.soutien_value
-                        unitHit.push(selectSoutien.name + ', ')
-            
-                    } else {
-                        unitMiss.push(selectSoutien.name + ', ')
-            
-                    }
-                }
-                if (unitHit.length != 0) {
-                    let stringHit = "L'unité "
-                    stringHit = stringHit.concat(...unitHit)
-                    logResult.def.soutien.hit = stringHit + "en soutien peut attaquer la cible, sa valeur d'attaque est ajouté."
-
-                }
-                if (unitMiss.length != 0) {
-                    let stringMiss = "L'unité "
-                    stringMiss = stringMiss.concat(...unitMiss)
-                    logResult.def.soutien.miss = stringMiss + "en soutien ne peut pas attaquer la cible."
-
-                }
-            }
-        } else {
-            // console.log("Soutien ne peut pas cibler - aucun degats n'est ajouté")
-            logResult.atk.soutien = "Aucune cible disponible."
-
-        }
-    }
-
-    // prise en compte Tech DEF de la carte Combat/Technologie
-    if (cardCombatDef.Tech) {
-        console.log('** Lecture Tech de cardCombat DEF **')
-        let combatTech = cardCombatDef.Tech
-        let verifTechCondition = result.def.damage.type
-
-        if (combatTech.condition && verifTechCondition === 'max') {
-            console.log('Lecture Condition de cardCombat')
-            let techCondition = combatTech.condition
-
-            if (techCondition.type) {
-                console.log('Lecture Type de Condition')
-
-                if (techCondition.type === 'front') {
-                    console.log('Lecture FRONT de Type')
-
-                    if (techCondition.unit && techCondition.unit === nameDefFront) {
-                        console.log('La Condition est respecté - BONUS en cours')
-                        let techType = combatTech.type
-                        
-                        if (techCondition.by) {
-                            console.log('Particularitée du CONTRE de la condition SOL ou AIR')
-                            let targetATK = unitFrontAtk
-                            let conditionBy = techCondition.by
-
-                            if (conditionBy === targetATK.type) {
-                                console.log('BONUS CONTRE VALIDEE condition respecté')
-                                result.def.tech.atk = combatTech.result
-                            } else {
-                                console.log('BONUS CONTRE NON validée condition non respecté')
-                            }
-                        } else {
-                            if (techType === 'atk') {
-                                console.log('Ajout Atk de la condition')
-                                result.def.tech.atk = combatTech.result
-    
-                            } else if (techType === 'def') {
-                                console.log('Ajout Def de la condition')
-                                result.def.tech.def = combatTech.result
-    
-                            } else if (techType === 'atk_def') {
-                                console.log('Ajout Def et Atk de la condition')
-                                result.def.tech.atk = combatTech.result
-                                result.def.tech.def = combatTech.result
-                            }
-                        }
-                    } else if (!techCondition.unit && techCondition.by) {
-                        console.log('La Condition est respecté - BONUS pour AIR en cours')
-                        let targetATK = unitFrontAtk
-                        let conditionBy = techCondition.by
-
-                        if (conditionBy === targetATK.type) {
-                            console.log('BONUS CONTRE VALIDEE condition respecté')
-                            result.def.tech.atk = combatTech.result
-                            
-                        } else {
-                            console.log('BONUS CONTRE NON validée condition non respecté')
-                        }
-                    } else {
-                        console.log("La Condition n'est pas respecté - aucun BONUS")
-                    }
-                } else if (techCondition.type === 'répercutés') {
-                    console.log('vérification de la condition degat REPERCUTEE')
-                    let typeOfTech = typeof techCondition.unit
-
-                    if (typeOfTech ===  'object') {
-                        console.log('réception VALIDE de degat REPERCUTEE avec cibles par Type')
-                        result.def.tech.type = techCondition
-
-                    } else if (typeOfTech ===  'string' && techCondition.unit === unitFrontDef.name) {
-                        console.log('réception VALIDE de degat REPERCUTEE selon figurine par Type')
-                        result.def.tech.type = techCondition
-
-                    } else if (techCondition.byCondition) {
-                        console.log('réception VALIDE de degat REPERCUTEE avec|sans condition par Type')
-                        result.def.tech.type = techCondition
-
-                    } else {
-                        console.log("BONUS non validée la condition n'est pas respecté les Figurines ne correspondent pas")
-
-                    }
-                } else if (techCondition.type === 'suicide') {
-                    console.log('réception VALIDE de degat SUICIDE par Type')
-                    result.def.tech.type = techCondition
-
-                } else if (techCondition.type === 'destroy') {
-                    console.log('réception VALIDE de degat DESTROY par Type')
-                    result.def.tech.type = techCondition
-                    result.def.tech.number = combatTech.result
+            } else if (resultTechType.byCondition === 'noDetecteur') {
+                // vérification Détecteur adverse dans Renfort||ZoneCard
+                if (resultDef.renfort.type.capacity === 'Détecteur'|| resultDef.renfort.type.name === 'Détecteur' || resultDef.zoneJeu.type.name === 'Détecteur') {
+                    // Détecteur actif, capacité annulé
+                    logResultAtk.tech = "Dégats Répercutés " + resultTechType.by + " non valide, Détecteur actif chez le Défenseur."
 
                 } else {
-                    console.log("BONUS non validée la condition n'est pas respecté les Figurines ne correspondent pas")
-                    
-                }
-            }
-        } else if (combatTech.capacity) {
-            console.log('Lecture Capacity de cardCombat et Ajout de type')
-            result.def.tech.type = combatTech.capacity.name
-            let capacityFor = combatTech.capacity.for
-            result.def.tech.unit = []
-            for (let i = 0; i < capacityFor.length; i++) {
-                let forName = capacityFor[i].name;
-                if (forName === nameDefFront || forName === unitSoutienDef.name) {
-                    console.log('Ajout de la figurine valide dans Renfort Unit')
-                    result.def.tech.unit.push(forName)
-                } else if (combatTech.length === i + 1 && result.def.tech.unit.length === 0) {
-                    console.log('Aucune figurine ne correspond a la Capacitée, BONUS non valide')
-                }
-                
-            }
-        } else {
-            console.log('Les figurines ne correspondent pas a la carte Combat')
-        }
-    }
-
-    // Prise en compte de la carte Renfort DEF
-    if (cardRenfortDef != '') {
-        console.log('** Lecture de la carte Renfort DEF **')
-        let renfortTech = cardRenfortDef.Tech
-
-        if (renfortTech.condition && !renfortTech.capacity) {
-            console.log('Vérification de la Condition sans Capacité')
-            let techCondition = renfortTech.condition
-
-            if (techCondition.type === 'soutien') {
-                console.log('vérification de la Condition Soutien')
-
-                if (techCondition.unit) {
-                    console.log('vérification des UNITES valide sur FRONT uniquement')
-                    let conditionUnit = techCondition.unit
-
-                    for (let i = 0; i < conditionUnit.length; i++) {
-                        let unit = conditionUnit[i].name
-
-                        if (unit === nameDefFront) {
-                            console.log ('BONUS valide - envoi dans Renfort')
-                            result.def.renfort.def = renfortTech.result
-
-                        } else if (conditionUnit.length === i + 1 && result.def.renfort.def === 0) {
-                            console.log("BONUS non valide, la condition n'est pas respectée")
-                        }
-                        
-                    }
-                } else if (techCondition.by) {
-                    console.log("vérification de la présence d'UNITE sur SOUTIEN uniquement")
-                    
-                    if (unitSoutienDef != '') {
-                        console.log("BONUS valide, envoi dans Renfort")
-                        result.def.renfort.atk = renfortTech.result
-
-                    } else {
-                        console.log("BONUS non valide, la condition n'est pas respectée")
-
-                    }
-                } else {
-                    console.log('BONUS valide pour Protoss, sans condition')
-                    result.def.renfort.def = renfortTech.result
+                    // Détecteur non actif, capacité valide
+                    tempoUnitAtk.tech = resultTechType
+                    logResultAtk.tech = "Dégats Répercutés " + resultTechType.by + " valide."
 
                 }
-            } else if (techCondition.type === 'base') {
-                console.log('vérification de la Condition base')
-                let base = def.base
-                let techType = renfortTech.type
-
-                if (base && techType === 'def') {
-                    console.log('BASE valide, vérification des conditions')
-                    
-                    if (techCondition.unit) {
-                        console.log('Vérification des conditions UNITE')
-                        let conditionUnit = techCondition.unit
-                        for (let i = 0; i < conditionUnit.length; i++) {
-                            let unitName = conditionUnit[i].name
-
-                            if (unitName === nameDefFront) {
-                                console.log('BONUS Valide, envoi dans Renfort')
-                                result.def.renfort.def = renfortTech.result
-
-                            } else if (conditionUnit.length === i + 1 && result.def.renfort.def === 0) {
-                                console.log('BONUS non valide, condition non respectée')
-
-                            }
-                        }
-                    } else {
-                        console.log('BONUS valide pour Protoss, envoi dans Renfort')
-                        result.def.renfort.def = renfortTech.result
-
-                    }
-                } else if (base && techType === 'atk') {
-                    console.log('Vérification des conditions de Base')
-                    let conditionBy = techCondition.by
-
-                    if (conditionBy === unitFrontAtk.type) {
-                        console.log('BONUS valide, envoi dans Renfort')
-                        result.def.renfort.atk = renfortTech.result
-
-                    } else {
-                        console.log('BONUS non valide, condition non respectée')
-
-                    }
-                } else {
-                    console.log('BONUS non valide pour Base, les conditions ne sont pas respectées')
-                    
-                }
-            } else if (techCondition.type === 'répercutés') {
-                console.log('Vérification de la Condition figurine de degats Répercutés')
-                let figurineName = cardRenfortDef.figurine
-
-                if (figurineName === unitFrontDef.name || figurineName === unitSoutienDef.name) {
-                    console.log('Nom de la figurine vérifiée, la correspondance est bonne, BONUS valide')
-                    result.def.renfort.type = techCondition
-
-                    if (renfortTech.type) {
-                        console.log("Ajout Supplémentaire de degats")
-                        result.def.renfort.atk = renfortTech.result
-
-                    }
-                } else {
-                    console.log('BONUS non valide, la figurine ne correspond pas')
-                }
-
-            } else if (!techCondition) {
-                console.log('BONUS valide, sans condition')
-                result.def.renfort.def = renfortTech.result
-            } else if (techCondition.type === 'exception') {
-                console.log("Vérification de la Condition figurine d'Exception")
-                let figurineName = cardRenfortDef.figurine
-
-                if (figurineName === unitFrontDef.name || figurineName === unitSoutienDef.name) {
-                    console.log('BONUS ajouté Exception dans Type Renfort')
-                    result.def.renfort.type = techCondition
-
-                } else {
-                    console.log('BONUS non valide, la figurine ne correspond pas')
-                }
-            } else if (techCondition.type === 'destroy') {
-                console.log('Vérification de la Condition Destroy')
-                let figurineName = cardRenfortDef.figurine
-
-                if (figurineName === unitFrontDef.name || figurineName === unitSoutienDef.name) {
-                    console.log('BONUS valide, vérification des conditions')
-                    let conditionUnit = techCondition.unit
-                    result.def.renfort.type = {
-                        type: techCondition.type
-                    }
-                    result.def.renfort.type.unit = []
-                    for (let i = 0; i < conditionUnit.length; i++) {
-                        let unitName = conditionUnit[i].name;
-
-                        if (unitName === unitFrontAtk.name || unitName === unitSoutienAtk.name) {
-                            console.log('Unité valide, envoi dans Type Renfort')
-                            result.def.renfort.type.unit.push(unitName)
-
-                        } else if (unitName === 'Zerg' && atk.race === 'zerg') {
-                            console.log('BONUS valide pour ZERG, figurine SOL uniquement')
-                            result.def.renfort.type.unit.push(unitName)
-                            result.def.renfort.type.by = 'sol'
-
-                        } else if (conditionUnit.length === i + 1 && result.def.renfort.type.unit.length === 0) {
-                            console.log('BONUS non valide, aucune unitées ne correspond a la condition')
-
-                        }
-                    }
-                } else {
-                    console.log('La Figurine ne correspond pas, BONUS non valide')
-                }
-
-            }
-        } else if (!renfortTech.condition && renfortTech.capacity) {
-            console.log('Vérification de la Capacité sans Condition')
-            let capacityName = renfortTech.capacity.name
-
-            if (capacityName === 'Camouflage') {
-                console.log('Vérification de la capacitée Camouflage')
-                let capacityUnit = renfortTech.capacity.unit
-                result.def.renfort.type = capacityName
-                result.def.renfort.unit = []
-                for (let i = 0; i < capacityUnit.length; i++) {
-                    let unitName = capacityUnit[i].name
-                    if (unitName === nameDefFront || unitName === unitSoutienDef.name) {
-                        console.log('Ajout du nom de la figurine pour la Capacitée Active')
-                        result.def.renfort.unit.push(unitName)
-    
-                    } else if (capacityUnit.length === i + 1 && result.def.renfort.unit.length === 0) {
-                        console.log('Aucune figurine ne correspond a la Capacitée, BONUS non valide')
-    
-                    }                
-                }
-            } else if (capacityName === 'Annulez') {
-                console.log('Vérification de la capacitée Annulez')
-                let techCapacity = renfortTech.capacity
-                let figurineName = cardRenfortDef.figurine
-
-                if (figurineName === unitFrontDef.name || figurineName === unitSoutienDef.name) {
-                    console.log('Vérification de la figurine pour BONUS')
-                    
-                    if (techCapacity.of === 'renfort') {
-                        console.log('BONUS Annulez ajouté dans Renfort')
-                        result.def.renfort.type = {
-                            name: techCapacity.name,
-                            of: techCapacity.of
-                        }
-                        
-                        if (techCapacity.for === result.def.target.name) {
-                            console.log('BONUS SUPPLEMENTAIRE pour figurine spécifique ARCHONTE')
-                            result.def.renfort.atk = renfortTech.result[0].number
-
-                        } else if (atk.race === 'protoss') {
-                            console.log('BONUS SUPPLEMENTAIRE pour Race spécifique PROTOSS')
-                            result.def.renfort.atk = renfortTech.result[1].number
-
-                        }
-                    } else if (techCapacity.of === 'combat') {
-                        console.log('BONUS Annulez ajouté dans Renfort')
-                        result.def.renfort.type = {
-                            name: techCapacity.name,
-                            of: techCapacity.of
-                        }
-
-                    }
-                } else {
-                    console.log('la Figurine ne correspond pas, BONUS non valide')
-                }
-            } else if (capacityName === 'Verrou') {
-                console.log('Vérification de la capacitée Verrou')
-                let capacityUnit = renfortTech.capacity.unit
-
-                if (cardRenfortDef.figurine === 'Fantôme') {
-                    console.log('BONUS en cours, la figurine correspond')
-                    result.def.renfort.unit = []
-                    result.def.renfort.type = capacityName
-                    for (let i = 0; i < capacityUnit.length; i++) {
-                        let unitName = capacityUnit[i].name
-                        if (unitName === unitFrontAtk.name || unitName === unitSoutienAtk.name ) {
-                            console.log('Ajout du nom de la figurine valide dans Renfort Unit')
-                            result.def.renfort.unit.push(unitName)
-
-                        } else if (capacityUnit.length === i + 1 && result.def.renfort.unit.length === 0) {
-                            console.log('Aucune figurine ne correspond a la Capacitée, BONUS non valide')
-                        }
-                    }
-                }
-            } else if (capacityName === 'Détecteur') {
-                console.log('Vérification de la figurine correspondante')
-                let figurineName = cardRenfortDef.figurine
-
-                if (figurineName === 'Reine' && figurineName === unitFrontDef.name || figurineName === 'Reine' && figurineName === unitSoutienDef.name) {
-                    console.log('BONUS valide, capacité ajouter dans Type RENFORT')
-                    result.def.renfort.type = renfortTech.capacity
-                    result.def.renfort.def = renfortTech.result
-                } else {
-                    console.log('BONUS non valide, la figurine ne correspond pas')
-                }
-            } else if (capacityName === 'Stase') {
-                console.log('Vérification de la figurine correspondante')
-                let figurineName = cardRenfortDef.figurine
-
-                if (figurineName === unitFrontDef.name ||figurineName === unitSoutienDef.name) {
-                    console.log('Figurine valide, BONUS ajouté dans type Renfort')
-                    result.def.renfort.type = renfortTech.capacity
-
-                } else {
-                    console.log('BONUS non valide, la figurine ne correspond pas')
-
-                }
-            }
-        } else if (renfortTech.condition && renfortTech.capacity) {
-            console.log('Vérification de la Capacité avec sa Condition')
-            let figurineName = cardRenfortDef.figurine
-
-            if (figurineName === unitFrontDef.name ||figurineName === unitSoutienDef.name) {
-                console.log('Vérification figurine valide, Condition en cours')
-                let conditionName = cardRenfortDef.Tech.condition.name
-
-                if (conditionName === 'Peste') {
-                    console.log('Peste envoyé dans Type Renfort')
-                    let techCondition = cardRenfortDef.Tech.condition
-                    let techCapacity = cardRenfortDef.Tech.capacity
-                    result.def.renfort.type = {
-                        name: techCondition.name,
-                        type: techCondition.type,
-                        by: techCondition.by,
-                        capacity : techCapacity.name
-                    }
-
-                } else if (conditionName === 'Tempête') {
-                    console.log('Tempête envoyé dans Type Renfort')
-                    let techCondition = cardRenfortDef.Tech.condition
-                    let techCapacity = cardRenfortDef.Tech.capacity
-                    result.def.renfort.type = {
-                        name: techCondition.name,
-                        type: techCondition.type,
-                        by: techCondition.by,
-                        capacity : techCapacity.name
-                    }
-                    result.def.renfort.atk = cardRenfortDef.Tech.result
-                }
-            } else {
-                console.log('BONUS non valide, la figurine ne correspond pas')
-            }
-        } else if (!renfortTech.condition && !renfortTech.capacity) {
-            console.log('Vérification du BONUS sans Condition, ni Capacité')
-            let figurineName = cardRenfortDef.figurine
-
-            if (figurineName === nameDefFront || figurineName === unitSoutienDef.name) {
-                console.log('BONUS valide, ajout de degat dans Renfort')
-                result.def.renfort.atk = cardRenfortDef.Tech.result
-
-            } else {
-                console.log('BONUS non valide, la figurine ne correspond pas')
-
-            }
-        }
-    }
-
-    // Prise en compte de la carte Zone de Jeu DEF
-    if (zoneJeuDef != '') {
-        console.log('** Lecture de la carte Zone de Jeu DEF **')
-        let zoneTech = zoneJeuDef.Tech
-        
-        if (zoneTech.capacity && !zoneTech.condition) {
-            console.log('Vérification de la Capacité sans Condition')
-            let techCapacity = zoneJeuDef.Tech.capacity
-
-            if (techCapacity.name === 'Détecteur') {
-                console.log('Détecteur ajouté dans ZoneJeu')
-                result.def.zoneJeu.type = techCapacity
-
-            } else {
-                console.log('Probleme dans la Capacité sans condition de Lecture de la carte Zone de Jeu')
-            }
-
-        } else if (!zoneTech.capacity && zoneTech.condition) {
-            console.log('Vérification de la Condition sans Capacité')
-            let techCondition = zoneJeuDef.Tech.condition
-
-            if (techCondition.type === 'renfort') {
-                console.log('Vérification de la figurine correspondante en Soutien')
-                let conditionUnit = techCondition.unit
-
-                if (conditionUnit === unitSoutienDef.name) {
-                    console.log('BONUS valide, ajout de Condition dans Type ZoneJeu')
-                    result.def.zoneJeu.type = techCondition
-                    result.def.zoneJeu.def = zoneJeuDef.Tech.result
-
-                } else {
-                    console.log('BONUS non valide, la figurine ne correspond pas en Soutien')
-                }
-            } else if (techCondition.type === 'front') {
-                console.log('Vérification de la figurine correspondante en Front')
-                let conditionUnit = techCondition.unit
-
-                if (conditionUnit === unitFrontDef.name) {
-                    console.log('BONUS valide, ajout de Condition dans Type ZoneJeu')
-                    result.def.zoneJeu.type = techCondition
-                    result.def.zoneJeu.def = zoneJeuDef.Tech.result
-
-                } else {
-                    console.log('BONUS non valide, la figurine ne correspond pas au Front')
-                }
-
-            } else {
-                console.log('Probleme dans la Condition sans Capacité de Lecture de la carte Zone de Jeu')
-            }
-
-        } else if (zoneTech.capacity && zoneTech.condition) {
-            console.log('Vérification de la Condition et de sa Capacité')
-            let techCondition = zoneJeuDef.Tech.condition
-
-            if (techCondition.unit === unitSoutienDef.name) {
-                console.log('BONUS valide, ajout dans Type ZoneJeu')
-                result.def.zoneJeu.type = zoneJeuDef.Tech.capacity
-
-            } else {
-                console.log('Probleme de lecture de la capacité avec condition')
-            }
-        }
-    } 
-
-    // Prise en compte de la Tourelle dans Base DEF
-    if (def.base) {
-        console.log('** Base active dans la Bataille, vérification de la présence de Tourelle **')
-
-        if (def.turret) {
-            console.log('Tourelle active, BONUS en cours')
-            result.def.turret.capacity = 'Détecteur'
-
-            if (unitFrontAtk.type === 'air') {
-                console.log('BONUS valide, ajout dans Turret')
-                result.def.turret.atk = 1
-
-            } else {
-                console.log("BONUS ATK non valide, la condition n'est pas respectée")
+            } else if (resultTechType.byCondition === 'unitSpecifique') {
+                // condition particuliere, capacité valide, activation lors de la phase final
+                let unitCondition = resultTechType.unit
+                tempoUnitAtk.tech = resultTechType
+                logResultAtk.tech = "Dégats Répercutés " + resultTechType.by + " ne peut détruire qu'une seule unité " + unitCondition[0].name + ", " + unitCondition[1].name + "ou " + unitCondition[2].name + "."
 
             }
         } else {
-            console.log('Tourelle non active, Aucun BONUS')
+            logResultAtk.tech = "Dégats Répercutés " + resultTechType.by + " non valide, la cible doit être détruite pour activer la capacité."
 
         }
-    }
+    // Validation des Degats Suicide
+    } else if (resultTechType.type === 'suicide') {
+        // vérification de l'unite front encore vivante
+        if (logDef.damage.statutAdv === 'alive') {
+            // vérification de l'unité front adverse volant uniquement
+            if (unitDef.front.type === 'air') {
+                // les conditions sont valides, la capacité est accepté
+                tempoUnitAtk.tech = resultTechType
+                logResultAtk.tech = "La Destruction est valide, les deux unités en Front (la vôtre et celle du Défenseur) sont détruites."
+                logResultAtk.damage.statutAdv = 'destroy'
+                let unitFinalDef = {
+                    unit : unitDef.front,
+                    statut : 'dead'
+                }
+                tempoUnitDef.front = unitFinalDef
+                let unitFinalAtk = {
+                    unit : unitAtk.front,
+                    statut : 'dead'
+                }
+                tempoUnitAtk.front = unitFinalAtk
 
-    ///////
-    //
-    // RESULTAT
-    //
-    ///////
-    console.log('-------------_ RESULTAT _-------------')
-    console.log('*** RESULTAT STEP 1 ***')
-    console.log(result)
+            } else {
+                // l'unité doit être volant
+                logResultAtk.tech = "La Destruction n'est pas valide, l'unité Front Défenseur doit être volant uniquement."
 
-    // Calcul des valeurs Final
-    let resultAtk = result.atk
-    let resultDef = result.def
+            }
+        } else {
+            // l'unité doit être vivante
+            logResultAtk.tech = "La Destruction n'est pas valide, l'unité doit être encore vivante."
 
-    const atkFinal = {
-        atk: resultAtk.damage.atk + resultAtk.soutien + resultAtk.renfort.atk + resultAtk.tech.atk + resultAtk.turret.atk,
-        def: resultAtk.damage.def + resultAtk.zoneJeu.def + resultAtk.renfort.def + resultAtk.tech.def
-    }
-
-    const defFinal = {
-        atk: resultDef.damage.atk + resultDef.soutien + resultDef.renfort.atk + resultDef.tech.atk + resultDef.turret.atk,
-        def: resultDef.damage.def + resultDef.zoneJeu.def + resultDef.renfort.def + resultDef.tech.def
-    }
-
-    console.log('*** RESULTAT STEP 2 ***')
-    console.log(atkFinal)
-    console.log(defFinal)
-
-    // Comparaison des valeurs Final
-    // ATK
-    if (result.atk.target != 'noTarget') {
-
-        if (atkFinal.atk >= defFinal.def) {
-            logResult.atk.damage.info = "L'unité " + nameAtkFront + " a la force suffisante pour détruire " + resultAtk.target.name + "."
-            logResult.atk.damage.statutAdv = 'destroy'
-    
-        } else if (atkFinal.atk < defFinal.def) {
-            logResult.atk.damage.info = "L'unité " + nameAtkFront + " n'a pas la force suffisante pour détruire " + resultAtk.target.name + "."
-    
         }
-    } else if (result.atk.target === 'noTarget') {
-        logResult.atk.damage.info = "L'unité " + nameAtkFront + " est incapable de cibler."
-
+    } else if (resultTechType.type === 'destroy') {
+        console.log('TODO DESTROY')
     }
 
-    // DEF
-    if (result.def.target != 'noTarget') {
-        
-        if (defFinal.atk >= atkFinal.def) {
-            logResult.def.damage.info = "L'unité " + nameDefFront + " a la force suffisante pour détruire " + resultDef.target.name + "."
-            logResult.def.damage.statutAdv = 'destroy'
-    
-        } else if (defFinal.atk < atkFinal.def) {
-            logResult.def.damage.info = "L'unité " + nameDefFront + " n'a pas la force suffisante pour détruire " + resultDef.target.name + "."
-    
-        }
-    } else if (result.def.target === 'noTarget') {
-        logResult.def.damage.info = "L'unité " + nameDefFront + " est incapable de cibler."
-
-    }
-
-    console.log(logResult)
-    return {logResult, atkFinal, defFinal};
+    return {logResultAtk, tempoUnitAtk, tempoUnitDef}
 };

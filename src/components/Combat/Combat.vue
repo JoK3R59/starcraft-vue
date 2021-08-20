@@ -462,6 +462,8 @@
                  :numberEscarmouche="this.selectData[2].numberEscarmouche"
                  :data="this.selectData[2].data"></escarmouche>
             </div>
+
+            <resultat :resultSimulation="this.resultSimulation"></resultat>
         </div>
     </div>
 </template>
@@ -469,6 +471,7 @@
 <script>
 import Simulation from './Simulation';
 import Escarmouche from './items/Escarmouche';
+import ResultatList from './items/ResultatList';
 
 import Card from '../../data/Simulation/Card';
 import {resultat} from './Simul-Combat.js';
@@ -636,12 +639,15 @@ export default {
                 selectCardZone: '',
                 base: false,
                 turret: false
-            }
+            },
+            //RESULTAT final simulation
+            resultSimulation: ''
         }
     },
     components : {
         'simul' : Simulation,
-        'escarmouche' : Escarmouche
+        'escarmouche' : Escarmouche,
+        'resultat' : ResultatList
     },
     methods: {
         onChange(event) {
@@ -1365,8 +1371,9 @@ export default {
         },
         supprSoutienAtk() {
             let id = this.selectionCounterSoutienAtk
+            let index = this.numberEscarmouche
             this.$delete(this.atk.selectFigurineSoutien, id)
-            this.$delete(this.selectData.atk.figurineSoutien, id)
+            this.$delete(this.selectData[index].data.atk.figurineSoutien, id)
             this.selectionCounterSoutienAtk--
         },
         addSoutienDef() {
@@ -1384,11 +1391,13 @@ export default {
         },
         supprSoutienDef() {
             let id = this.selectionCounterSoutienDef
+            let index = this.numberEscarmouche
             this.$delete(this.def.selectFigurineSoutien, id)
-            this.$delete(this.selectData.def.figurineSoutien, id)
+            this.$delete(this.selectData[index].data.def.figurineSoutien, id)
             this.selectionCounterSoutienDef--
         },
         addEscarmouche() {
+            // AJOUT d'une fonction permettant de vérifier les champs FRONT et COMBAT avant ajout d'une escarmouche
             if(this.numberEscarmouche < 3) {
                 this.numberEscarmouche++
                 this.resetSelect(1, 1, false, false)
@@ -1404,17 +1413,94 @@ export default {
 
                 // Lancement de la simulation
                 if (elementData.active) {
+                    let tempoResult = resultat(elementData.data)
                     dataMultiResult[i] = {
-                        result: resultat(elementData.data)
+                        log: tempoResult.logResult,
+                        unites: tempoResult.unites,
+                        result: tempoResult.resultat
                     }
 
                 } else {
                     i = 3
                 }
+
+                document.getElementById('resultat-modal').style.display = 'block'
             }
             console.log(dataMultiResult)
             console.log('FINISH')
+            this.resultSimulation = dataMultiResult
+        },
+        // TODO !!!
+        verifiedFieldSelect() {
+            let i = this.numberEscarmouche
+            let selectVerify = this.selectData
+
+            let verifyAtk = {
+                front: false,
+                logFront: '',
+                cardCombat: false,
+                logCombat: ''
+            }
+            selectVerify[i].data.atk.figurineFront != '' ?
+             verifyAtk.front = true : null
+            selectVerify[i].data.atk.cardCombat != '' ?
+             verifyAtk.cardCombat = true : null
+            
+            let verifyDef = {
+                front: false,
+                logFront: '',
+                cardCombat: false,
+                logCombat: ''
+            }
+            selectVerify[i].data.def.figurineFront != '' ?
+             verifyDef.front = true : null
+            selectVerify[i].data.def.cardCombat != '' ?
+             verifyDef.cardCombat = true : null
+            
+            !verifyAtk.front ?
+             verifyAtk.logFront = 'ROUGE select CSS FRONT ATK' :
+             null
+            !verifyAtk.cardCombat ?
+             verifyAtk.logCombat = 'ROUGE select CSS CARDCOMBAT ATK' :
+             null
+            !verifyDef.front ?
+             verifyDef.logFront = 'ROUGE select CSS FRONT DEF' :
+             null
+            !verifyDef.cardCombat ? 
+             verifyDef.logCombat = 'ROUGE select CSS CARDCOMBAT DEF' : 
+             null
+            
+            // if () {
+
+            // }
         }
+        ///////////////////////
+        //
+        // Données effets et capacités
+        //
+        ///////////////////////
+        // 
+        // Camouflage :
+        //              retraite, fin de l'étape Destruction
+        // 
+        // Détecteur : 
+        //              Escouade
+        // 
+        // Annuler : 
+        //              Dois être deja joué avant simulation... pour le moment
+        // 
+        // Contre : OK
+        //              Deja ajouté dans simulation
+        // 
+        // Renfort : OK
+        //              R.A.S
+        // 
+        // Degats Repercuté : 
+        //              Fin des etapes.
+        // 
+        // Destroy (nuke||sucide) : 
+        //              Fin des etapes.
+        // 
     }
 }
 </script>

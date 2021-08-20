@@ -9,11 +9,13 @@
                 
                 <div class="atk-figurine--soutien">
 
-                    <imgSoutien v-for="stringImg in atk.selectFigurineSoutien"
+                    <selectImage v-for="stringImg in atk.selectFigurineSoutien"
                      :key="stringImg.id"
                      :imgSrc="stringImg.icon"
                      :race="atk.selectRace"
-                     :classSelect="imgDisplaySoutien(stringImg.icon)"></imgSoutien>
+                     :classSelect="imgDisplaySoutien(stringImg.icon)"
+                     :selectType="'soutien'"
+                    />
                 </div>
             </div>
             
@@ -22,9 +24,12 @@
                 <h3>Front</h3>
 
                 <div>
-                    <img class="figurine-front"
-                     :src="imgFigurine(atk.selectFigurineFront,atk.selectRace)"
-                      alt="Selectionnez une Figurine">
+                    <selectImage
+                     :imgSrc="atk.selectFigurineFront"
+                     :race="atk.selectRace"
+                     :classSelect="'figurine-front'"
+                     :selectType="'front'"
+                    />
                 </div>
             </div>
 
@@ -33,9 +38,12 @@
                 <h3>Carte Renfort</h3>
 
                 <div>
-                    <img class="atk-card soutien"
-                     :src="imgCarte(atk.selectCardRenfort,atk.selectRace)"
-                      alt="Selectionnez une carte">
+                    <selectImage
+                     :imgSrc="atk.selectCardRenfort"
+                     :race="atk.selectRace"
+                     :classSelect="'atk-card soutien'"
+                     :selectType="'card'"
+                    />
                 </div>
             </div>
 
@@ -44,9 +52,12 @@
                 <h3>Carte Combat</h3>
 
                 <div>
-                    <img class="atk-card soutien"
-                     :src="imgCarte(atk.selectCardCombat,atk.selectRace)"
-                      alt="Selectionnez une carte">
+                    <selectImage
+                     :imgSrc="atk.selectCardCombat"
+                     :race="atk.selectRace"
+                     :classSelect="'atk-card soutien'"
+                     :selectType="'card'"
+                    />
                 </div>
             </div>
 
@@ -55,22 +66,37 @@
                 <h3>Zone de Jeu</h3>
 
                 <div>
-                    <img class="atk-card zone"
-                     :src="imgCarte(atk.selectCardZone,atk.selectRace)"
-                     alt="Selectionnez une carte Zone de Jeu">
+                    <selectImage
+                     :imgSrc="atk.selectCardZone"
+                     :race="atk.selectRace"
+                     :classSelect="'atk-card zone'"
+                     :selectType="'card'"
+                    />
                 </div>
             </div>
 
             <div class="base">
                 <div>
+
                     <h3>Base</h3>
-                    <img class="imgBase"
-                     :src="imgBase(atk.base, atk.selectRace)" alt="Base ?">
+
+                    <selectImage
+                     :imgSrc="atk.base"
+                     :race="atk.selectRace"
+                     :classSelect="'imgBase'"
+                     :selectType="'base'"
+                    />
                 </div>
                 <div>
+
                     <h3>Tourelle</h3>
-                    <img class="imgTurret"
-                     :src="imgTurret(atk.turret, atk.selectRace)" alt="tourelle ?">
+
+                    <selectImage
+                     :imgSrc="atk.turret"
+                     :race="atk.selectRace"
+                     :classSelect="'imgTurret'"
+                     :selectType="'turret'"
+                    />
                 </div>
             </div>
         </div>
@@ -82,9 +108,13 @@
                 <h3>Front</h3>
 
                 <div>
-                    <img class="figurine-front"
-                     :src="imgFigurine(def.selectFigurineFront,def.selectRace)"
-                      alt="Selectionnez une Figurine">
+
+                    <selectImage
+                     :imgSrc="def.selectFigurineFront"
+                     :race="def.selectRace"
+                     :classSelect="'figurine-front'"
+                     :selectType="'front'"
+                    />
                 </div>
 
             </div>
@@ -95,11 +125,13 @@
 
                 <div class="def-figurine--soutien">
 
-                    <imgSoutien v-for="stringImg in def.selectFigurineSoutien"
+                    <selectImage v-for="stringImg in def.selectFigurineSoutien"
                      :key="stringImg.id"
                      :imgSrc="stringImg.icon"
                      :race="def.selectRace"
-                     :classSelect="imgDisplaySoutien(stringImg.icon)"></imgSoutien>
+                     :classSelect="imgDisplaySoutien(stringImg.icon)"
+                     :selectType="'soutien'"
+                    />
                 </div>
 
             </div>
@@ -109,9 +141,13 @@
                 <h3>Carte Combat</h3>
 
                 <div>
-                    <img class="def-card soutien"
-                     :src="imgCarte(def.selectCardCombat,def.selectRace)"
-                      alt="Selectionnez une carte">
+
+                    <selectImage
+                     :imgSrc="def.selectCardCombat"
+                     :race="def.selectRace"
+                     :classSelect="'def-card soutien'"
+                     :selectType="'card'"
+                    />
                 </div>
             </div>
 
@@ -120,23 +156,38 @@
                 <h3>Carte Renfort</h3>
 
                 <div>
-                    <img class="def-card soutien"
-                     :src="imgCarte(def.selectCardRenfort,def.selectRace)"
-                     alt="Selectionnez une carte">
+
+                    <selectImage
+                     :imgSrc="def.selectCardRenfort"
+                     :race="def.selectRace"
+                     :classSelect="'def-card soutien'"
+                     :selectType="'card'"
+                    />
                 </div>
             </div>
 
             <div class="base">
                 <div>
+
                     <h3>Base</h3>
-                    <img class="imgBase"
-                     :src="imgBase(def.base, def.selectRace)" alt="Base ?">
+
+                    <selectImage
+                     :imgSrc="def.base"
+                     :race="def.selectRace"
+                     :classSelect="'imgBase'"
+                     :selectType="'base'"
+                    />
                 </div>
                 <div>
+
                     <h3>Tourelle</h3>
-                    <img class="imgTurret"
-                     :src="imgTurret(def.turret, def.selectRace)"
-                     alt="tourelle ?">
+
+                    <selectImage
+                     :imgSrc="def.turret"
+                     :race="def.selectRace"
+                     :classSelect="'imgTurret'"
+                     :selectType="'turret'"
+                    />
                 </div>
             </div>
 
@@ -145,9 +196,13 @@
                 <h3>Zone de Jeu</h3>
 
                 <div>
-                    <img class="def-card zone"
-                     :src="imgCarte(def.selectCardZone,def.selectRace)"
-                      alt="Selectionnez une carte Zone de Jeu">
+
+                    <selectImage
+                     :imgSrc="def.selectCardZone"
+                     :race="def.selectRace"
+                     :classSelect="'def-card zone'"
+                     :selectType="'card'"
+                    />
                 </div>
             </div>
         </div>
@@ -156,13 +211,13 @@
 
 <script>
 import Card from '../../data/Simulation/Card';
-import imgSoutien from './items/imgFigSoutien';
+import selectImage from './items/SelectImage';
 
 export default {
     name: 'Simulation',
     props: ['atk', 'def', 'resultData'],
     components : {
-        'imgSoutien' : imgSoutien
+        'selectImage' : selectImage
     },
     methods: {
         getImgFront(pic) {
@@ -179,13 +234,13 @@ export default {
                 return ''
             }
         },
-        imgFigurine(pic, race) {
-            if (pic != '') {
-                return require('../../assets/Images/Interfaces/Combat/Icon/' + race + '/' + pic + '.png')
-            } else {
-                return ''
-            }
-        },
+        // imgFigurine(pic, race) {
+        //     if (pic != '') {
+        //         return require('../../assets/Images/Interfaces/Combat/Icon/' + race + '/' + pic + '.png')
+        //     } else {
+        //         return ''
+        //     }
+        // },
         imgDisplaySoutien(pic) {
             if (pic != undefined) {
 
@@ -195,45 +250,45 @@ export default {
                 return "img-figurineNone"
             }
         },
-        imgCarte(pic, race) {
-            if (pic != '') {
-                if (race === 'terran') {
-                    return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + pic + '.png')
-                } else if (race === 'zerg') {
-                    return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + pic + '.png')
-                } else if (race === 'protoss') {
-                    return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + pic + '.png')
-                }
-            } else {
-                return ''
-            }
-        },
-        imgBase(pic, race) {
-            if (pic) {
-                if (race === 'terran') {
-                    return require('../../assets/Images/DataScan/Factions/Bleu/jeton/base.png')
-                } else if (race === 'zerg') {
-                    return require('../../assets/Images/DataScan/Factions/Violet/jeton/base.png')
-                } else if (race === 'protoss') {
-                    return require('../../assets/Images/DataScan/Factions/Jaune/jeton/base.png')
-                }
-            } else {
-                return ''
-            }
-        },
-        imgTurret(pic, race) {
-            if (pic) {
-                if (race === 'terran') {
-                    return require('../../assets/Images/DataScan/Factions/Bleu/jeton/module_tower.png')
-                } else if (race === 'zerg') {
-                    return require('../../assets/Images/DataScan/Factions/Violet/jeton/module_tower.png')
-                } else if (race === 'protoss') {
-                    return require('../../assets/Images/DataScan/Factions/Jaune/jeton/module_tower.png')
-                }
-            } else {
-                return ''
-            }
-        }
+        // imgCarte(pic, race) {
+        //     if (pic != '') {
+        //         if (race === 'terran') {
+        //             return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + pic + '.png')
+        //         } else if (race === 'zerg') {
+        //             return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + pic + '.png')
+        //         } else if (race === 'protoss') {
+        //             return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + pic + '.png')
+        //         }
+        //     } else {
+        //         return ''
+        //     }
+        // },
+        // imgBase(pic, race) {
+        //     if (pic) {
+        //         if (race === 'terran') {
+        //             return require('../../assets/Images/DataScan/Factions/Bleu/jeton/base.png')
+        //         } else if (race === 'zerg') {
+        //             return require('../../assets/Images/DataScan/Factions/Violet/jeton/base.png')
+        //         } else if (race === 'protoss') {
+        //             return require('../../assets/Images/DataScan/Factions/Jaune/jeton/base.png')
+        //         }
+        //     } else {
+        //         return ''
+        //     }
+        // },
+        // imgTurret(pic, race) {
+        //     if (pic) {
+        //         if (race === 'terran') {
+        //             return require('../../assets/Images/DataScan/Factions/Bleu/jeton/module_tower.png')
+        //         } else if (race === 'zerg') {
+        //             return require('../../assets/Images/DataScan/Factions/Violet/jeton/module_tower.png')
+        //         } else if (race === 'protoss') {
+        //             return require('../../assets/Images/DataScan/Factions/Jaune/jeton/module_tower.png')
+        //         }
+        //     } else {
+        //         return ''
+        //     }
+        // }
     }
 }
 
