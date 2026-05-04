@@ -149,6 +149,7 @@
 
 <script>
 import {bus} from '../../main'
+import factions from '../../data/Factions/factions'
 
 export default {
     name:'Commander',
@@ -156,26 +157,7 @@ export default {
         return {
             viewC : false,
             faction : '',
-            commanders: [
-                {
-                    leader: '',
-                    slug: '',
-                    color: '',
-                    victory: '',
-                    world: '',
-                    soldier: '',
-                    advance: '',
-                    vehicule: '',
-                    ship: '',
-                    constructor: '',
-                    gifL: '',
-                    gifS: '',
-                    gifA: '',
-                    gifV: '',
-                    gifSh: '',
-                    gifC: '',
-                }
-            ]
+            commanders: []
         }
     },
     methods: {
@@ -183,25 +165,39 @@ export default {
             this.$router.push('/factions')
         },
         getGifUrl(pic) {
-            return require('../../assets/Images/Interfaces/Races/' + pic + '.gif')
+            return this.$img('Interfaces/Races/' + pic + '.gif')
         },
         getGifLogo(pic) {
-            return require('../../assets/Images/Interfaces/Races/' + pic + '/' + pic + '.gif')
+            return this.$img('Interfaces/Races/' + pic + '/' + pic + '.gif')
         },
         getImgUrl(pic) {
-            return require('../../assets/Images/Interfaces/Races/' + pic + '/fond-portrait.png')
+            return this.$img('Interfaces/Races/' + pic + '/fond-portrait.webp')
         },
         capitalize(value) {
             value = value.toString()
             return value.charAt(0).toUpperCase() + value.slice(1)
+        },
+        loadFromRoute() {
+            const slug = this.$route.params.name
+            const found = factions.find(f => f.slug === slug)
+            if (found) {
+                this.faction = this.capitalize(slug)
+                this.commanders = found.commander
+                this.viewC = true
+            }
         }
     },
-    beforeCreate() {
+    created() {
+        this.loadFromRoute()
         bus.$on('dataCommander', (data) => {
-            this.viewC = true
-            this.faction = this.capitalize(this.$router.history.current.params.name)
+            this.faction = this.capitalize(this.$route.params.name)
             this.commanders = data
+            this.viewC = true
         })
+    },
+    beforeRouteUpdate(to, from, next) {
+        next()
+        this.$nextTick(() => this.loadFromRoute())
     }
 }
 </script>

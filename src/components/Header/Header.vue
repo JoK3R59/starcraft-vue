@@ -6,7 +6,7 @@
             
             <div class="header-title">
                 <img class="img-fluid"
-                src="../../assets/Images/Interfaces/Accueil/starcraft_title.png"
+                :src="$img('Interfaces/Accueil/starcraft_title.webp')"
                 alt="Starcraft">
                 <h1 class="header-undertitle text-center pb-3">
                     - Le Jeu de Plateau -

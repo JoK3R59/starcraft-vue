@@ -221,26 +221,18 @@ export default {
     },
     methods: {
         getImgFront(pic) {
-            return require('../../assets/Images/Interfaces/Races/' + pic + '/' + pic + '.gif')
+            return this.$img('Interfaces/Races/' + pic + '/' + pic + '.gif')
         },
         testId(id) {
-            // var Race = this.atk.selectRace
             var selectId = Card.terran.figurine[id]
             var Race = this.atk.selectRace
             if (id != '') {
                 this.selectAtk.figurineFront = selectId
-                return require('../../assets/Images/Interfaces/Combat/Icon/' + Race + '/' + selectId.img + '.png')
+                return this.$img('Interfaces/Combat/Icon/' + Race + '/' + selectId.img + '.webp')
             } else {
                 return ''
             }
         },
-        // imgFigurine(pic, race) {
-        //     if (pic != '') {
-        //         return require('../../assets/Images/Interfaces/Combat/Icon/' + race + '/' + pic + '.png')
-        //     } else {
-        //         return ''
-        //     }
-        // },
         imgDisplaySoutien(pic) {
             if (pic != undefined) {
 
@@ -250,45 +242,6 @@ export default {
                 return "img-figurineNone"
             }
         },
-        // imgCarte(pic, race) {
-        //     if (pic != '') {
-        //         if (race === 'terran') {
-        //             return require('../../assets/Images/DataScan/Factions/Bleu/Cartes/' + pic + '.png')
-        //         } else if (race === 'zerg') {
-        //             return require('../../assets/Images/DataScan/Factions/Violet/Cartes/' + pic + '.png')
-        //         } else if (race === 'protoss') {
-        //             return require('../../assets/Images/DataScan/Factions/Jaune/Cartes/' + pic + '.png')
-        //         }
-        //     } else {
-        //         return ''
-        //     }
-        // },
-        // imgBase(pic, race) {
-        //     if (pic) {
-        //         if (race === 'terran') {
-        //             return require('../../assets/Images/DataScan/Factions/Bleu/jeton/base.png')
-        //         } else if (race === 'zerg') {
-        //             return require('../../assets/Images/DataScan/Factions/Violet/jeton/base.png')
-        //         } else if (race === 'protoss') {
-        //             return require('../../assets/Images/DataScan/Factions/Jaune/jeton/base.png')
-        //         }
-        //     } else {
-        //         return ''
-        //     }
-        // },
-        // imgTurret(pic, race) {
-        //     if (pic) {
-        //         if (race === 'terran') {
-        //             return require('../../assets/Images/DataScan/Factions/Bleu/jeton/module_tower.png')
-        //         } else if (race === 'zerg') {
-        //             return require('../../assets/Images/DataScan/Factions/Violet/jeton/module_tower.png')
-        //         } else if (race === 'protoss') {
-        //             return require('../../assets/Images/DataScan/Factions/Jaune/jeton/module_tower.png')
-        //         }
-        //     } else {
-        //         return ''
-        //     }
-        // }
     }
 }
 

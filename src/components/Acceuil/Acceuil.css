@@ -64,7 +64,7 @@
         margin-left: auto;
         margin-right: auto;
         border: 12px solid transparent;
-        border-image: url(../../assets/Images/Interfaces/Menu/Border-Image81x81.png)30 stretch;
+        border-image: var(--bd-border81)30 stretch;
         width: 700px;
         height: 44_px;
         background-color: black;

@@ -63,7 +63,7 @@ export default {
     },
     methods: {
         getImgUrl(pic) {
-            return require('../../../assets/Images/Interfaces/' + pic + '.png')
+            return this.$img('Interfaces/' + pic + '.webp')
         },
     }
 }

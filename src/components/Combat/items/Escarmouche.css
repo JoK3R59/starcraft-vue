@@ -4,7 +4,7 @@
     margin: 1vh;
     padding: .5rem;
     border: 8px solid transparent;
-    border-image: url(../../../assets/Images/Interfaces/Menu/Border-Image81x81.png) 16 stretch;
+    border-image: var(--bd-border81) 16 stretch;
     background: rgba(0, 0, 0);
 }
 .Escarmouche-atk {

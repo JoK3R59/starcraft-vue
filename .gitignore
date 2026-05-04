@@ -1,8 +1,9 @@
 .DS_Store
 node_modules
 /dist
-/src/assets/Images
+/public/images
 vue.config.jstest
+CLAUDE.md
 
 # Dossier ignoré - non utilisé
 

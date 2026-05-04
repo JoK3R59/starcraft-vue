@@ -5,47 +5,47 @@ export default {
             {
                 name: 'Char de Siège',
                 value: 'char_de_siege',
-                img: 'terran/char.png'
+                img: 'terran/char.webp'
             },
             {
                 name: 'Cuirassé',
                 value: 'cuirasse',
-                img: 'terran/cuirassé.png'
+                img: 'terran/cuirassé.webp'
             },
             {
                 name: 'Fantôme',
                 value: 'fantome',
-                img: 'terran/fantome.png'
+                img: 'terran/fantome.webp'
             },
             {
                 name: 'Flammeur',
                 value: 'flammeur',
-                img: 'terran/flammeur.png'
+                img: 'terran/flammeur.webp'
             },
             {
                 name: 'Goliath',
                 value: 'goliath',
-                img: 'terran/goliath.png'
+                img: 'terran/goliath.webp'
             },
             {
                 name: 'Vaisseau Laboratoire',
                 value: 'vaisseau_laboratoire',
-                img: 'terran/labo.png'
+                img: 'terran/labo.webp'
             },
             {
                 name: 'Marine',
                 value: 'marine',
-                img: 'terran/marine.png'
+                img: 'terran/marine.webp'
             },
             {
                 name: 'Ombre',
                 value: 'ombre',
-                img: 'terran/ombre.png'
+                img: 'terran/ombre.webp'
             },
             {
                 name: 'Vautour',
                 value: 'vautour',
-                img: 'terran/vautour.png'
+                img: 'terran/vautour.webp'
             }
         ]
     },
@@ -54,7 +54,7 @@ export default {
             {
                 name: 'Gardien',
                 value: 'gardien',
-                img: 'zerg/gardien.png'
+                img: 'zerg/gardien.webp'
             },
             {
                 name: 'Hydralisk',
@@ -64,32 +64,32 @@ export default {
             {
                 name: 'Masse',
                 value: 'masse',
-                img: 'zerg/masse.png'
+                img: 'zerg/masse.webp'
             },
             {
                 name: 'Mutalisk',
                 value: 'mutalisk',
-                img: 'zerg/mutalisk.png'
+                img: 'zerg/mutalisk.webp'
             },
             {
                 name: 'Reine',
                 value: 'reine',
-                img: 'zerg/reine.png'
+                img: 'zerg/reine.webp'
             },
             {
                 name: 'Saboteur',
                 value: 'saboteur',
-                img: 'zerg/saboteur.png'
+                img: 'zerg/saboteur.webp'
             },
             {
                 name: 'Ultralisk',
                 value: 'ultralisk',
-                img: 'zerg/ultralisk.png'
+                img: 'zerg/ultralisk.webp'
             },
             {
                 name: 'Zergling',
                 value: 'zergling',
-                img: 'zerg/zergling.png'
+                img: 'zerg/zergling.webp'
             }
         ]
     },
@@ -98,42 +98,42 @@ export default {
             {
                 name: 'Arbitre',
                 value: 'arbitre',
-                img: 'protoss/arbitre.png'
+                img: 'protoss/arbitre.webp'
             },
             {
                 name: 'Archonte',
                 value: 'archonte',
-                img: 'protoss/archonte.png'
+                img: 'protoss/archonte.webp'
             },
             {
                 name: 'Destructeur',
                 value: 'destructeur',
-                img: 'protoss/destructeur.png'
+                img: 'protoss/destructeur.webp'
             },
             {
                 name: 'Disciple',
                 value: 'disciple',
-                img: 'protoss/disciple.png'
+                img: 'protoss/disciple.webp'
             },
             {
                 name: 'Dragon',
                 value: 'dragon',
-                img: 'protoss/dragon.png'
+                img: 'protoss/dragon.webp'
             },
             {
                 name: 'Porte-Nefs',
                 value: 'porte-nefs',
-                img: 'protoss/porte.png'
+                img: 'protoss/porte.webp'
             },
             {
                 name: 'Scout',
                 value: 'scout',
-                img: 'protoss/scout.png'
+                img: 'protoss/scout.webp'
             },
             {
                 name: 'Templier',
                 value: 'templier',
-                img: 'protoss/templier.png'
+                img: 'protoss/templier.webp'
             }
         ]
     }
@@ -147,39 +147,39 @@ export default [
         figurine: [
             {
                 name: 'Char de Siège',
-                img: 'terran/char.png'
+                img: 'terran/char.webp'
             },
             {
                 name: 'Cuirassé',
-                img: 'terran/cuirassé.png'
+                img: 'terran/cuirassé.webp'
             },
             {
                 name: 'Fantôme',
-                img: 'terran/fantome.png'
+                img: 'terran/fantome.webp'
             },
             {
                 name: 'Flammeur',
-                img: 'terran/flammeur.png'
+                img: 'terran/flammeur.webp'
             },
             {
                 name: 'Goliath',
-                img: 'terran/goliath.png'
+                img: 'terran/goliath.webp'
             },
             {
                 name: 'Vaisseau Laboratoire',
-                img: 'terran/labo.png'
+                img: 'terran/labo.webp'
             },
             {
                 name: 'Marine',
-                img: 'terran/marine.png'
+                img: 'terran/marine.webp'
             },
             {
                 name: 'Ombre',
-                img: 'terran/ombre.png'
+                img: 'terran/ombre.webp'
             },
             {
                 name: 'Vautour',
-                img: 'terran/vautour.png'
+                img: 'terran/vautour.webp'
             }
         ]
     },
@@ -188,7 +188,7 @@ export default [
         figurine: [
             {
                 name: 'Gardien',
-                img: 'zerg/gardien.png'
+                img: 'zerg/gardien.webp'
             },
             {
                 name: 'Hydralisk',
@@ -196,27 +196,27 @@ export default [
             },
             {
                 name: 'Masse',
-                img: 'zerg/masse.png'
+                img: 'zerg/masse.webp'
             },
             {
                 name: 'Mutalisk',
-                img: 'zerg/mutalisk.png'
+                img: 'zerg/mutalisk.webp'
             },
             {
                 name: 'Reine',
-                img: 'zerg/reine.png'
+                img: 'zerg/reine.webp'
             },
             {
                 name: 'Saboteur',
-                img: 'zerg/saboteur.png'
+                img: 'zerg/saboteur.webp'
             },
             {
                 name: 'Ultralisk',
-                img: 'zerg/ultralisk.png'
+                img: 'zerg/ultralisk.webp'
             },
             {
                 name: 'Zergling',
-                img: 'zerg/zergling.png'
+                img: 'zerg/zergling.webp'
             }
         ]
     },
@@ -225,35 +225,35 @@ export default [
         figurine: [
             {
                 name: 'Arbitre',
-                img: 'protoss/arbitre.png'
+                img: 'protoss/arbitre.webp'
             },
             {
                 name: 'Archonte',
-                img: 'protoss/archonte.png'
+                img: 'protoss/archonte.webp'
             },
             {
                 name: 'Destructeur',
-                img: 'protoss/destructeur.png'
+                img: 'protoss/destructeur.webp'
             },
             {
                 name: 'Disciple',
-                img: 'protoss/disciple.png'
+                img: 'protoss/disciple.webp'
             },
             {
                 name: 'Dragon',
-                img: 'protoss/dragon.png'
+                img: 'protoss/dragon.webp'
             },
             {
                 name: 'Porte-Nefs',
-                img: 'protoss/porte.png'
+                img: 'protoss/porte.webp'
             },
             {
                 name: 'Scout',
-                img: 'protoss/scout.png'
+                img: 'protoss/scout.webp'
             },
             {
                 name: 'Templier',
-                img: 'protoss/templier.png'
+                img: 'protoss/templier.webp'
             }
         ]
     }

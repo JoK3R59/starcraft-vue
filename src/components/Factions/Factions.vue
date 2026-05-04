@@ -52,7 +52,7 @@ export default {
     },
     methods: {
         getImgUrl(pic) {
-            return require('../../assets/Images/Interfaces/Races/' + pic + '.png')
+            return this.$img('Interfaces/Races/' + pic + '.webp')
         },
         dataCommander(i) {
             var commanders = this.factions[i].commander

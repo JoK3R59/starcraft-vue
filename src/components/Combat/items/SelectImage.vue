@@ -36,7 +36,7 @@ export default {
     },
     imgFigurineFront(pic, race) {
       if (pic != '') {
-        return require('../../../assets/Images/Interfaces/Combat/Icon/' + race + '/' + pic + '.png')
+        return this.$img('Interfaces/Combat/Icon/' + race + '/' + pic + '.webp')
       
       } else {
         return ''
@@ -45,7 +45,7 @@ export default {
     },
     imgFigurineSoutien( pic, race ) {
       if (pic != undefined) {
-        return require('../../../assets/Images/Interfaces/Combat/Icon/' + race + '/' + pic + '.png')
+        return this.$img('Interfaces/Combat/Icon/' + race + '/' + pic + '.webp')
       
       } else {
         return ''
@@ -55,13 +55,13 @@ export default {
     imgCarte(pic, race) {
       if (pic != '') {
         if (race === 'terran') {
-          return require('../../../assets/Images/DataScan/Factions/Bleu/Cartes/' + pic + '.png')
+          return this.$img('DataScan/Factions/Bleu/Cartes/' + pic + '.webp')
         
         } else if (race === 'zerg') {
-          return require('../../../assets/Images/DataScan/Factions/Violet/Cartes/' + pic + '.png')
+          return this.$img('DataScan/Factions/Violet/Cartes/' + pic + '.webp')
         
         } else if (race === 'protoss') {
-          return require('../../../assets/Images/DataScan/Factions/Jaune/Cartes/' + pic + '.png')
+          return this.$img('DataScan/Factions/Jaune/Cartes/' + pic + '.webp')
         
         }
       } else {
@@ -72,13 +72,13 @@ export default {
     imgBase(pic, race) {
       if (pic) {
         if (race === 'terran') {
-          return require('../../../assets/Images/DataScan/Factions/Bleu/jeton/base.png')
+          return this.$img('DataScan/Factions/Bleu/jeton/base.webp')
         
         } else if (race === 'zerg') {
-          return require('../../../assets/Images/DataScan/Factions/Violet/jeton/base.png')
+          return this.$img('DataScan/Factions/Violet/jeton/base.webp')
         
         } else if (race === 'protoss') {
-          return require('../../../assets/Images/DataScan/Factions/Jaune/jeton/base.png')
+          return this.$img('DataScan/Factions/Jaune/jeton/base.webp')
         
         }
       } else {
@@ -89,13 +89,13 @@ export default {
     imgTurret(pic, race) {
       if (pic) {
         if (race === 'terran') {
-          return require('../../../assets/Images/DataScan/Factions/Bleu/jeton/module_tower.png')
+          return this.$img('DataScan/Factions/Bleu/jeton/module_tower.webp')
         
         } else if (race === 'zerg') {
-          return require('../../../assets/Images/DataScan/Factions/Violet/jeton/module_tower.png')
+          return this.$img('DataScan/Factions/Violet/jeton/module_tower.webp')
         
         } else if (race === 'protoss') {
-          return require('../../../assets/Images/DataScan/Factions/Jaune/jeton/module_tower.png')
+          return this.$img('DataScan/Factions/Jaune/jeton/module_tower.webp')
         
         }
       } else {

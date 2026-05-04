@@ -1,20 +1,22 @@
 # Étape 1 : Build (construction du projet)
-FROM node:14.21.3-alpine3.16 AS build-stage
+FROM node:18-alpine AS build-stage
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
-COPY package*.json ./
+COPY package*.json pnpm-lock.yaml ./
 
 # Installer les dépendances du projet
-RUN npm install
+RUN pnpm install --frozen-lockfile
 
 # Copier tout le contenu du projet dans le conteneur
-COPY . /app/
+COPY . .
 
 # Construire le projet Vue.js pour la production
-RUN npm run build
+RUN pnpm run build
 
 # Étape 2 : Serveur web (Nginx pour servir l'application)
 FROM nginx:stable-alpine AS production-stage

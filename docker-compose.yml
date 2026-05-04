@@ -1,0 +1,7 @@
+services:
+  starcraft_app:
+    build: .
+    container_name: starcraft_app
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8081:80"

@@ -8,6 +8,9 @@ import Routes from './Routes';
 
 export const bus = new Vue();
 
+// Permet de charger les images depuis le dossier public
+Vue.prototype.$img = (path) => require('/public/images/' + path)
+
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)

@@ -15,7 +15,7 @@
     font-family: 'univers', sans-serif;
 }
 #stellar {
-    background: url(./assets/Images/Interfaces/Menu/motif_etoiles.png);
+    background: var(--bg-etoiles);
     z-index: -500;
     position: fixed;
     top: 0;
@@ -31,7 +31,7 @@
     background-repeat: no-repeat;
 }
 #const {
-    background: url(./assets/Images/Interfaces/Menu/constellations0.png);
+    background: var(--bg-constellations);
     transition: all 1.5s ease;
     background-repeat: no-repeat;
     position: fixed;
@@ -41,7 +41,7 @@
     right: 0;
 }
 #const1 {
-    background: url(./assets/Images/Interfaces/Menu/constellations.png);
+    background: var(--bg-constellations1);
     transition: all 1s ease;
     background-repeat: no-repeat;
     position: fixed;
@@ -51,7 +51,7 @@
     right: 0;
 }
 #terre {
-    background: url(./assets/Images/Interfaces/Menu/terre1.png);
+    background: var(--bg-terre);
     transition: all 0.3s ease;
     background-repeat: no-repeat;
     position: fixed;
@@ -73,4 +73,22 @@
         left: 135px;
         top: -400px;
     }
+}
+
+:root {
+    --bd-border81: url(/images/Interfaces/Menu/Border-Image81x81.webp);
+    --bg-etoiles: url(/images/Interfaces/Menu/motif_etoiles.webp);
+    --bg-constellations: url(/images/Interfaces/Menu/constellations0.webp);
+    --bg-constellations1: url(/images/Interfaces/Menu/constellations.webp);
+    --bg-terre: url(/images/Interfaces/Menu/terre1.webp);
+    --gif-Left1: url(/images/Interfaces/Menu/gifLeft1.gif);
+    --gif-Left2: url(/images/Interfaces/Menu/gifLeft2.gif);
+    --gif-Left3: url(/images/Interfaces/Menu/gifLeft3.gif);
+    --gif-Left4: url(/images/Interfaces/Menu/gifLeft4.gif);
+    --gif-Left5: url(/images/Interfaces/Menu/gifLeft5.gif);
+    --gif-Right1: url(/images/Interfaces/Menu/gifRight1.gif);
+    --gif-Right2: url(/images/Interfaces/Menu/gifRight2.gif);
+    --gif-Right3: url(/images/Interfaces/Menu/gifRight3.gif);
+    --gif-Right4: url(/images/Interfaces/Menu/gifRight4.gif);
+    --gif-Right5: url(/images/Interfaces/Menu/gifRight5.gif);
 }

@@ -9,6 +9,7 @@
      <div id="terre"></div>
    </div>
 
+    <screen-guard></screen-guard>
     <header-top></header-top>
     <router-view></router-view>
     <footer-bot></footer-bot>
@@ -18,6 +19,7 @@
 <script>
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import ScreenGuard from './components/ScreenGuard/ScreenGuard';
 
 export default {
   name: 'App',
@@ -29,6 +31,7 @@ export default {
   components: {
     'header-top' : Header,
     'footer-bot' : Footer,
+    'screen-guard' : ScreenGuard,
   },
   methods: {
     topPosition() {

@@ -22,7 +22,7 @@
             <ul>
                 <li class="liste">
                     <a class="txt"
-                     href="https://www.linkedin.com/in/guillaume-ersent-15419a17b/" target="_blank">
+                     href="https://www.linkedin.com/in/guillaume-ersent" target="_blank">
                         -&gt; Linkedin
                     </a>
                 </li>

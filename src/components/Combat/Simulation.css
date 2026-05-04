@@ -4,7 +4,7 @@
     margin: 1vh;
     padding: .5rem;
     border: 24px solid transparent;
-    border-image: url(../../assets/Images/Interfaces/Menu/Border-Image81x81.png) 40 stretch;
+    border-image: var(--bd-border81) 40 stretch;
     background: rgba(0, 0, 0);
 }
 .select-list {

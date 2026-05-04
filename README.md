@@ -1,58 +1,84 @@
-# Starcraft - le Jeu de Plateau  
+# StarCraft — Le Jeu de Plateau
 
-MadeFan  
-by Guillaume R100. 
+Compagnon non-officiel (fan-made) pour le jeu de plateau **StarCraft** de Fantasy Flight Games.  
+Application en **français** couvrant les factions, les règles et un simulateur de combat.
 
-# Project setup
-```
-[ ] yarn install 
-[*] npm install 
+> Projet réalisé par Guillaume ersent (début 2021).
+
+---
+
+## Stack technique
+
+| Technologie | Version |
+|-------------|---------|
+| Vue.js | 2.6 |
+| Vue Router | 3.x |
+| Bootstrap | 4.x |
+| Node.js | 14+ |
+
+- Pas de Vuex — la communication entre composants passe par un **event bus** (`src/main.js`)
+- Toutes les données sont locales (pas d'API) — fichiers JS dans `src/data/`
+
+---
+
+## Installation
+
+```bash
+npm install
 ```
 
-### Compiles and hot-reloads for development
-```
-[ ] yarn serve 
-[*] npm run serve 
+## Commandes
+
+```bash
+npm run serve   # Serveur de développement avec hot-reload
+npm run build   # Build de production → dist/
+npm run lint    # ESLint avec correction automatique
 ```
 
-### Compiles and minifies for production
-```
-[ ] yarn build 
+---
+
+## Déploiement Docker
+
+Build multi-étape : Node 14 (build) → Nginx Alpine (serve, port 80).
+
+```bash
+docker build -t starcraft-vue .
+docker run -p 80:80 starcraft-vue
 ```
 
-### Lints and fixes files
-```
-[ ] yarn lint 
-```
+---
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).  
-  
-# _* VERSION_ 
+## Routes
 
-Actuelle : 
-```
-v. 0.4.5  
-Ajout SIMULATION - mise en place de la balise *SELECT* pour Atk et Def, correction nécessaire sur *CARD.js* pour différencier Carte Combat & Carte Renfort.
-```
-* 0.3.0  
-Ajout Multiples dans REGLES - Récap a terminer, mise a disposition du Bouton : Plus d'informations a terminer. 
-Rectification multiple en CSS sur divers composent.
-  
-* 0.2.9  
-Changement de FrameWork - Passage de React.js à Vue.js 
-  
-* 0.2.8  
-Changement d'interface (SCSS) - redirection des fichiers Images dans *Public* - rectification de problèmes mineurs (SCSS) - Ajout fond noir dans *MODAL*. - Ajout d'un composent FOOTER
-  
-* 0.2.6  
-*Redux* mis en place, arborescence des fichiers changé, composent *Rules* à terminer -- *Order* est en cours --.  
-CSS à revoir sur *Order* (left & Right) -- données à transférer dans store data: *Build* --redux.  
-  
-* 0.2.5  
-Changement apporté sur CSS dans *MENU* et RACES.  
-Ajout bouton *RULES* pour inclure composent *PHASE* et *ORDER*.  
-  
-* 0.2.0  
-Mise en place de la section * Présentation des races *.  
-Réglage temporaire du CSS.  
+| Chemin | Composant | Description |
+|--------|-----------|-------------|
+| `/` | `Acceuil` | Page d'accueil et FAQ |
+| `/combat` | `Combat` | Simulateur de combat |
+| `/factions` | `Factions` | Grille des factions et commandants |
+| `/factions/:name` | `Commander` | Détail d'un commandant |
+| `/regles` | `Regles` | Référence des règles du jeu |
+
+---
+
+## Historique des versions
+
+**v0.4.5**
+Ajout SIMULATION — mise en place de la balise `SELECT` pour Atk et Def, correction sur `CARD.js` pour différencier Carte Combat et Carte Renfort.
+
+**v0.3.0**
+Ajout Multiples dans RÈGLES — Récap à terminer, bouton « Plus d'informations » à terminer. Rectifications CSS sur divers composants.
+
+**v0.2.9**
+Changement de framework — passage de React.js à Vue.js.
+
+**v0.2.8**
+Changement d'interface (SCSS) — redirection des images dans `public/` — corrections CSS mineures — ajout fond noir dans MODAL — ajout composant FOOTER.
+
+**v0.2.6**
+Redux mis en place, arborescence des fichiers revue, composant Rules à terminer (Order en cours). CSS à revoir sur Order — données à transférer dans le store Redux.
+
+**v0.2.5**
+Changements CSS dans MENU et RACES. Ajout bouton RULES pour inclure les composants PHASE et ORDER.
+
+**v0.2.0**
+Mise en place de la section « Présentation des races ». Réglage temporaire du CSS.

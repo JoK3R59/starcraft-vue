@@ -80,10 +80,10 @@ export default {
     },
     methods: {
         getImgUrl(pic) {
-            return require('../../../assets/Images/DataScan/Factions/' + pic + '.png')
+            return this.$img('DataScan/Factions/' + pic + '.webp')
         },
         getImgTower(pic) {
-            return require('../../../assets/Images/Interfaces/Module/' + pic + '.png')
+            return this.$img('Interfaces/Module/' + pic + '.webp')
         }
     }
 }
