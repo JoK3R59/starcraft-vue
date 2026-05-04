@@ -4,7 +4,7 @@ node_modules
 /public/images
 vue.config.jstest
 CLAUDE.md
-settings.local.json
+.claude
 
 /src/data/factions.js
 /src/data/Factions/Protoss.js
@@ -15,6 +15,7 @@ settings.local.json
 /src/data/Phase/Program.js
 /src/data/Phase/Regroupement.js
 
+src/components/Regles/Capacity/OffCanvas.vue
 
 # local env files
 .env.local
@@ -34,5 +35,4 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-src/components/Regles/Capacity/OffCanvas.vue
 *.svg
