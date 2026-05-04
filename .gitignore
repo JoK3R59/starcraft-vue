@@ -4,11 +4,7 @@ node_modules
 /public/images
 vue.config.jstest
 CLAUDE.md
-
-# Dossier ignoré - non utilisé
-
-
-# Fichier ignoré - non utilisé
+settings.local.json
 
 /src/data/factions.js
 /src/data/Factions/Protoss.js
